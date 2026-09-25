@@ -162,7 +162,7 @@ body{display:flex;flex-direction:column;overflow:hidden}
 </tbody>
 </table>
 </div>
-<p class="cap">&ldquo;Last heartbeat&rdquo; is the timestamp in each repo&rsquo;s <code>data/.last-check</code> as of 25/09. Every schedule above is the live cron read from the routine API on 25/09. The one-<code>&lt;html&gt;</code>-tag mirror check was done on 24/09 and was <em>not</em> repeated on 25/09.</p>
+<p class="cap">&ldquo;Last heartbeat&rdquo; is the timestamp in each repo&rsquo;s <code>data/.last-check</code> as of 25/09. Every schedule above is the live cron read from the routine API on 25/09. Mirror check repeated 25/09: all nine previews in section 3 have exactly one <code>&lt;html&gt;</code> tag on read-back, so none renders blank.</p>
 
 <h2>2 &middot; The other six repos</h2>
 <p class="lede">14 repos in total: the eight above plus these six.</p>
@@ -208,11 +208,11 @@ body{display:flex;flex-direction:column;overflow:hidden}
 <table>
 <thead><tr><th>Artifact</th><th>Updated</th><th>What writes it</th></tr></thead>
 <tbody>
-<tr><td><strong>Signal Desk</strong><br><a class="aurl" href="https://claude.ai/artifact/PETvCeZufa32XyvdhyEAG3">claude.ai/artifact/PETvCeZufa32XyvdhyEAG3</a></td><td class="num">25/09</td><td>Signal Desk routine, daily 00:10. Sessions were created at 00:11 and 02:06&nbsp;UTC on 25/09, so it provisions again; I did not read those run logs for their outcome.</td></tr>
+<tr><td><strong>Signal Desk</strong><br><a class="aurl" href="https://claude.ai/artifact/PETvCeZufa32XyvdhyEAG3">claude.ai/artifact/PETvCeZufa32XyvdhyEAG3</a></td><td class="num">25/09</td><td>Signal Desk routine, daily 00:10. Run logs read 25/09: the 00:11 run failed because the repo was still missing; the 02:06 run, after the restore, <strong>succeeded</strong> and published the 25/09 briefing with no source errors. There is no briefing for 24/09. The first scheduled run since the restore is 26/09 00:10.</td></tr>
 <tr><td><strong>Ecosystem Health</strong><br><a class="aurl" href="https://claude.ai/artifact/4GFQXbNh97Q9qmtNMfnyWR">claude.ai/artifact/4GFQXbNh97Q9qmtNMfnyWR</a></td><td class="num">12/09</td><td rowspan="2" style="vertical-align:middle">Named by title (not id) in the <a href="https://claude.ai/code/routines/trig_01UrAFG2ZNXtQvv9MHXmjjoB">monthly system run</a>: Part A writes Ecosystem Health, Part C writes Second Brain. Next run 01/10 03:00. KB Monthly Update, which used to write Second Brain, is disabled.</td></tr>
 <tr><td><strong>Second Brain, Applied</strong><br><a class="aurl" href="https://claude.ai/artifact/Kkzb2BgUjKgMcosCEtwhFd">claude.ai/artifact/Kkzb2BgUjKgMcosCEtwhFd</a></td><td class="num">15/09</td></tr>
-<tr><td><strong>Passbook</strong><br><a class="aurl" href="https://claude.ai/artifact/DFX3AXsi8tLyCeadMcwuBa">claude.ai/artifact/DFX3AXsi8tLyCeadMcwuBa</a></td><td class="num">24/09</td><td>Renamed from &ldquo;Vitals Journal&rdquo;. A public <code>passbook</code> Pages site also exists; no routine links the two, and I have not checked whether this artifact mirrors it.</td></tr>
-<tr><td><strong>Passbook Review</strong><br><a class="aurl" href="https://claude.ai/artifact/EhdVm1z8r1qVhjJPScp9G7">claude.ai/artifact/EhdVm1z8r1qVhjJPScp9G7</a></td><td class="num">24/09</td><td rowspan="2" style="vertical-align:middle"><span class="pill p-warn">Two artifacts, same title</span> Possibly a duplicate. Not opened or compared; nothing deleted.</td></tr>
+<tr><td><strong>Passbook</strong><br><a class="aurl" href="https://claude.ai/artifact/DFX3AXsi8tLyCeadMcwuBa">claude.ai/artifact/DFX3AXsi8tLyCeadMcwuBa</a></td><td class="num">24/09</td><td>Renamed from &ldquo;Vitals Journal&rdquo;. It is the same app as the public <code>passbook</code> Pages site, but <strong>behind it</strong>: the Pages copy is 296&nbsp;KB vs 244&nbsp;KB here, and the repo was pushed 25/09 after this artifact&rsquo;s last update on 24/09. No routine keeps them in sync.</td></tr>
+<tr><td><strong>Passbook Review</strong><br><a class="aurl" href="https://claude.ai/artifact/EhdVm1z8r1qVhjJPScp9G7">claude.ai/artifact/EhdVm1z8r1qVhjJPScp9G7</a></td><td class="num">24/09</td><td rowspan="2" style="vertical-align:middle"><span class="pill p-ok">Not duplicates</span> Same title, different documents, both opened 25/09: the first is the security &amp; council review (&ldquo;tested, attacked, and put before the council&rdquo;, ~2,600 words); the second is the product review (~760 words). Consider renaming one.</td></tr>
 <tr><td><strong>Passbook Review</strong><br><a class="aurl" href="https://claude.ai/artifact/3Fn4VgjSCWDxZMuYAaYepN">claude.ai/artifact/3Fn4VgjSCWDxZMuYAaYepN</a></td><td class="num">24/09</td></tr>
 <tr><td><strong>Passbook Thirty Visitors</strong><br><a class="aurl" href="https://claude.ai/artifact/7U3SLMCd4A4gBHWwumSdfd">claude.ai/artifact/7U3SLMCd4A4gBHWwumSdfd</a></td><td class="num">24/09</td><td>One-off document.</td></tr>
 <tr><td><strong>Omni Next Level</strong><br><a class="aurl" href="https://claude.ai/artifact/D6pxjFc3H8BjAkzt3aawTY">claude.ai/artifact/D6pxjFc3H8BjAkzt3aawTY</a></td><td class="num">25/09</td><td>Omni strategy blueprint; record in <code>Claude outputs/Omni Strategy/</code>. One-off, updated by hand.</td></tr>
@@ -288,34 +288,34 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
   <li><strong>Omni-Audit schedule.</strong> The page said 1st 09:00. The live system is the monthly system run on the 1st at 03:00, plus a fallback on the 2nd at 01:00. None of the routines I could find has cron <code>0 9 1 * *</code>.</li>
   <li><strong>&ldquo;0 touch your Mac&rdquo; was false.</strong> See section 5.</li>
   <li><strong>Signal Desk was listed as broken.</strong> Its repo is back and the routine created sessions on 25/09.</li>
-  <li><strong>ECOPM was said to be two weeks behind (newest week 2026-09-W01).</strong> Its <code>data/index.json</code> runs to <strong>2026-09-W03</strong> (as of &ldquo;Tuần 03/09/2026&rdquo;, generated 22/09), the same week as OMNI. What <em>is</em> true: the per-week detail files in <code>data/weeks/</code> stop at <code>2026-09-W01</code>, so W02 and W03 have no detail file. I have not checked whether the page needs them.</li>
+  <li><strong>ECOPM was said to be two weeks behind (newest week 2026-09-W01).</strong> Its <code>data/index.json</code> runs to <strong>2026-09-W03</strong> (as of &ldquo;Tuần 03/09/2026&rdquo;, generated 22/09), the same week as OMNI. What <em>is</em> wrong: the 22/09 run did only half of runbook step 5. It appended W02 and W03 to <code>wk</code> but wrote neither <code>data/weeks/2026-09-W02.json</code> / <code>W03.json</code> (both 404 on Pages) nor their <code>detail</code> entries. The page does not break, but clicking W02 or W03 shows no line items. The next run (28/09) should backfill them; check it did.</li>
   <li><strong>The routine-connection diagram</strong> still showed KB Monthly Update and a Monday publisher. Both are retired; section 4 is redrawn.</li>
 </ul>
 </details>
 
 <details open>
-<summary><span class="pill p-warn">Decide</span> The two Japan routines with Mac tools</summary>
-<p style="margin-bottom:16px">They will not fire until 23/11 and 11/12. When they do, they can reach your Mac and autofill credentials. Options: strip the remote-devices tools from both (the prompts only need to read a Cowork project and write a file), or leave them. I have not changed them.</p>
+<summary><span class="pill p-mute">Parked</span> The two Japan routines with Mac tools &mdash; revisit before 23/11</summary>
+<p style="margin-bottom:16px">Ty, 25/09: leave them for now. They fire once each, 23/11 and 11/12, and still hold the remote-devices tools. Come back to this before the first one fires.</p>
 </details>
 
 <details>
-<summary><span class="pill p-stop">Security</span> Revoke the two tokens &mdash; carried from 24/09, not re-verified</summary>
+<summary><span class="pill p-stop">Security</span> Revoke the two tokens &mdash; only you can confirm this</summary>
 <p><strong>Trashing a file does not revoke a credential.</strong> On 24/09 two files needed action at the provider:</p>
 <ul>
   <li><code>routine_fire_token.txt</code> &mdash; an Anthropic <code>sk-ant-oat01-&hellip;</code> session token. Revoke it in your account settings.</li>
   <li><code>.github-token</code> &mdash; 94 bytes, PAT-shaped, created 20/05. Revoke it if it is not one you already revoked.</li>
 </ul>
-<p style="margin-bottom:16px">I cannot see revocation status from here, so this item stays open until you confirm.</p>
+<p style="margin-bottom:16px">Checked 25/09: there is no API that lists a user&rsquo;s personal GitHub tokens or Anthropic session tokens, and the only other test is to use the leaked token itself, which I will not do. Confirm at github.com/settings/tokens and in your Anthropic account settings, then this item closes.</p>
 </details>
 
 <details>
-<summary><span class="pill p-info">Housekeeping</span> A routine I could not find</summary>
-<p style="margin-bottom:16px">The 24/09 page asked you to delete a routine renamed <strong>&ldquo;⚠ DELETE ME — retired Mac-bound Trade Journal&rdquo;</strong>. It is not among the 20 rows the list call returns, and its id is not recorded anywhere I can read, so I could not confirm whether it still exists. Check <a href="https://claude.ai/code/routines">claude.ai/code/routines</a>; the API has no delete action.</p>
+<summary><span class="pill p-ok">Resolved 25/09</span> The &ldquo;DELETE ME&rdquo; routine is gone</summary>
+<p style="margin-bottom:16px">A past session log shows the routine renamed &ldquo;⚠ DELETE ME — retired Mac-bound Trade Journal&rdquo; was <code>trig_01PcCwHLz25YrYbfLtL1gH8W</code>. The routine API returns <em>not found</em> for that id on 25/09, so it has been deleted.</p>
 </details>
 
 <details>
 <summary><span class="pill p-mute">Caution</span> The routine listing is capped and drops rows silently</summary>
-<p style="margin-bottom:16px">On 25/09 the list call returned 20 rows plus a next-page cursor the tool cannot follow. Four routines were missing from it and were found only by fetching ids one by one: TMDV (enabled), the two Japan one-shots (enabled) and the retired KSNB weekly (disabled). Of 23 other ids found in old notes, 19 no longer exist. Any routine whose id is not written down anywhere could still be missing from this page.</p>
+<p style="margin-bottom:16px">On 25/09 the list call returned 20 rows plus a next-page cursor the tool cannot follow. Five routines were missing from it and were found only by fetching ids one by one: TMDV (enabled), the two Japan one-shots (enabled), the retired KSNB weekly (disabled) and a one-off check from 09/09 (disabled). I fetched all 31 ids found in Drive notes, the repos and past session logs: those 5 exist, 26 no longer do. A routine whose id was never written down anywhere could still be missing, but no recorded id is unaccounted for.</p>
 </details>
 
 <p class="foot">Pipeline Wiring &middot; re-audited 25/09/2026 &middot; tabs: Wiring &middot; Starter Story &middot; Learning Matrix &middot; repos from the GitHub API, Pages by HTTP status, routines from the routine API (list + get by id), artifacts from the artifact API. Items not re-checked on 25/09 are labelled.</p>

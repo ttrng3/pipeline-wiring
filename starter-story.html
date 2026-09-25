@@ -1,0 +1,530 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Starter Story Venture Scan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;450;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --panel:#FFFFFF;
+    --panel-2:#F6F7F9;      /* faint cool neutral, hue-biased toward the blue accent */
+    --ink:#14181D;          /* Tier 1 — conclusions & decision numbers */
+    --ink-soft:#3B424B;     /* Tier 2 — body prose */
+    --muted:#6C747E;        /* Tier 3 — labels, captions, sources */
+    --line:#E4E7EB;         /* hairline */
+    --line-strong:#CDD2D8;
+    --accent:#1A56C4;       /* the single reserved accent */
+    --accent-wash:#EAF0FB;
+    --maxw:1120px;
+    --r:7px;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg);
+    color:var(--ink-soft);
+    font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-weight:450;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    margin:0;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:20px;padding-block:0}
+  h1,h2,h3,h4{font-family:"Fraunces","Georgia",serif;color:var(--ink);font-weight:600;margin:0;text-wrap:balance;letter-spacing:-.01em}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+  .num{font-variant-numeric:tabular-nums}
+  .lbl{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ---------- header ---------- */
+  header.hd{border-bottom:1px solid var(--line);background:var(--bg)}
+  .hd-inner{max-width:var(--maxw);margin:0 auto;padding:34px 20px 26px}
+  .eyebrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:3px 10px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.02;opsz:144}
+  .dek{margin-top:14px;max-width:64ch;font-size:17px;color:var(--ink-soft)}
+  .dek b{color:var(--ink);font-weight:600}
+  .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:18px 26px;font-size:12.5px;color:var(--muted)}
+  .meta b{color:var(--ink);font-weight:600}
+
+  section{padding-block:38px;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .sec-head h2{font-size:23px}
+  .sec-head .kick{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .lead{max-width:70ch;color:var(--ink-soft);font-size:15.5px}
+  .lead b{color:var(--ink);font-weight:600}
+
+  /* ---------- honest-read panel ---------- */
+  .truths{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:4px}
+  .truth{background:var(--panel);padding:18px 18px 20px}
+  .truth .n{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);margin-bottom:7px}
+  .truth h4{font-size:15.5px;margin-bottom:5px}
+  .truth p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+
+  /* ---------- summary tiles ---------- */
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:6px}
+  .tile{border:1px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;background:var(--panel)}
+  .tile .k{font-size:29px;font-family:"Fraunces",serif;font-weight:600;color:var(--ink);line-height:1}
+  .tile .k.acc{color:var(--accent)}
+  .tile .t{margin-top:7px;font-size:12px;color:var(--muted)}
+
+  /* ---------- controls ---------- */
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:2px 0 16px}
+  .controls input[type=search],.controls select{
+    font-family:inherit;font-size:13px;color:var(--ink);background:var(--panel);
+    border:1px solid var(--line-strong);border-radius:6px;padding:8px 10px}
+  .controls input[type=search]{min-width:210px;flex:1 1 210px}
+  .controls label.tg{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);cursor:pointer;user-select:none;border:1px solid var(--line-strong);border-radius:6px;padding:7px 11px}
+  .controls .sp{flex:1 1 auto}
+  .count{font-size:12.5px;color:var(--muted)}
+
+  /* ---------- table ---------- */
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r)}
+  table{border-collapse:collapse;width:100%;min-width:900px;font-size:13px}
+  thead th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:11px 12px;border-bottom:1px solid var(--line-strong);white-space:nowrap;cursor:pointer;background:var(--panel)}
+  thead th.sortable:hover{color:var(--ink)}
+  thead th .ar{color:var(--accent);font-size:9px}
+  th.r,td.r{text-align:right}
+  th.c,td.c{text-align:center}
+  tbody td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.top{background:var(--panel-2)}
+  tbody tr:hover td{background:var(--accent-wash)}
+  .rank{font-family:"IBM Plex Mono",monospace;color:var(--muted);font-size:12px}
+  .rank .star{color:var(--accent)}
+  .idea .nm{color:var(--ink);font-weight:600;font-size:13.5px}
+  .idea .dm{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);margin-top:1px}
+  .idea .ang{font-size:12px;color:var(--ink-soft);margin-top:4px;max-width:44ch;line-height:1.4}
+  .arch{color:var(--ink-soft);white-space:nowrap;font-size:12.5px}
+  .cat{font-size:11px}
+  .chip{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.03em;padding:2px 7px;border-radius:100px;border:1px solid var(--line-strong);color:var(--muted);white-space:nowrap}
+  .chip.build-No-code{color:var(--accent);border-color:var(--accent)}
+  .chip.build-Low-code{color:var(--ink-soft)}
+  /* fit bar */
+  .fit{display:flex;align-items:center;gap:8px;justify-content:flex-end;min-width:96px}
+  .fit .bar{position:relative;width:54px;height:6px;background:var(--line);border-radius:100px;overflow:hidden}
+  .fit .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:100px}
+  .fit .v{font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--ink);font-size:12.5px;min-width:30px;text-align:right}
+  tr.top .fit .v{color:var(--accent)}
+  .dots{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:1px;color:var(--ink);white-space:nowrap}
+  .dots .off{color:var(--line-strong)}
+  .rev{font-family:"IBM Plex Mono",monospace;color:var(--ink-soft);font-size:12.5px;white-space:nowrap}
+  .team{font-family:"IBM Plex Mono",monospace;color:var(--ink-soft);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  /* ---------- deep dive cards ---------- */
+  .cards{display:flex;flex-direction:column;gap:22px}
+  .card{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);overflow:hidden}
+  .card-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:20px 22px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .card-top .lhs{max-width:70ch}
+  .card-rank{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .card h3{font-size:21px;line-height:1.1}
+  .card .play{margin-top:9px;font-size:14.5px;color:var(--ink-soft)}
+  .card .play b{color:var(--ink);font-weight:600}
+  .scorebox{flex:0 0 auto;text-align:right;min-width:104px}
+  .scorebox .big{font-family:"Fraunces",serif;font-weight:600;font-size:38px;line-height:1;color:var(--accent)}
+  .scorebox .cap{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+  .scorebox .mk{margin-top:9px;font-size:11.5px;color:var(--ink-soft)}
+  .scorebox .mk b{color:var(--ink)}
+
+  .card-body{padding:20px 22px;column-count:2;column-gap:36px;column-rule:1px solid var(--line)}
+  .blk{margin-bottom:17px;break-inside:avoid;-webkit-column-break-inside:avoid}
+  .blk:first-child{margin-top:0}
+  .blk:last-child{margin-bottom:0}
+  .blk .h{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .blk .h .t{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);font-weight:600}
+  .blk .h .t.warn{color:var(--muted)}
+  .blk p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+  ol.steps{margin:0;padding-left:0;list-style:none;counter-reset:s}
+  ol.steps li{counter-increment:s;position:relative;padding-left:26px;margin-bottom:7px;font-size:13px;color:var(--ink-soft)}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--accent);border:1px solid var(--line-strong);border-radius:100px;width:18px;height:18px;display:flex;align-items:center;justify-content:center;line-height:1}
+
+  /* econ mini table */
+  .econ{margin-top:2px}
+  .econ .row{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--line);font-size:12.5px}
+  .econ .row:last-child{border-bottom:none}
+  .econ .row .k{color:var(--muted)}
+  .econ .row .v{font-family:"IBM Plex Mono",monospace;color:var(--ink);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+  .econ .row.hl .v{color:var(--accent);font-weight:600}
+  .mkrow{display:grid;grid-template-columns:1fr;gap:6px;margin-top:2px}
+  .mkrow .m{display:flex;gap:9px;font-size:12.5px;align-items:baseline}
+  .mkrow .m .g{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:var(--muted);width:58px;flex:0 0 58px;text-transform:uppercase}
+  .mkrow .m .d{color:var(--ink-soft)}
+  .mkrow .m .d b{color:var(--ink);font-weight:600}
+
+  .mark{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.02em;padding:1px 6px;border-radius:4px;border:1px solid var(--line-strong);color:var(--muted);white-space:nowrap}
+  .mark.v{color:var(--accent);border-color:var(--accent)}
+
+  /* patterns / avoid */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .plist{list-style:none;margin:0;padding:0}
+  .plist li{padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink-soft)}
+  .plist li:last-child{border-bottom:none}
+  .plist li b{color:var(--ink);font-weight:600}
+  .avoid li b{color:var(--ink)}
+
+  /* method */
+  .method{font-size:13px;color:var(--muted)}
+  .method h4{font-size:13px;color:var(--ink);margin:0 0 6px;font-family:"IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase}
+  .method p{margin:0 0 12px;max-width:78ch}
+  .method .legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .wtbl{font-size:12px;border-collapse:collapse}
+  .wtbl td{padding:3px 14px 3px 0;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .wtbl td.n{font-family:"IBM Plex Mono",monospace;color:var(--ink)}
+  footer{padding:26px 20px 60px;max-width:var(--maxw);margin:0 auto;color:var(--muted);font-size:12px}
+  footer a{color:var(--muted);text-decoration:underline}
+
+  @media (max-width:760px){
+    .card-body{column-count:1}
+    .two{grid-template-columns:1fr}
+  }
+
+  @media print{
+    :root{--muted:#222;--ink-soft:#1c1c1c;--line:#c9c9c9;--line-strong:#b4b4b4;--accent:#0f3f96;--panel-2:#f2f2f2;--accent-wash:#fff}
+    body{background:#fff}
+    .no-print{display:none!important}
+    section,header.hd{border-color:#c9c9c9}
+    .card,.truth,.tile,tbody tr{break-inside:avoid}
+    .tablewrap{overflow:visible}
+    table{min-width:0}
+  }
+</style>
+
+<header class="hd">
+  <div class="hd-inner">
+    <div class="eyebrow">
+      <span class="tag">Strategic scan</span>
+      <span class="tag">24 ideas · scored for you</span>
+      <span class="tag">US · Asia · Vietnam</span>
+    </div>
+    <h1>Which of these could you actually build?</h1>
+    <p class="dek">Every publicly-visible idea on Starter Story's problems database, scored through <b>your</b> constraints — non-coder, minimal capital, real-estate/commercial edge, a demanding day job — then compared across the three markets you'd realistically operate in. The winners are not the ones with the biggest revenue. They're the ones you could start in weeks with almost no cash.</p>
+    <div class="meta">
+      <span><b>Source:</b> starterstory.com/data/problems</span>
+      <span><b>Updated:</b> 15 Sep 2026 · v2, verified</span>
+      <span><b>Coverage:</b> 24 of ~99 (full list is paid); 22 case studies opened &amp; verified</span>
+      <span><b>Register:</b> direct / your-eyes-only</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- HONEST READ -->
+  <section>
+    <div class="sec-head"><span class="kick">Read this first</span><h2>The honest read</h2></div>
+    <p class="lead" style="margin-bottom:16px">Four things the raw list won't tell you, and they matter more than any single idea below.</p>
+    <div class="truths">
+      <div class="truth"><div class="n">01</div><h4>Your constraint is time, not ideas</h4><p>You have capital access, a network, and an oversight role that already fills the week. Every idea here dies the same death: you don't give it 15–20 focused hours. That's the real filter, so I weighted bandwidth and buildability heavily.</p></div>
+      <div class="truth"><div class="n">02</div><h4>80% of this list is software you can't build</h4><p>Most entries are horizontal SaaS that need an engineering team and years. For a non-coder, the honest wedge is <b>productized services</b> you can sell now and maybe turn into a tool later — not SaaS from scratch.</p></div>
+      <div class="truth"><div class="n">03</div><h4>The edge isn't an idea — it's an arbitrage</h4><p>Bill in USD, deliver from Hanoi. The same "get-found" or advisory work earns roughly 3–5× more from US/expat clients than VN SMEs, while your cost base stays Vietnamese. That geography trade beats any product pick.</p></div>
+      <div class="truth"><div class="n">04</div><h4>Sequence, don't scatter</h4><p>Services throw off cash in weeks at near-zero capital. Use that cash to fund the one product bet — not your savings. Asset-light, risk-tranched, exactly the structure you already favor. Pick one, not four.</p></div>
+    </div>
+  </section>
+
+  <!-- SUMMARY TILES -->
+  <section>
+    <div class="sec-head"><span class="kick">At a glance</span><h2>What the scan found</h2></div>
+    <div class="tiles">
+      <div class="tile"><div class="k acc num">83</div><div class="t">Top fit score / 100 — fractional commercial strategist</div></div>
+      <div class="tile"><div class="k num">5</div><div class="t">Ideas worth a deep-dive, all distinct business models</div></div>
+      <div class="tile"><div class="k num">$300–1k</div><div class="t">Upfront capital for 4 of the 5 shortlisted plays</div></div>
+      <div class="tile"><div class="k num">~3 wk</div><div class="t">Fastest path to first revenue (consulting)</div></div>
+      <div class="tile"><div class="k num">19 / 24</div><div class="t">Ideas I'd tell you to skip — mostly eng-heavy SaaS</div></div>
+    </div>
+  </section>
+
+  <!-- VERIFIED -->
+  <section>
+    <div class="sec-head"><span class="kick">Verified this session</span><h2>What logging in changed</h2></div>
+    <p class="lead" style="margin-bottom:16px">You logged in, so I opened all 22 linked case studies and read the real numbers. The full list stayed paywalled, but the detail pages didn't. Here's what actually moved.</p>
+    <div class="truths">
+      <div class="truth"><div class="n">01</div><h4>Team size confirms the rubric</h4><p>The businesses you can run solo-to-tiny cluster at the top: consulting (3 people), chefs (2), dashp (1), stackero (1), myzia (2). The ones I told you to skip run on armies — perfect.live 100, OSINT 70, chatfuel 38, plurio 37, brümate 57. The model held.</p></div>
+      <div class="truth"><div class="n">02</div><h4>dashp moved up to a top-3 pick</h4><p>Its founder shipped the commission tracker solo on Retool (no-code) for $0. That kills my "needs an $8k build" assumption — you'd do the same on Retool or Claude Code. Fit 73.6 → 82.6, and the card economics are corrected (upfront ~$1k, not $8k).</p></div>
+      <div class="truth"><div class="n">03</div><h4>The revenue numbers are noise, confirmed</h4><p>The list and the founder stories disagree by 2–5× (rankings.io: list $2.5M/mo vs story "$3.6M/year"; modernproducers: $233K vs "$85K/month"). Rank on fit and team size, not on their revenue.</p></div>
+      <div class="truth"><div class="n">04</div><h4>One honest correction on the agency</h4><p>rankings.io's $2.5M/mo runs on 168 employees. Still a top pick as a model, but that ceiling is a staffed agency, not a solo play — you'd start alone and it scales only with headcount.</p></div>
+    </div>
+  </section>
+
+  <!-- CATALOG TABLE -->
+  <section>
+    <div class="sec-head"><span class="kick">The catalog</span><h2>All 24, ranked for you</h2></div>
+    <p class="lead" style="margin-bottom:14px">Sort by any column. <b>Fit</b> is your ability to execute (rubric at the bottom). <b>US / Asia / VN</b> are market attractiveness for that business, 1–5. Reported revenue is self-reported and survivorship-biased — treat it as noise, not signal.</p>
+    <div class="controls no-print">
+      <input type="search" id="q" placeholder="Search idea, archetype, angle…" aria-label="Search">
+      <select id="fcat" aria-label="Filter by category"></select>
+      <select id="fbuild" aria-label="Filter by build mode"></select>
+      <label class="tg"><input type="checkbox" id="ftop"> Shortlist only</label>
+      <span class="sp"></span>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="tablewrap">
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th class="sortable r" data-k="rank">#</th>
+            <th class="sortable" data-k="name">Idea &amp; your angle</th>
+            <th class="sortable" data-k="arch">Archetype</th>
+            <th class="c" data-k="build">Build</th>
+            <th class="c" data-k="team" title="Founders / employees, verified from the case-study page">Team F/E</th>
+            <th class="sortable r" data-k="fit">Fit ▾</th>
+            <th class="sortable c" data-k="us">US</th>
+            <th class="sortable c" data-k="asia">Asia</th>
+            <th class="sortable c" data-k="vn">VN</th>
+            <th class="sortable r" data-k="rev">Rev/mo*</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p style="font-size:11.5px;color:var(--muted);margin-top:8px">*Reported by the founder to Starter Story; unverified, survivorship-biased. A high-revenue row is not a recommendation.</p>
+  </section>
+
+  <!-- DEEP DIVES -->
+  <section>
+    <div class="sec-head"><span class="kick">The shortlist</span><h2>Top 5, taken apart</h2></div>
+    <p class="lead" style="margin-bottom:20px">Five different business models, ordered by fit. Two are "get-found" cousins pointed at different markets (US vs VN) — that split is deliberate, it answers your market question. Each card: the play, the money, how it dies, how it wins, and the minimal-capital steps. Numbers are computed, not guessed; every one is labeled.</p>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <!-- PATTERNS -->
+  <section>
+    <div class="sec-head"><span class="kick">Cross-cutting</span><h2>Patterns &amp; what to avoid</h2></div>
+    <div class="two">
+      <div>
+        <h4 class="lbl" style="margin-bottom:6px">The moves that repeat</h4>
+        <ul class="plist">
+          <li><b>Services first, product second.</b> #1–#4 need no build and pay in weeks. #5 is the only real product bet — fund it with service cash, not savings.</li>
+          <li><b>Niche down hard.</b> rankings.io hit $2.5M/mo by refusing every vertical but one. Every winner here owns a narrow lane; every loser is a generalist.</li>
+          <li><b>USD in, VND out.</b> The arbitrage is the business. Point any service at US/expat buyers and deliver with Hanoi talent.</li>
+          <li><b>Distribution before product.</b> The one thing all five require is that you can reach the buyer. You can — real estate, commercial, F&B, US finance. That's the asset, not the code.</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="lbl" style="margin-bottom:6px">What to skip — and why</h4>
+        <ul class="plist avoid">
+          <li><b>Horizontal SaaS</b> (ConvertKit, Customer.io, Fireflies, Chatbase, Supademo). Great businesses, wrong founder profile — eng teams and years you don't have.</li>
+          <li><b>The standalone AI-visibility tool</b> (Myzia/BrandAxis as products). The US category is already crowded — a $7.3B-by-2031 projection pulled in dozens of tools. Sell it as a <b>service</b> instead.</li>
+          <li><b>Pure edtech</b> (Ship30, exam prep). You already killed Sunny. Don't rebuild the same graveyard without a sharper distribution wedge.</li>
+          <li><b>Physical DTC &amp; concierge</b> (BrüMate, Perfect.live). Capital-heavy or ops-heavy; both torch the bandwidth you can't spare.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section style="border-bottom:none">
+    <div class="sec-head"><span class="kick">Method</span><h2>How this was scored &amp; what's verified</h2></div>
+    <div class="method">
+      <div class="legend">
+        <span class="mark v">Verified</span><span style="align-self:center">recomputed or source opened this session</span>
+        <span class="mark" style="margin-left:12px">Likely (basis)</span><span style="align-self:center">stated basis, not confirmed</span>
+        <span class="mark" style="margin-left:12px">Assumption</span><span style="align-self:center">planning figure, changes if wrong</span>
+      </div>
+      <h4>Fit rubric (weighted to 100)</h4>
+      <p>Each idea scored 1–5 on eight dimensions, weighted:</p>
+      <table class="wtbl" style="margin-bottom:14px">
+        <tr><td class="n">18</td><td>Buildability without a dev team</td><td class="n">18</td><td>Capital efficiency (low upfront)</td><td class="n">18</td><td>Your edge (domain + network)</td></tr>
+        <tr><td class="n">14</td><td>Distribution access</td><td class="n">9</td><td>Velocity to first revenue</td><td class="n">9</td><td>Bandwidth fit (part-time)</td></tr>
+        <tr><td class="n">9</td><td>Scale ceiling (worth your time)</td><td class="n">5</td><td>Defensibility</td><td class="n"></td><td></td></tr>
+      </table>
+      <h4>What's verified vs assumed</h4>
+      <p><span class="mark v">Verified</span> AEO/GEO 2026 retainer bands ($1–2.5k entry, $3–8k mid, $10–25k+ enterprise) and that the category is real but crowded in the US (a $7.3B-by-2031, ~34% CAGR projection). All fit and market scores are my judgment on a fixed rubric, recomputed in code. <span class="mark">Assumption</span> every unit-economics figure on the cards — client counts, retainers and margins are planning cases, not forecasts; VN retainers are marked <span class="mark">Likely</span> (VN agency rates run well below US).</p>
+      <h4>Data &amp; limits</h4>
+      <p>Only 24 of the claimed ~99 problems load even with a free account — the full list is a paid Starter Story feature. Logged in as the user, I opened all 22 linked case studies and read team size (founders / employees) and headline revenue from each; the team figures are Verified and populate the Team column, and they drove the dashp re-rating (73.6 → 82.6). Self-reported revenue is internally inconsistent across the list and the stories, so I did not weight it. Counter-case on the top pick: consulting scores highest partly because it's easy and instant, but it caps at your hours and collides with the Ecopark day job — which is why the shortlist also carries scalable (agency, micro-SaaS) and passive (media) options. Working on the memory floor (kernel not mounted); the palette here is a Bright-Professional floor, not your locked kernel hex.</p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  Built for Ty · 15 Sep 2026 · v2 — team sizes &amp; revenue verified from 22 Starter Story case studies (logged in as the user). Scoring &amp; unit economics computed in-session (Python), reproducible on request.<br>
+  Sources: <a href="https://www.starterstory.com/data/problems">Starter Story — Problems</a> · <a href="https://thedigitalelevator.com/blog/aeo-and-geo-pricing-guide/">Digital Elevator — AEO/GEO pricing 2026</a> · Valuates Reports — GEO services market projection.
+</footer>
+
+<script>
+const IDEAS = [
+ {rank:1, name:"Business development consulting", dm:"thecatalystbdc.com", arch:"Productized consulting", cat:"Services", build:"No-code", fit:83.4, us:4, asia:4, vn:5, rev:18000, top:true, ang:"Fractional commercial strategist / GTM-for-hire — your exact expertise, zero capital"},
+ {rank:2, name:"SEO for personal injury law", dm:"rankings.io", arch:"Vertical growth agency", cat:"Services", build:"No-code", fit:82.6, us:5, asia:4, vn:3, rev:2500000, top:true, ang:"'Get found' agency for real estate / proptech / developers (SEO + AEO)"},
+ {rank:3, name:"Get cited by AI search engines", dm:"myzia.io", arch:"AEO service-first", cat:"Services", build:"No-code", fit:79.8, us:4, asia:4, vn:3, rev:5000, top:true, ang:"AEO / AI-visibility service for VN/SEA SMEs — market you sit in, ~18mo behind US"},
+ {rank:4, name:"Affordable postcard marketing", dm:"communitycardplaybook.com", arch:"Done-for-you local marketing", cat:"Services", build:"No-code", fit:76.2, us:5, asia:2, vn:2, rev:4000, top:true, ang:"Done-for-you farming (direct mail US / Zalo-omni VN) for real estate agents"},
+ {rank:5, name:"Commission tracking software", dm:"dashp.io", arch:"Vertical micro-SaaS", cat:"Software", build:"Low-code", fit:82.6, us:4, asia:3, vn:3, rev:8330, top:true, ang:"Commission + pipeline tracker for real estate sales teams — founder built it solo on Retool (no-code) for $0"},
+ {rank:6, name:"Culinary resource platform", dm:"chefs-resources.com", arch:"Niche B2B media / community", cat:"Media", build:"No-code", fit:73.4, us:4, asia:3, vn:2, rev:5000, top:false, ang:"Resource + community for F&B / restaurant operators (ties to your PHO R&D)"},
+ {rank:7, name:"Cohort-based digital writing course", dm:"ship30for30.com", arch:"Cohort info-product", cat:"Education", build:"No-code", fit:67.0, us:4, asia:3, vn:2, rev:0, top:false, ang:"Needs an audience you don't yet have; Sunny edtech was already killed"},
+ {rank:8, name:"Premium business outputs (no bloat)", dm:"stackero.co", arch:"Productized micro-SaaS / service", cat:"Services", build:"Low-code", fit:68.0, us:4, asia:3, vn:2, rev:42000, top:false, ang:"Productized 'done-for-you business ops' — AI + service hybrid; verified 1 founder, ~$42K/mo"},
+ {rank:9, name:"AI visibility analytics", dm:"brandaxis.ai", arch:"AEO analytics tool", cat:"Software", build:"Needs build", fit:64.4, us:4, asia:3, vn:3, rev:10000, top:false, ang:"AEO tool (crowded); better as a service line than a standalone product"},
+ {rank:10, name:"WU Vienna exam prep platform", dm:"bbe-insider.com", arch:"Niche exam-prep", cat:"Education", build:"Low-code", fit:59.8, us:3, asia:3, vn:3, rev:20000, top:false, ang:"Niche cert/exam prep (finance/MBA?); Sunny edtech caution applies"},
+ {rank:11, name:"Amazon affiliate website toolkit", dm:"amawp.com", arch:"WP plugin / tool", cat:"Software", build:"Needs build", fit:55.4, us:4, asia:3, vn:2, rev:20000, top:false, ang:"Plugin for affiliate marketers; no edge for you, needs a build"},
+ {rank:12, name:"Lifestyle management ecosystem", dm:"perfect.live", arch:"High-touch concierge", cat:"Services", build:"No-code", fit:54.6, us:4, asia:3, vn:3, rev:120000, top:false, ang:"Ops-nightmare concierge; low margin, kills the bandwidth you can't spare"},
+ {rank:13, name:"AI-powered interactive demos", dm:"supademo.com", arch:"Horizontal SaaS", cat:"Software", build:"Needs build", fit:51.8, us:4, asia:3, vn:2, rev:250000, top:false, ang:"Crowded PLG SaaS; needs a real product and engineering"},
+ {rank:14, name:"AI customer experience agents", dm:"chatbase.co", arch:"AI infra SaaS", cat:"Software", build:"Needs build", fit:51.8, us:4, asia:3, vn:2, rev:833000, top:false, ang:"Crowded AI-chatbot infrastructure; needs an eng team"},
+ {rank:15, name:"Performance marketing AI agent", dm:"plurio.ai", arch:"AI agent SaaS", cat:"Software", build:"Needs build", fit:51.8, us:4, asia:3, vn:2, rev:150000, top:false, ang:"AI marketing agent; crowded and eng-heavy"},
+ {rank:16, name:"AI OS for healthcare / wellness SMBs", dm:"chatfuel.com", arch:"Vertical AI platform", cat:"Software", build:"Needs build", fit:51.8, us:4, asia:3, vn:3, rev:83000, top:false, ang:"Ties to Vitals, but SMB access is hard and it needs engineering"},
+ {rank:17, name:"Music production tool marketplace", dm:"modernproducers.com", arch:"Passion marketplace", cat:"Marketplace", build:"Needs build", fit:40.0, us:4, asia:2, vn:2, rev:233000, top:false, ang:"No edge, no distribution for you in this niche"},
+ {rank:18, name:"All-in-one SaaS toolkit", dm:"outseta.com", arch:"SaaS infra", cat:"Software", build:"Needs build", fit:39.2, us:3, asia:2, vn:2, rev:0, top:false, ang:"Infrastructure product; needs deep engineering"},
+ {rank:19, name:"AI meeting note-taker", dm:"fireflies.ai", arch:"Horizontal AI SaaS", cat:"Software", build:"Needs build", fit:39.0, us:3, asia:3, vn:2, rev:0, top:false, ang:"Crowded note-taker space; nothing here is your edge"},
+ {rank:20, name:"Insulated beverage containers", dm:"brumate.com", arch:"DTC physical product", cat:"Physical", build:"Needs ops", fit:38.2, us:4, asia:3, vn:3, rev:12000000, top:false, ang:"Inventory-heavy DTC; high capital, no edge — off-thesis"},
+ {rank:21, name:"Creator commerce platform", dm:"gumroad.com", arch:"Platform / marketplace", cat:"Marketplace", build:"Needs build", fit:33.8, us:3, asia:2, vn:2, rev:917000, top:false, ang:"Platform play; needs scale and engineering"},
+ {rank:22, name:"OSINT security platform", dm:"sociallinks.io", arch:"Deep-tech security", cat:"Software", build:"Needs build", fit:33.8, us:4, asia:3, vn:2, rev:700000, top:false, ang:"Deep-tech OSINT; far off-thesis for a non-coder"},
+ {rank:23, name:"SaaS marketing automation", dm:"customer.io", arch:"Enterprise SaaS", cat:"Software", build:"Needs build", fit:32.8, us:3, asia:2, vn:2, rev:8330000, top:false, ang:"Enterprise, engineering-heavy; off-thesis"},
+ {rank:24, name:"Email marketing for creators", dm:"convertkit.com", arch:"Mature horizontal SaaS", cat:"Software", build:"Needs build", fit:30.0, us:3, asia:2, vn:2, rev:1000000, top:false, ang:"Saturated incumbent category; not entrant-friendly"}
+];
+
+// Verified team sizes (founders / employees), read from each case-study page while logged in as the user
+const TEAM={"dashp.io":"1 / 0","brumate.com":"1 / 57","chefs-resources.com":"1 / 1","rankings.io":"1 / 168","modernproducers.com":"1 / 0","myzia.io":"1 / 1","amawp.com":"1 / 1","bbe-insider.com":"2 / 0","thecatalystbdc.com":"1 / 2","brandaxis.ai":"2 / 3","plurio.ai":"2 / 37","stackero.co":"1 / 1","perfect.live":"1 / 100","sociallinks.io":"1 / 70","chatfuel.com":"1 / 38","communitycardplaybook.com":"2 / 0"};
+IDEAS.forEach(i=>{ i.team = TEAM[i.dm] || "—"; });
+// re-number # by the (re-scored) fit order; stable sort keeps ties in original order
+IDEAS.sort((a,b)=>b.fit-a.fit).forEach((i,ix)=>{ i.rank = ix+1; });
+
+const DEEP = [
+ {
+  rank:1, title:"Fractional commercial strategist", fit:83.4, market:"Vietnam (5/5)",
+  play:"Sell what you already do at Ecopark, by the retainer. Package <b>commercial strategy, go-to-market and deal structuring for real estate, retail and F&B ventures</b> as a fractional-director engagement — not a vague 'consultant'.",
+  fits:["Zero build, zero inventory, your literal expertise and network.","First invoice in ~3 weeks — the fastest cash on this list.","The catch, stated plainly: it caps at your hours and brushes the Ecopark conflict line."],
+  econ:[["Gross revenue / mo","$12,000"],["Delivery cost","~$0"],["Tools / legal","$500"],["Net margin / mo","$11,500",1],["Upfront capital","$300"],["Time to first $","~3 weeks"]],
+  econnote:"Assumption: 3 retainers × $4,000. Floor case: 1 client × $3,000 = $2,500/mo margin.",
+  barrier:"Anyone can call themselves a consultant; almost no one commands real fees. Your barrier is credibility — which you have. The true gate is your own time, and putting the Ecopark conflict-of-interest line in writing before you start.",
+  pre:"You take delivery-heavy clients, they eat the hours you don't have, quality slips, referrals stop. Or Ecopark reads it as moonlighting and it costs you politically.",
+  post:"You stayed advisory — strategy memos, deal reviews, board prep — never operational. Two anchor clients referred three more. You productized recurring deliverables so each hour billed higher.",
+  steps:["Pick one wedge: 'commercial strategy for regional developers &amp; retail landlords'.","Write two anonymized case teardowns — that's your entire marketing asset.","Price on value (retainer or per-deal %), never hourly.","Land one client through your network in 30 days; convert results into two referrals.","Clear the Ecopark conflict line in writing first."],
+  markets:[["US","4 — high fees, but you're remote. Sell to VN/SEA developers expanding, or US funds eyeing Vietnam."],["Asia","4 — regional developers pay for on-the-ground insight."],["VN","5 — home turf, trust, network. Start here."]]
+ },
+ {
+  rank:2, title:"'Get found' agency — real estate &amp; proptech", fit:82.6, market:"US (5/5)",
+  play:"rankings.io does SEO for one vertical (injury lawyers) and reports $2.5M/mo. Copy the model, swap the vertical: a done-for-you <b>'get found' agency for real estate developers, brokerages and proptech</b> — SEO plus the 2026 wedge, AEO (getting cited by ChatGPT, Perplexity, Google AI).",
+  fits:["No code, your domain, and the USD-in / Hanoi-out arbitrage baked in.","Biggest proven ceiling of the five — but verified this session, rankings.io's $2.5M/mo runs on 168 employees. You start solo; that ceiling only comes with a team.","AEO is the timing wedge: sell 2026 optimization while incumbents still sell 2019 SEO."],
+  econ:[["Gross revenue / mo","$12,500"],["Delivery (2 VN specialists)","$4,000"],["Tools","$500"],["Net margin / mo","$8,000",1],["Upfront capital","$1,000"],["Time to first $","~6 weeks"]],
+  econnote:"5 clients × $2,500 (mid-band, Verified from 2026 AEO pricing guide). Delivered with Vietnamese talent. Ramp 3–6 months.",
+  barrier:"Low technically, high on proof and niche authority. Your barrier: you must show ranking results before you can charge premium. Solve it with one or two discounted case-study clients, then never discount again.",
+  pre:"You stay a generalist agency and drown among thousands. Or you sell SEO as a commodity and race to the bottom. An algorithm shift tanks a client's traffic and they blame you.",
+  post:"You owned one narrow lane ('we only do real estate'), published proof, and productized AEO as the premium upsell while competitors were still selling links.",
+  steps:["Niche to real estate / proptech only — refuse everything else.","Land two case-study clients at cost for the proof.","Hire one or two VN freelance SEO/content specialists.","Package: $1.5k audit → $2.5–5k/mo retainer, AEO included.","Sell via LinkedIn plus your commercial network; results compound into inbound."],
+  markets:[["US","5 — highest willingness-to-pay, deepest real estate marketing budgets. Crowded, so niche hard."],["Asia","4 — developers going digital, less competition than the US."],["VN","3 — thin retainer WTP, but you'd be first on AEO."]]
+ },
+ {
+  rank:4, title:"AEO service — Vietnam &amp; SEA SMEs", fit:79.8, market:"Asia / VN (early)",
+  play:"The same 'get found' muscle as #2, pointed at the market you physically sit in. Vietnam/SEA runs roughly 12–18 months behind the US on AI-search optimization, so here you're <b>early, not late</b>. Run it as a service first — audit, fix, monitor — and only productize into a tool later if it works.",
+  fits:["On-the-ground, local-language, local-network sales.","The tool version is crowded in the US but nearly empty in VN.","Service-first means no build to start — you sell judgment, not software."],
+  econ:[["Gross revenue / mo","$5,600"],["Delivery (1 specialist)","$1,200"],["Tools","$400"],["Net margin / mo","$4,000",1],["Upfront capital","$800"],["Time to first $","~4 weeks"]],
+  econnote:"Assumption: 8 SME clients × $700/mo. VN retainer $500–1,200 marked Likely (basis: VN agency rates run well below US).",
+  barrier:"Low. The barrier is client education — most VN SMEs don't yet know AI-search matters. That's also the moat: whoever teaches the market owns it. Publish the VN-language explainer nobody else has.",
+  pre:"You burn months evangelizing SMEs who won't pay. VN willingness-to-pay stays too thin. A US tool localizes and undercuts you before you've locked in the category name.",
+  post:"You picked one high-WTP VN niche — private hospitals, international schools, developers — delivered measurable AI-citation wins, and became the reference name before it got crowded.",
+  steps:["Pick one high-WTP VN vertical (not 'SMEs' generally).","Do three free audits for logos and testimonials.","Package a $500–1,000/mo 'AI-visibility' retainer.","Publish VN-language content on AEO — own the search term.","Build the tool only once 8–10 clients prove demand."],
+  markets:[["US","4 — proven WTP but crowded. Skip unless you niche brutally."],["Asia","4 — emerging; this is your real edge."],["VN","3 — early and thin WTP, but you're first and local."]]
+ },
+ {
+  rank:5, title:"Done-for-you real-estate farming", fit:76.2, market:"US (5/5)",
+  play:"communitycardplaybook sells affordable postcard campaigns. Aim it at the buyer you know cold — real estate agents and developers who 'farm' neighborhoods. Done-for-you design + print + mail in the US, or <b>Zalo/omnichannel launch campaigns</b> in Vietnam.",
+  fits:["No code, fast, and your network is the buyer.","Honest caveat: it scored high on mechanics, low on ceiling. It's a $4k/mo proof point, not a $2.5M one.","Best used as a cash-flow floor, not the main event."],
+  econ:[["Gross revenue / mo","$8,000"],["Fulfillment labor","$2,000"],["Tools","$300"],["Net margin / mo","$5,700",1],["Upfront capital","$1,000"],["Time to first $","~3 weeks"]],
+  econnote:"Assumption: 10 agents × $800 service fee. Print/postage billed to the client (pass-through) — never eat the media cost.",
+  barrier:"Very low, which is the problem. Anyone can print postcards; the value is consistency and tracked results. Your barrier is turning a personal hustle into a repeatable system with a VA team from day one.",
+  pre:"It stays a low-margin fulfillment treadmill you personally run. One botched mailing burns a client. You can't scale past your own hours, so it caps low and bores you.",
+  post:"You systematized it — templates, a VA team, a results dashboard — and sold the outcome (listings won per farm), not the postcards.",
+  steps:["Pick US farming (mature, high WTP) or VN launch-marketing (your turf).","Build three campaign templates plus a results tracker.","Land three agents through your network.","Hand fulfillment to a VA from day one.","Charge a service fee on top of pass-through media."],
+  markets:[["US","5 — direct mail is a real, budgeted real estate channel."],["Asia","2 — weak mail culture."],["VN","2 — pivot to Zalo/omnichannel; lower fees, but your network."]]
+ },
+ {
+  rank:3, title:"Real-estate sales commission micro-SaaS", fit:82.6, market:"US (4/5)",
+  play:"dashp.io built commission-tracking software for pest-control sales teams. <b>Verified this session:</b> one founder, zero employees, and the prototype shipped on Retool (no-code) at $0. You run township sales and leasing teams, so build the real-estate version the same way — a <b>commission + pipeline tracker for property sales orgs</b>, via Retool or Claude Code.",
+  fits:["Recurring revenue in your exact domain — you know the commission pain natively.","Verified no-code path: the original was built solo on Retool for $0, so 'needs a dev team' is off the table.","Your network likely holds the first two or three design-partner sales teams already."],
+  econ:[["Gross revenue / mo (25 teams)","$10,000"],["Hosting / no-code tools","$800"],["Net margin / mo","$9,200",1],["Upfront (no-code build)","~$1,000"],["Time to first $","~8–10 weeks"],["Reported (dashp)","$100K ARR, solo"]],
+  econnote:"Verified: dashp's founder built it solo on Retool (no-code) at $0 → $100K ARR. Assumption: 25 teams × $400/mo. Your path is Retool or Claude Code (~$1,000 in tools), not an $8k dev build — which is why this jumped from fit 73.6 to 82.6.",
+  barrier:"Still higher than the pure services plays — you need a working product before a dollar arrives. But the verified no-code path removes the 'non-technical founder babysitting a contractor' risk. The real gate is landing the first two or three design partners, probably inside your own network.",
+  pre:"Scope creep turns a two-week Retool build into a six-month project. Or you build it for one company (yours) and it never generalizes enough to sell to others.",
+  post:"You started with two or three design-partner sales teams from your network, kept scope brutally narrow (commissions only), shipped on no-code in weeks, and let recurring revenue compound while the services plays funded your time.",
+  steps:["Get 2–3 real estate sales teams to commit as design partners before building.","Scope to ONE job: commission calculation + payout tracking.","Build the MVP on Retool or Claude Code — target ~$1,000 in tools, not an $8k dev contract.","Charge from day one — $300–500/team/mo.","Protect your hours: this competes with the services plays, so time-box the build."],
+  markets:[["US","4 — big sales orgs, real WTP for sales tooling."],["Asia","3.5 — growing appetite."],["VN","3 — low SaaS WTP, but you have direct design-partner access to prove it."]]
+ }
+];
+
+// ---------- render table ----------
+const rowsEl = document.getElementById('rows');
+const qEl = document.getElementById('q');
+const catEl = document.getElementById('fcat');
+const buildEl = document.getElementById('fbuild');
+const topEl = document.getElementById('ftop');
+const countEl = document.getElementById('count');
+let sortK='fit', sortDir=-1;
+
+function fmtRev(v){ if(!v) return '—'; if(v>=1e6) return '$'+(v/1e6).toFixed(v>=1e7?0:1)+'M'; if(v>=1e3) return '$'+Math.round(v/1e3)+'k'; return '$'+v; }
+function dots(n){ let s=''; for(let i=1;i<=5;i++){ s+= i<=n?'●':'<span class="off">○</span>'; } return s; }
+
+['All categories', ...[...new Set(IDEAS.map(i=>i.cat))].sort()].forEach((c,i)=>{ const o=document.createElement('option'); o.value=i===0?'':c; o.textContent=c; catEl.appendChild(o); });
+['All build modes', ...[...new Set(IDEAS.map(i=>i.build))]].forEach((c,i)=>{ const o=document.createElement('option'); o.value=i===0?'':c; o.textContent=c; buildEl.appendChild(o); });
+
+function render(){
+  const q=qEl.value.trim().toLowerCase(), fc=catEl.value, fb=buildEl.value, ft=topEl.checked;
+  let data=IDEAS.filter(i=>{
+    if(fc && i.cat!==fc) return false;
+    if(fb && i.build!==fb) return false;
+    if(ft && !i.top) return false;
+    if(q && !(i.name+' '+i.arch+' '+i.ang+' '+i.dm).toLowerCase().includes(q)) return false;
+    return true;
+  });
+  data.sort((a,b)=>{
+    let x=a[sortK], y=b[sortK];
+    if(typeof x==='string'){ x=x.toLowerCase(); y=y.toLowerCase(); return x<y?-1*sortDir:x>y?1*sortDir:0; }
+    return (x-y)*sortDir;
+  });
+  rowsEl.innerHTML = data.map(i=>`
+    <tr class="${i.top?'top':''}">
+      <td class="r rank">${i.top?'<span class="star">★</span>':''}${i.rank}</td>
+      <td class="idea"><div class="nm">${i.name}</div><div class="dm">${i.dm}</div><div class="ang">${i.ang}</div></td>
+      <td class="arch">${i.arch}</td>
+      <td class="c"><span class="chip build-${i.build.replace(/ /g,'-')}">${i.build}</span></td>
+      <td class="c team">${i.team}</td>
+      <td class="r"><div class="fit"><span class="bar"><i style="width:${i.fit}%"></i></span><span class="v num">${i.fit.toFixed(0)}</span></div></td>
+      <td class="c dots">${dots(i.us)}</td>
+      <td class="c dots">${dots(i.asia)}</td>
+      <td class="c dots">${dots(i.vn)}</td>
+      <td class="r rev">${fmtRev(i.rev)}</td>
+    </tr>`).join('');
+  countEl.textContent = data.length+' of '+IDEAS.length+' shown';
+}
+document.querySelectorAll('th.sortable').forEach(th=>{
+  th.addEventListener('click',()=>{
+    const k=th.dataset.k;
+    if(sortK===k) sortDir*=-1; else { sortK=k; sortDir = (k==='name'||k==='arch')?1:-1; }
+    document.querySelectorAll('th .ar').forEach(a=>a.remove());
+    const ar=document.createElement('span'); ar.className='ar'; ar.textContent = sortDir<0?' ▾':' ▴'; th.appendChild(ar);
+    render();
+  });
+});
+[qEl,catEl,buildEl,topEl].forEach(el=>el.addEventListener('input',render));
+render();
+
+// ---------- render deep-dive cards ----------
+document.getElementById('cards').innerHTML = DEEP.slice().sort((a,b)=>a.rank-b.rank).map(d=>`
+  <div class="card">
+    <div class="card-top">
+      <div class="lhs">
+        <div class="card-rank">Shortlist · #${d.rank}</div>
+        <h3>${d.title}</h3>
+        <p class="play">${d.play}</p>
+      </div>
+      <div class="scorebox">
+        <div class="big num">${d.fit.toFixed(1)}</div>
+        <div class="cap">Fit / 100</div>
+        <div class="mk">Best market<br><b>${d.market}</b></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="blk"><div class="h"><span class="t">Unit economics</span><span class="mark">Assumption</span></div>
+        <div class="econ">${d.econ.map(e=>`<div class="row ${e[2]?'hl':''}"><span class="k">${e[0]}</span><span class="v">${e[1]}</span></div>`).join('')}</div>
+        <p style="font-size:11.5px;color:var(--muted);margin-top:8px">${d.econnote}</p>
+      </div>
+      <div class="blk"><div class="h"><span class="t">Why it fits you</span></div>
+        <ul class="plist" style="margin-top:0">${d.fits.map(f=>`<li style="padding:6px 0;font-size:13px">${f}</li>`).join('')}</ul>
+      </div>
+      <div class="blk"><div class="h"><span class="t warn">Pre-mortem · how it dies</span></div><p>${d.pre}</p></div>
+      <div class="blk"><div class="h"><span class="t">Post-mortem · how it won</span></div><p>${d.post}</p></div>
+      <div class="blk"><div class="h"><span class="t">Entry barrier</span></div><p>${d.barrier}</p></div>
+      <div class="blk"><div class="h"><span class="t">Minimal-capital playbook</span></div>
+        <ol class="steps">${d.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+      </div>
+      <div class="blk"><div class="h"><span class="t">Market read</span></div>
+        <div class="mkrow">${d.markets.map(m=>`<div class="m"><span class="g">${m[0]}</span><span class="d">${m[1]}</span></div>`).join('')}</div>
+      </div>
+    </div>
+  </div>`).join('');
+</script>

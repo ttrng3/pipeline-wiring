@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pipeline Wiring</title>
+<style>
+
+:root{
+  --ground:#F2F2F7; --card:#FFFFFF; --line:#E5E5EA; --line-soft:#F0F0F3;
+  --ink:#1C1C1E; --ink-2:#3C3C43; --ink-3:#8E8E93;
+  --blue:#007AFF; --green:#34C759; --amber:#FF9500; --red:#FF3B30; --violet:#AF52DE;
+  --blue-ink:#0047B3; --green-ink:#1D7A33; --amber-ink:#8A5200; --red-ink:#B3231B; --violet-ink:#6B2E93;
+  --blue-t:#E8F1FF; --green-t:#E6F7EA; --amber-t:#FFF3E0; --red-t:#FFEBEA; --violet-t:#F3EAFB; --grey-t:#EFEFF4;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:14px;line-height:1.5}
+.wrap{max-width:1020px;margin:0 auto;padding:32px 16px 72px}
+h1{font-size:26px;line-height:1.25;font-weight:600;letter-spacing:-.02em;margin:0 0 6px}
+h2{font-size:19px;line-height:1.35;font-weight:500;letter-spacing:-.01em;margin:36px 0 4px}
+h3{font-size:16px;line-height:1.4;font-weight:500;margin:0 0 8px}
+p{margin:0 0 12px}
+.sub{color:var(--ink-3);margin:0 0 4px}
+.lede{color:var(--ink-2);margin:0 0 14px;max-width:72ch}
+.cap{font-size:12px;color:var(--ink-3)}
+.aurl{display:inline-block;font-size:11.5px;font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;color:var(--ink-3);border-bottom:1px solid var(--line);word-break:break-all;line-height:1.35;margin-top:2px}
+.aurl:hover{color:var(--blue-ink);border-bottom-color:var(--blue-ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:0 0 14px}
+.card.tight{padding:14px 16px}
+.grid{display:grid;gap:12px}
+@media(min-width:700px){.grid.c3{grid-template-columns:repeat(3,1fr)}.grid.c4{grid-template-columns:repeat(4,1fr)}}
+.stat{font-size:26px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin:0 0 2px}
+.flow{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:0 0 14px;
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;font-size:12.5px;line-height:1.85;
+  overflow-x:auto;white-space:pre;color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+th{font-size:12px;font-weight:500;color:var(--ink-3);border-bottom:1px solid var(--line);white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.scroll table{min-width:680px}
+a{color:var(--blue-ink);text-decoration:none;border-bottom:1px solid rgba(0,71,179,.25)}
+a:hover{border-bottom-color:var(--blue-ink)}
+code{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;font-size:12.5px;background:var(--grey-t);padding:1px 5px;border-radius:4px}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:12px;padding:2px 8px;font-size:12px;line-height:1.45;white-space:nowrap;font-weight:500}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;flex:none}
+.p-ok{background:var(--green-t);color:var(--green-ink)}    .p-ok::before{background:var(--green)}
+.p-info{background:var(--blue-t);color:var(--blue-ink)}    .p-info::before{background:var(--blue)}
+.p-warn{background:var(--amber-t);color:var(--amber-ink)}  .p-warn::before{background:var(--amber)}
+.p-stop{background:var(--red-t);color:var(--red-ink)}      .p-stop::before{background:var(--red)}
+.p-alt{background:var(--violet-t);color:var(--violet-ink)} .p-alt::before{background:var(--violet)}
+.p-mute{background:var(--grey-t);color:var(--ink-3)}       .p-mute::before{background:var(--ink-3)}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0;margin:0 0 14px}
+summary{cursor:pointer;padding:14px 18px;font-weight:500;font-size:15px;list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"\203A";margin-left:auto;color:var(--ink-3);font-size:19px;line-height:1;transform:rotate(90deg);transition:transform .15s}
+details[open] summary::after{transform:rotate(-90deg)}
+details>*:not(summary){padding:0 18px}
+details>*:last-child{padding-bottom:16px}
+details .scroll{padding:0 18px 16px}
+ul{margin:0 0 12px;padding-left:20px}
+li{margin:0 0 6px}
+.rule{height:1px;background:var(--line);border:0;margin:30px 0}
+.foot{color:var(--ink-3);font-size:12px;margin-top:28px}
+@media print{
+  body{background:#fff;font-size:11px}
+  .wrap{max-width:none;padding:0}
+  .card,details,.flow{border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid}
+  details>*:not(summary){display:block!important}
+  summary::after{display:none}
+  a{border-bottom:none;color:#000}
+  h2{page-break-after:avoid}
+}
+
+
+/* ---- tab shell ---- */
+html,body{height:100%}
+body{display:flex;flex-direction:column;overflow:hidden}
+.tabbar{flex:none;background:var(--card);border-bottom:1px solid var(--line);
+  display:flex;gap:2px;padding:0 12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabbar button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;
+  font:inherit;font-size:13px;font-weight:500;color:var(--ink-3);
+  padding:13px 14px 11px;cursor:pointer;white-space:nowrap;letter-spacing:-.01em}
+.tabbar button:hover{color:var(--ink)}
+.tabbar button[aria-selected="true"]{color:var(--blue-ink);border-bottom-color:var(--blue)}
+.tabbar button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;border-radius:4px}
+.panes{flex:1;min-height:0;position:relative}
+.pane{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch}
+.pane[hidden]{display:none}
+.pane iframe{display:block;width:100%;height:100%;border:0;background:var(--card)}
+@media print{
+  html,body{height:auto;overflow:visible}
+  body{display:block}
+  .tabbar{display:none}
+  .panes{position:static}
+  .pane{position:static;overflow:visible}
+  .pane[hidden]{display:block!important}
+  .pane iframe{height:auto;min-height:100vh;page-break-before:always}
+}
+
+</style>
+</head>
+<body>
+
+<nav class="tabbar" role="tablist" aria-label="Sections">
+  <button role="tab" id="t-wiring" aria-controls="p-wiring" aria-selected="true">Wiring</button>
+  <button role="tab" id="t-starter" aria-controls="p-starter" aria-selected="false">Starter Story</button>
+  <button role="tab" id="t-learning" aria-controls="p-learning" aria-selected="false">Learning Matrix</button>
+</nav>
+
+<div class="panes">
+  <section class="pane" id="p-wiring" role="tabpanel" aria-labelledby="t-wiring" tabindex="0">
+    <div class="wrap">
+<h1>Pipeline Wiring</h1>
+<p class="sub">Every repo, every artifact, every routine &mdash; and which of them are copies of each other.</p>
+<p class="cap">Updated 25/09/2026 &middot; schedules, next-run times and artifact list read live from the routine and artifact APIs &mdash; not from memory</p>
+<p class="cap" style="margin-top:6px">Address: <a href="https://ttrng3.github.io/pipeline-wiring/"><strong>ttrng3.github.io/pipeline-wiring/</strong></a> &middot; source <a href="https://github.com/ttrng3/pipeline-wiring">ttrng3/pipeline-wiring</a> &middot; <a href="https://claude.ai/code/routines">all routines</a></p>
+
+<div class="grid c4" style="margin-top:22px">
+  <div class="card tight"><div class="stat">8</div><div class="cap">pipelines, all complete</div></div>
+  <div class="card tight"><div class="stat">12</div><div class="cap">repositories <span style="color:var(--green-ink)">&minus;2</span></div></div>
+  <div class="card tight"><div class="stat">20</div><div class="cap">artifacts</div></div>
+  <div class="card tight"><div class="stat">0</div><div class="cap">touch your Mac</div></div>
+</div>
+
+<h2>The flow</h2>
+<p class="lede">All eight pipelines are built in this order. The artifact is the last step, never the source, and never a step that can block the repo write.</p>
+<div class="flow">schedule &rarr; cloud routine &rarr; source
+              &darr;
+           GitHub
+              &darr;
+           Pages  (truth)
+              &darr;
+        artifact (mirror)</div>
+
+<div class="card tight" style="border-color:#CFE0FF;background:var(--blue-t)">
+  <p style="margin:0"><strong>Two links, and they are not the same thing.</strong> The <strong>address</strong> is the Pages URL &mdash; that is what goes in a document, an email or a message, and it is the one worth remembering. The <strong>Cowork</strong> link opens the preview of that same page inside Claude. Every row below carries both, so nothing here needs copying by hand. The artifacts stay private either way: a link alone opens nothing for anyone you have not shared it with.</p>
+</div>
+
+<h2>1 &middot; The eight pipelines</h2>
+<p class="lede">Each one: a routine on a schedule, and a preview in Cowork. Nothing else to watch.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Pipeline</th><th>Fires (UTC) &mdash; opens the routine</th><th>Next</th><th>Source</th><th>Repo</th><th>Address</th><th>Cowork</th></tr></thead>
+<tbody>
+<tr><td><strong>TMDV</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01Ff3aQaqt1w2YEpUvo7LmXe">Sun 11:00</a></td><td class="num">27/09</td><td>Drive trackers + Outlook</td><td><a href="https://github.com/ttrng3/Omni-TMDV">ttrng3/Omni-TMDV</a></td><td><a href="https://ttrng3.github.io/Omni-TMDV/">ttrng3.github.io/Omni-TMDV/</a></td><td><a href="https://claude.ai/artifact/3hNqXDiwsssZBe34b6mK73"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>OMNI Sitecheck</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LRyJphqNgprVTbyUmubw5h">Mon 15:45</a></td><td class="num">28/09</td><td>SharePoint &mdash; OMNI tree</td><td><a href="https://github.com/ttrng3/Omni-sitecheck">ttrng3/Omni-sitecheck</a></td><td><a href="https://ttrng3.github.io/Omni-sitecheck/">ttrng3.github.io/Omni-sitecheck/</a></td><td><a href="https://claude.ai/artifact/KR1dnH91u1qdzhoop4Dqkr"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>ECOPM Sitecheck</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_016gpDjeZBU2f9GLhfVqb3BR">Mon 14:00</a></td><td class="num">28/09</td><td>SharePoint &mdash; ECOPM tree</td><td><a href="https://github.com/ttrng3/Ecopm-Sitecheck">ttrng3/Ecopm-Sitecheck</a></td><td><a href="https://ttrng3.github.io/Ecopm-Sitecheck/">ttrng3.github.io/Ecopm-Sitecheck/</a></td><td><a href="https://claude.ai/artifact/Gxr48hVPm7YGEuE2947eoZ"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>ECP &times; ELA</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01TsaptFpFhEY4eFUxcQSaNU">Sun 14:00</a></td><td class="num">27/09</td><td>Drive weekly PDFs</td><td><a href="https://github.com/ttrng3/ecp-ela-weekly">ttrng3/ecp-ela-weekly</a></td><td><a href="https://ttrng3.github.io/ecp-ela-weekly/">ttrng3.github.io/ecp-ela-weekly/</a></td><td><a href="https://claude.ai/artifact/22fboAK5NyitZHc4iiVgTx"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Trade Journal</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LWyx19N6D7gUqcy3FewYP1">Tue&ndash;Sat 01:07</a></td><td class="num">26/09</td><td>Webull CSVs on Drive</td><td><a href="https://github.com/ttrng3/Trade-Journal">ttrng3/Trade-Journal</a></td><td><a href="https://ttrng3.github.io/Trade-Journal/">ttrng3.github.io/Trade-Journal/</a></td><td><a href="https://claude.ai/artifact/GcWosLDVDFFqwEE7NS2hqV"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>GDSH</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01FEgjqUEhG88GtAGFdLE4hE">Mon 01:00</a></td><td class="num">28/09</td><td>Drive budget workbook</td><td><a href="https://github.com/ttrng3/gdsh-report">ttrng3/gdsh-report</a></td><td><a href="https://ttrng3.github.io/gdsh-report/">ttrng3.github.io/gdsh-report/</a></td><td><a href="https://claude.ai/artifact/A5DNPFCcerdjgoBk2c5vVd"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Ops-Dashboard</strong> <span class="cap">KSNB</span></td><td class="num"><a href="https://claude.ai/code/routines/trig_01HqP8u1h6LYYRXmS8aXmSre">1st &amp; 15th 06:00</a></td><td class="num">01/10</td><td>Outlook + Drive <code>09 TCKT</code></td><td><a href="https://github.com/ttrng3/Ops-Dashboard">ttrng3/Ops-Dashboard</a></td><td><a href="https://ttrng3.github.io/Ops-Dashboard/">ttrng3.github.io/Ops-Dashboard/</a></td><td><a href="https://claude.ai/artifact/Ny2dknmJCxADa95gJn6DMx"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Omni-Audit</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01AXUmgrW5pxPFdRcQtYv1Tv">1st 09:00</a></td><td class="num">01/10</td><td>Drive handoff</td><td><a href="https://github.com/ttrng3/Omni-Audit">ttrng3/Omni-Audit</a></td><td><a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a></td><td><a href="https://claude.ai/artifact/8zhD3Cm1hYW3KUxZ3YWajS"><span class="pill p-ok">Open</span></a></td></tr>
+</tbody>
+</table>
+</div>
+<p class="cap">All eight Pages sites verified live (HTTP&nbsp;200) on 24/09. Every mirror was checked for the silent-blank failure: exactly one <code>&lt;html&gt;</code> tag on read-back, which is correct &mdash; two would mean the page nested inside the service wrapper and renders blank with no console error.</p>
+
+<h2>2 &middot; Repos nothing drives</h2>
+<p class="lede">Four repos with no routine. They move only by hand &mdash; so none has a heartbeat, and a stale one looks identical to a healthy one.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Repo</th><th>Visibility</th><th>What it is</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><strong><a href="https://github.com/ttrng3/famrec">famrec</a></strong></td><td>Public</td><td>Personal health record trend</td><td><span class="pill p-info">Hand-driven</span></td></tr>
+<tr><td><strong><a href="https://github.com/ttrng3/vitals-journal">vitals-journal</a></strong></td><td>Private</td><td>Local-only medical record book</td><td><span class="pill p-info">Hand-driven</span></td></tr>
+<tr><td><strong><a href="https://github.com/ttrng3/vitals-app">vitals-app</a></strong></td><td>Private</td><td>The Vitals product code</td><td><span class="pill p-mute">Commercial closed 23/09</span></td></tr>
+<tr><td><strong><a href="https://github.com/ttrng3/japan-travel-2026">japan-travel-2026</a></strong></td><td>Public</td><td>Japan trip &mdash; store only</td><td><span class="pill p-ok">Pages off 23/09</span></td></tr>
+</tbody>
+</table>
+</div>
+<p class="cap">12 repos total: the 8 pipelines above, plus these four. <code>market-intel-collector</code> and <code>signal-desk-collector</code> were deleted on 24/09 &mdash; see below for what that broke.</p>
+
+<h2>3 &middot; The twenty artifacts</h2>
+
+<h3 style="margin-top:18px">Eight are previews of a Pages site</h3>
+<p class="lede">Both links work: the Pages address is the one to circulate, the Cowork column opens the preview in one click.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Preview</th><th>Address (circulate this)</th><th>Cowork</th></tr></thead>
+<tbody>
+<tr><td><strong>TMDV Điều hành</strong></td><td><a href="https://ttrng3.github.io/Omni-TMDV/">ttrng3.github.io/Omni-TMDV/</a></td><td><a href="https://claude.ai/artifact/3hNqXDiwsssZBe34b6mK73"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>OMNI Sitecheck Điều hành</strong></td><td><a href="https://ttrng3.github.io/Omni-sitecheck/">ttrng3.github.io/Omni-sitecheck/</a></td><td><a href="https://claude.ai/artifact/KR1dnH91u1qdzhoop4Dqkr"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>ECOPM Sitecheck — Điều hành</strong></td><td><a href="https://ttrng3.github.io/Ecopm-Sitecheck/">ttrng3.github.io/Ecopm-Sitecheck/</a></td><td><a href="https://claude.ai/artifact/Gxr48hVPm7YGEuE2947eoZ"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Điều Hành Vận Hành ECP × ELA</strong></td><td><a href="https://ttrng3.github.io/ecp-ela-weekly/">ttrng3.github.io/ecp-ela-weekly/</a></td><td><a href="https://claude.ai/artifact/22fboAK5NyitZHc4iiVgTx"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Webull Trade Journal</strong></td><td><a href="https://ttrng3.github.io/Trade-Journal/">ttrng3.github.io/Trade-Journal/</a></td><td><a href="https://claude.ai/artifact/GcWosLDVDFFqwEE7NS2hqV"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Thẩm định Giáo dục Sông Hồng</strong></td><td><a href="https://ttrng3.github.io/gdsh-report/">ttrng3.github.io/gdsh-report/</a></td><td><a href="https://claude.ai/artifact/A5DNPFCcerdjgoBk2c5vVd"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Ecosystem Audit</strong></td><td><a href="https://ttrng3.github.io/Ops-Dashboard/">ttrng3.github.io/Ops-Dashboard/</a></td><td><a href="https://claude.ai/artifact/Ny2dknmJCxADa95gJn6DMx"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Dashboard Giám sát Ngân sách &amp; Dòng tiền — KSNB</strong></td><td><a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a></td><td><a href="https://claude.ai/artifact/8zhD3Cm1hYW3KUxZ3YWajS"><span class="pill p-ok">Open</span></a></td></tr>
+</tbody>
+</table>
+</div>
+<h3 style="margin-top:22px">Twelve are the only surface</h3>
+<p class="lede">No Pages site behind these, so the artifact link <em>is</em> the address. Deleting one destroys the output rather than de-duplicating it.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Artifact</th><th>Updated</th><th>What it is</th></tr></thead>
+<tbody>
+<tr><td><strong>Signal Desk</strong><br><a class="aurl" href="https://claude.ai/artifact/PETvCeZufa32XyvdhyEAG3">claude.ai/artifact/PETvCeZufa32XyvdhyEAG3</a></td><td class="num">23/09</td><td>Daily briefing. <strong>Its repo <code>signal-desk-collector</code> was deleted 24/09</strong> &mdash; the routine cannot provision until it is restored. See &ldquo;Broken&rdquo; above.</td></tr>
+<tr><td><strong>Second Brain, Applied</strong><br><a class="aurl" href="https://claude.ai/artifact/Kkzb2BgUjKgMcosCEtwhFd">claude.ai/artifact/Kkzb2BgUjKgMcosCEtwhFd</a></td><td class="num">15/09</td><td>Republished monthly by KB Monthly Update, 1st 02:00.</td></tr>
+<tr><td><strong>Ecosystem Health</strong><br><a class="aurl" href="https://claude.ai/artifact/4GFQXbNh97Q9qmtNMfnyWR">claude.ai/artifact/4GFQXbNh97Q9qmtNMfnyWR</a></td><td class="num">12/09</td><td>Written monthly by the Ecosystem Audit producer, 1st 03:00.</td></tr>
+<tr><td><strong>Pipeline Wiring</strong><br><a class="aurl" href="https://claude.ai/artifact/1jJocxY9ehSu9DJigt9ZmW">claude.ai/artifact/1jJocxY9ehSu9DJigt9ZmW</a></td><td class="num">24/09</td><td>This page. Describes the system; is not part of it.</td></tr>
+<tr><td><strong>Vitals Journal</strong><br><a class="aurl" href="https://claude.ai/artifact/DFX3AXsi8tLyCeadMcwuBa">claude.ai/artifact/DFX3AXsi8tLyCeadMcwuBa</a></td><td class="num">23/09</td><td>Sits alongside the private <code>vitals-journal</code> repo, which has no Pages site.</td></tr>
+<tr><td><strong>Vitals Build Blueprint</strong><br><a class="aurl" href="https://claude.ai/artifact/V6kCKarz6NnqWLAP2yqMhg">claude.ai/artifact/V6kCKarz6NnqWLAP2yqMhg</a></td><td class="num">14/09</td><td rowspan="2" style="vertical-align:middle">Commercial Vitals closed 23/09. These describe a venture you killed.</td></tr>
+<tr><td><strong>Tư Cách Pháp Lý Vitals</strong><br><a class="aurl" href="https://claude.ai/artifact/GNU6Qga1dTX5xfumWHLG8D">claude.ai/artifact/GNU6Qga1dTX5xfumWHLG8D</a></td><td class="num">20/09</td></tr>
+<tr><td><strong>Chuyến Nhật 2026</strong><br><a class="aurl" href="https://claude.ai/artifact/NpqPpXjuLnpVdrYuMPB8Nn">claude.ai/artifact/NpqPpXjuLnpVdrYuMPB8Nn</a></td><td class="num">07/09</td><td rowspan="3" style="vertical-align:middle">Japan trip. The repo is the store; its Pages site was switched off 23/09, so these three are the only way to read it.</td></tr>
+<tr><td><strong>Nhật 2026 Bỏ Túi</strong><br><a class="aurl" href="https://claude.ai/artifact/Qh2AH4356xDDyJePqB8msp">claude.ai/artifact/Qh2AH4356xDDyJePqB8msp</a></td><td class="num">07/09</td></tr>
+<tr><td><strong>Mẫu Kế Hoạch Chuyến Đi</strong><br><a class="aurl" href="https://claude.ai/artifact/7mqZkXdoZgDfr1m7T1xsSY">claude.ai/artifact/7mqZkXdoZgDfr1m7T1xsSY</a></td><td class="num">07/09</td></tr>
+<tr><td><strong>Ecosystem Map</strong><br><a class="aurl" href="https://claude.ai/artifact/4pjUSfRctWCbkeMHgH7Vfk">claude.ai/artifact/4pjUSfRctWCbkeMHgH7Vfk</a></td><td class="num">22/09</td><td rowspan="2" style="vertical-align:middle">One-off documents. No repo, no routine, no Pages twin.</td></tr>
+<tr><td><strong>Portfolio Position</strong><br><a class="aurl" href="https://claude.ai/artifact/E8vEJ5Qxn1ovETsaHJrFQg">claude.ai/artifact/E8vEJ5Qxn1ovETsaHJrFQg</a></td><td class="num">23/09</td></tr>
+</tbody>
+</table>
+</div>
+<p class="cap">Every artifact above is <strong>private</strong> &mdash; the links work for you, and for nobody else until you share them from the page&rsquo;s Share menu.</p>
+
+<h2>4 &middot; How the routines connect</h2>
+<p class="lede">Only one pair is coupled. That is deliberate &mdash; one failure cannot cascade.</p>
+<div class="flow">1st, 03:00 UTC      Monthly Ecosystem Audit &mdash;writes&rarr; Drive: Claude outputs/Audit/index.html
+                              &#9474;                                       &#9474;
+                              &#9492;&mdash;writes&rarr; Ecosystem Health           &#9474;  (1-hour margin)
+                                           (artifact)                 &darr;
+Mondays, 04:00 UTC  Omni-Audit publisher &mdash;&mdash;reads&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&#9496;
+                              &#9492;&mdash;writes&rarr; ttrng3/Omni-Audit &rarr; Pages &rarr; preview
+
+1st, 02:00 UTC      KB Monthly Update &mdash;writes&rarr; Drive SYS report + Second Brain, Applied
+
+everything else     TMDV &middot; OMNI &middot; ECOPM &middot; ECP&times;ELA &middot; Trade Journal &middot; GDSH &middot; Signal Desk
+                    independent &mdash; own source, own repo, own page, no shared state</div>
+
+<h2>5 &middot; Mac dependency &mdash; all clear</h2>
+<div class="card">
+  <p style="margin-bottom:10px"><span class="pill p-ok">Verified</span> Every enabled routine, three independent signals:</p>
+  <ul>
+    <li><strong>Tools</strong> &mdash; zero routines hold <code>device_bash</code>, <code>device_list_dir</code>, <code>device_stage_files</code> or any remote-devices tool.</li>
+    <li><strong>Binding</strong> &mdash; every routine reports <code>bound = false</code>.</li>
+    <li><strong>Mounts</strong> &mdash; every routine has <code>file_mounts: []</code>.</li>
+  </ul>
+  <p style="margin-bottom:0">Five prompts contain the string <code>device_bash</code> or <code>remote-devices</code> &mdash; in all five inside a prohibition, not a use. A keyword scan reads those as dependency; they are the opposite.</p>
+</div>
+
+<hr class="rule">
+
+<h2>6 &middot; Done</h2>
+<div class="card">
+  <p><strong>The flow is now uniform across all seven.</strong> Each routine writes its source into GitHub, Pages serves it, and the mirror publishes last. A failed mirror reports and stops &mdash; it can never cause an undo, retry or rewrite of the repo.</p>
+  <p><strong>Every mirror was verified, not assumed.</strong> Fragments built with zero doctype/<code>&lt;html&gt;</code>/<code>&lt;head&gt;</code>/<code>&lt;body&gt;</code> tags; data files published first and the page second on the larger payloads, because a page sent alongside a big files payload comes back blank; exactly one <code>&lt;html&gt;</code> tag on read-back.</p>
+  <p><strong>Five renderers fetch <code>data/</code> relatively</strong> and only fall back to the absolute Pages URL &mdash; which CSP blocks inside an artifact. That is why each mirror carries its own <code>data/</code> copy. GDSH is the exception: <code>build_auto.py</code> bakes the numbers in and it fetches nothing, so there the mirror <em>is</em> the page. Each routine now carries that distinction in writing.</p>
+  <p><strong>Audit publisher moved 02:00 &rarr; 04:00 Monday.</strong> It used to fire one hour <em>before</em> its own producer, so whenever the 1st fell on a Monday the fresh audit waited a week &mdash; 2027-02-01, 2027-03-01, 2027-11-01. Now one hour behind, with the reason written into the prompt so nobody moves it back.</p>
+  <p><strong>GDSH renamed</strong> to &ldquo;weekly check, monthly period&rdquo; &mdash; the cron was always weekly. Typo fixed: <em>SINH BẮNG CODE</em> &rarr; <em>SINH BẰNG CODE</em>.</p>
+  <p><strong>Three plaintext credential files moved to Drive trash</strong> &mdash; a <code>github_pat_&hellip;</code>, an <code>sk-ant-oat01-&hellip;</code>, and a third PAT-shaped file.</p>
+  <p><strong>Japan Pages switched off</strong> &mdash; the public URL 404s; the repo is untouched.</p>
+  <p><strong>Ops-Dashboard restyled to the Ty Artifact Standard</strong> &mdash; it was the last page on the retired palette. Variable <em>names</em> were kept, because <code>ksnb-render.js</code> builds its SVG charts from them and writes <code>color:var(--red)</code> onto 12.5px table numbers; so every accent is now a text-safe ink (blue 8.2:1, red 6.6:1, amber 6.4:1, green 6.6:1 on white) rather than a bright mark. Chart pairs checked with the CVD validator: blue/red &Delta;E 24.3, blue/amber 25.9, green/red 7.0 deutan &mdash; the last is legal because the bars also encode sign by position around a zero axis and the MoM table repeats every signed figure. Nothing outside the stylesheet changed; the file is otherwise byte-identical.</p>
+  <p><strong>That restyle fixed a real defect.</strong> The old sheet carried a second, dead <code>:root</code> block from the 20/09 reskin that aliased <code>--blue</code> and <code>--green</code> to the <em>same</em> colour. Anywhere both appeared &mdash; the <em>info</em> vs <em>good</em> bullet dots, the KPI border tops &mdash; they were indistinguishable. They are now two distinct hues.</p>
+  <p><strong>Ops-Dashboard became the eighth pipeline.</strong> The repo was already repo-first with a runbook, heartbeat and freshness check — but <strong>no routine had ever been created</strong>, so it only moved when run by hand. It now has one, Mondays 06:00 UTC.</p>
+  <p><strong>Its "mounted folder" was never a Mac dependency.</strong> The source it calls <em>thư mục Drive cục bộ 09 TCKT</em> is a Google Drive folder the connector reads from the cloud — the same false constraint Trade Journal had. Both PnL files are readable; the routine now scans Outlook <em>and</em> that folder, because TCKT has started delivering reports there instead of by email.</p>
+  <p style="margin-bottom:0"><strong>Three artifacts became one</strong> &mdash; Starter Story and Learning Matrix are tabs on this page. <strong>One duplicate deleted</strong> &mdash; the old Ecosystem Audit copy, after confirming the repo already held the same run.</p>
+</div>
+
+<h2>7 &middot; Open &mdash; needs you</h2>
+
+<details open>
+<summary><span class="pill p-ok">Corrected 25/09</span> Four dead registry URLs, two wrong schedules, one duplicate I created</summary>
+<p><strong>Two schedules on this page were wrong.</strong> Read against the live routine API on 25/09: <strong>Ops-Dashboard</strong> fires <code>0 6 1,15 * *</code> &mdash; the 1st and the 15th, not &ldquo;Mon 06:00&rdquo;; <strong>Omni-Audit</strong> fires <code>0 9 1 * *</code> &mdash; the 1st at 09:00, not &ldquo;Mon 04:00&rdquo;. Section 6 still describes an audit-publisher move to Monday 04:00; that move is not what the cron now says. Both rows above are corrected.</p>
+<p><strong>The artifact registry had four dead URLs.</strong> <code>_tools/artifact-registry.md</code> pointed at deleted artifacts for TMDV (both the short and uuid forms), ECP&times;ELA, OMNI Sitecheck and Trade Journal &mdash; all four verified <em>artifact not found</em>. Cause: those artifacts were recreated on 24/09 and the routine prompts were updated, but the registry was not. No routine was ever at risk, because each carries its publish target in its own prompt and states that older ids are dead. The rows now record the <strong>Pages address</strong> instead of an artifact id, which is what those prompts require.</p>
+<p><strong>ECOPM Sitecheck was an unregistered artifact</strong> &mdash; no row at all. It has one now. It is a sibling of OMNI Sitecheck, not a copy: different SharePoint tree, different repo, different week-slug format. <strong>Still open: ECOPM&rsquo;s newest week is 2026-09-W01 while OMNI is at 2026-09-W3</strong>, roughly two weeks behind. Worth checking whether the source stopped or the routine did.</p>
+<p><strong>Trade Journal is not Mac-bound.</strong> The registry called its nightly sync a device-bound autonomy debt. It is a cloud routine and ran clean at 01:50&nbsp;UTC on 25/09.</p>
+<p style="margin-bottom:16px"><strong>And one duplicate, which was mine.</strong> The 14/09 record for the Learning Matrix named an artifact id that no longer resolved, so a standalone Learning Matrix was rebuilt from it &mdash; without noticing the page had already been folded into this one as a tab on 24/09. That is exactly the second-copy failure the registry exists to prevent, caused by the repair rather than by the original fault. The standalone was deleted; the Learning Matrix tab here is the only one.</p>
+</details>
+
+<details open>
+<summary><span class="pill p-stop">Broken</span> Signal Desk loses its source tonight at 00:10 UTC</summary>
+<p><code>signal-desk-collector</code> was deleted on 24/09, but the <strong>Signal Desk daily briefing</strong> routine still names it as its git source &mdash; and its prompt opens <em>"everything you need is in the cloned repo."</em> It reads <code>PUBLISH-CONTRACT.md</code>, <code>BRIEFING-SPEC.md</code>, <code>data/latest.json</code> and the collector's raw file from that repo. With the repo gone it cannot provision, so the run fails before a session exists.</p>
+<p>Three ways out, and the choice is yours:</p>
+<ul>
+  <li><strong>Restore the repo.</strong> GitHub keeps a deleted repo recoverable for 90 days &mdash; Settings &rarr; your repositories &rarr; Deleted repositories. This is the only option that keeps the briefing working as designed.</li>
+  <li><strong>Disable the routine</strong> until you decide. No data is lost; the artifact keeps its last briefing.</li>
+  <li><strong>Retire Signal Desk</strong> deliberately, and delete the routine and the artifact together.</li>
+</ul>
+<p style="margin-bottom:16px">I have not touched it. A failed run is harmless &mdash; it publishes nothing and leaves the existing briefing intact &mdash; but it will fail every night until one of the above happens.</p>
+</details>
+
+<details>
+<summary><span class="pill p-stop">Security</span> Revoke the two tokens &mdash; deleting the files did not</summary>
+<p><strong>Trashing a file does not revoke a credential.</strong> Two need action at the provider:</p>
+<ul>
+  <li><code>routine_fire_token.txt</code> &mdash; an Anthropic <code>sk-ant-oat01-&hellip;</code> session token. Revoke it in your account settings.</li>
+  <li><code>.github-token</code> &mdash; 94 bytes, PAT-shaped, created 20/05. If it is not one of the three you already revoked, revoke it too.</li>
+</ul>
+<p style="margin-bottom:16px">The third held the Trade-Journal PAT you already killed &mdash; dead residue, now gone. No routine reads any of the three.</p>
+</details>
+
+<details>
+<summary><span class="pill p-info">Housekeeping</span> One dead routine, one unclaimed repo</summary>
+<p>Delete the routine now named <strong>&ldquo;⚠ DELETE ME — retired Mac-bound Trade Journal&rdquo;</strong> at <a href="https://claude.ai/code/routines">claude.ai/code/routines</a>. I renamed it so it cannot be confused with the live one. It is the last thing in the system that is device-bound and still carries <code>device_bash</code>; disabled, so no rush. I cannot delete routines &mdash; the API has no delete action.</p>
+<p style="margin-bottom:16px"><strong>Resolved 25/09 &mdash; Ops-Dashboard does have a routine.</strong> This paragraph used to say it had none, which contradicted section 6 two screens above. The live listing shows <a href="https://claude.ai/code/routines/trig_01HqP8u1h6LYYRXmS8aXmSre"><code>Ops-Dashboard KSNB refresh</code></a>, enabled, cron <code>0 6 1,15 * *</code>, last succeeded 25/09 01:55&nbsp;UTC. It is live, not abandoned.</p>
+</details>
+
+<details>
+<summary><span class="pill p-ok">Corrected</span> Two things I reported wrongly</summary>
+<p><strong>There was no token in the TMDV runbook.</strong> All four copies contain a placeholder &mdash; <code>DÁN_TOKEN_VÀO_ĐÂY</code> &mdash; and instructions to revoke a token that lived elsewhere. I repeated that claim from a 14/09 audit without checking. The runbook is documentation and stays.</p>
+<p><strong>KSNB is not a duplicate — then it turned out it was.</strong> I first flagged it as a Pages duplicate, then corrected myself saying no KSNB repo existed. Both were wrong in different ways: the repo is <code>Ops-Dashboard</code>, whose page carries the title "Dashboard Giám sát Ngân sách &amp; Dòng tiền — KSNB". The artifact was the original; the repo was built from it on 20/09 and became the source of truth.</p>
+<p style="margin-bottom:16px">It had drifted: the artifact was frozen at the 15/09 snapshot while the repo had moved to 20/09 — so the September compliance count read <code>0 / 8</code> in Cowork and <code>2 / 10</code> on Pages, because both PnLs arrived on 16/09. It is now a thin mirror of the repo, so that gap cannot reopen. I read the full 1,030-line original first and diffed it: every substantive figure survived into the repo.</p>
+</details>
+
+<details>
+<summary><span class="pill p-mute">Caution</span> The routine listing is capped and drops rows silently</summary>
+<p style="margin-bottom:16px">Listing routines returned 20 rows and omitted <strong>TMDV</strong> &mdash; an enabled, active dashboard. I only caught it because I knew the ID and fetched it directly. Never audit from that listing alone.</p>
+</details>
+
+<p class="foot">Pipeline Wiring &middot; 24/09/2026 &middot; tabs: Wiring &middot; Starter Story &middot; Learning Matrix &middot; schedules, tool lists and bindings read live from the routine API; artifact list read live from the artifact API. Nothing here is from memory.</p>
+</div>
+  </section>
+  <section class="pane" id="p-starter" role="tabpanel" aria-labelledby="t-starter" tabindex="0" hidden>
+    <iframe src="starter-story.html" title="Starter Story Venture Scan" loading="lazy"></iframe>
+  </section>
+  <section class="pane" id="p-learning" role="tabpanel" aria-labelledby="t-learning" tabindex="0" hidden>
+    <iframe src="learning-matrix.html" title="Learning Matrix" loading="lazy"></iframe>
+  </section>
+</div>
+
+<script>
+(function () {
+  var tabs  = [].slice.call(document.querySelectorAll('.tabbar button'));
+  var panes = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+  var KEY = 'pw.tab';
+
+  function show(i) {
+    tabs.forEach(function (t, n) {
+      t.setAttribute('aria-selected', n === i ? 'true' : 'false');
+      panes[n].hidden = n !== i;
+    });
+    try { localStorage.setItem(KEY, String(i)); } catch (e) {}
+  }
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { show(i); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = (i + d + tabs.length) % tabs.length;
+      tabs[n].focus(); show(n);
+    });
+  });
+
+  var start = 0;
+  try {
+    var v = localStorage.getItem(KEY);
+    if (v !== null && +v >= 0 && +v < tabs.length) start = +v;
+  } catch (e) {}
+  show(start);
+
+  window.addEventListener('beforeprint', function () {
+    document.querySelectorAll('details').forEach(function (d) { d.open = true; });
+  });
+})();
+</script>
+
+</body>
+</html>

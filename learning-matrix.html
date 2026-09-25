@@ -1,0 +1,566 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<title>Learning Matrix</title>
+<style>
+  :root{
+    --paper:#FFFFFF; --surface:#FAFAF8; --sunk:#F3F3EF;
+    --ink:#1C1C1A; --ink-soft:#44443F; --muted:#6B6B64; --rule:#E4E4DF;
+    --accent:#0F6E52; --accent-bg:#EAF3EF; --accent-line:#CFE4DB;
+    --critical:#B02418; --warning:#9A6B00;
+    --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+    --sans:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .page{max-width:1000px;margin:0 auto;padding:0 20px;padding-block:38px 60px;}
+  .num{font-variant-numeric:tabular-nums;}
+
+  /* Masthead */
+  .eyebrow{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:22px;}
+  h1{font-family:var(--serif);font-weight:800;font-size:40px;line-height:1.03;margin:.24em 0 .18em;
+    letter-spacing:-.01em;text-wrap:balance;}
+  .dek{font-size:16px;color:var(--ink-soft);max-width:70ch;margin:0;}
+  .flow{margin-top:14px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;}
+  .flow b{color:var(--ink-soft);font-weight:600;}
+  .flow .ar{color:var(--accent);font-weight:700;}
+
+  /* Start-here band */
+  .band{margin:30px 0 8px;}
+  .band-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+  .band-head h2{font-family:var(--serif);font-weight:700;font-size:23px;margin:0;letter-spacing:-.01em;}
+  .band-head .note{font-size:12.5px;color:var(--muted);}
+  .seven{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  .move{display:grid;grid-template-columns:26px 1fr;gap:12px;background:var(--accent-bg);
+    border:1px solid var(--accent-line);border-radius:9px;padding:15px 16px;}
+  .move .rk{font-family:var(--serif);font-weight:800;font-size:18px;color:var(--accent);line-height:1.1;}
+  .move .mt{font-size:14.5px;color:var(--ink);line-height:1.42;margin:0;}
+  .move .mm{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+  .move .who{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--accent);}
+
+  /* Controls */
+  .toolbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);
+    border-bottom:1px solid var(--rule);padding:14px 0 12px;margin-top:34px;}
+  .toolbar h2{font-family:var(--serif);font-weight:700;font-size:23px;margin:0 0 3px;letter-spacing:-.01em;}
+  .toolbar .sub{font-size:12.5px;color:var(--muted);margin:0 0 12px;}
+  .search{width:100%;max-width:340px;font-family:var(--sans);font-size:14px;color:var(--ink);
+    background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:9px 12px;margin-bottom:12px;}
+  .search:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent);}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px;}
+  .chips .lab{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+    font-weight:600;align-self:center;margin-right:2px;}
+  .chip{font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--ink-soft);
+    background:var(--surface);border:1px solid var(--rule);border-radius:20px;padding:4px 11px;cursor:pointer;
+    line-height:1.3;}
+  .chip:hover{border-color:var(--accent-line);}
+  .chip[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  /* Matrix */
+  .matrix{margin-top:10px;}
+  .dom{margin-top:26px;}
+  .dom-head{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--rule);
+    padding-bottom:7px;margin-bottom:4px;}
+  .dom-head h3{font-family:var(--serif);font-weight:700;font-size:19px;margin:0;letter-spacing:-.005em;}
+  .dom-head .ct{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .lesson{display:grid;grid-template-columns:1fr;gap:5px;padding:14px 2px;border-bottom:1px solid var(--rule);}
+  .lesson:last-child{border-bottom:none;}
+  .lz{margin:0;font-size:15px;color:var(--ink);line-height:1.45;}
+  .anchor{margin:0;font-size:12.5px;color:var(--muted);font-style:italic;line-height:1.4;
+    border-left:2px solid var(--rule);padding-left:9px;}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:1px;}
+  .apply{font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-bg);border:1px solid var(--accent-line);
+    border-radius:4px;padding:1px 6px;}
+  .src{font-size:11px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums;}
+  .empty{color:var(--muted);font-size:14px;padding:24px 2px;}
+
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--rule);
+    font-size:12.5px;color:var(--muted);line-height:1.65;}
+  footer b{color:var(--ink-soft);}
+  details{margin-top:10px;}
+  summary{cursor:pointer;color:var(--accent);font-weight:600;}
+  details ul{margin:8px 0 0;padding-left:18px;}
+  details li{margin:.28em 0;}
+
+  @media (max-width:680px){
+    h1{font-size:31px;}
+    .seven{grid-template-columns:1fr;}
+    .page{padding-block:26px 44px;}
+  }
+  @media print{
+    body{background:#fff;}
+    .toolbar{position:static;}
+    .search,.chips{display:none;}
+    .move,.chip{background:#fff !important;}
+    :root{--muted:#222;--ink-soft:#222;}
+    .move,.lesson,.dom{break-inside:avoid;}
+    .page{padding:0;max-width:100%;}
+  }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="eyebrow">Second Brain · Applied Knowledge</div>
+    <h1>Learning Matrix</h1>
+    <p class="dek">Every lesson worth applying, pulled out of ten knowledge bases and put in one place. The seven that touch what is live now read in five minutes; the full library below filters to whatever you are working on.</p>
+    <div class="flow"><b>You drop sources in RAW</b> <span class="ar">→</span> <b>the librarian compiles the Wiki</b> <span class="ar">→</span> <b>these are the lessons that fall out</b> · 57 kept, 13 low-signal filtered · refreshed on the monthly pass</div>
+  </header>
+
+  <!-- START HERE -->
+  <section class="band">
+    <div class="band-head">
+      <h2>Start here — the five-minute read</h2>
+      <span class="note">Seven moves for what is live: CRV/TM-01, the ELA ~40bn commit, the weekly report</span>
+    </div>
+    <div class="seven">
+      <div class="move"><div class="rk">1</div><div>
+        <p class="mt">Pre-empt the walkback. A midday intervention cuts the protective terms first, so stage the rent floor, CPI floor, guarantee and put option as later "legal-review" lines, not lead term-sheet items. The tell: a new counterparty principal introduced same-day.</p>
+        <div class="mm"><span class="who">CRV/TM-01</span><span class="anchor" style="border:none;padding:0">"8 of 9 protective terms" survived only the structural ones</span></div>
+      </div></div>
+      <div class="move"><div class="rk">2</div><div>
+        <p class="mt">Distrust the 60M GMV. It runs about 2.9× the Vinh comparable, and turnover rent plus IRR scale straight off it. Model a 20 / 40 / 60M band and anchor the negotiation to the low end before any floor is signed.</p>
+        <div class="mm"><span class="who">CRV/TM-01</span><span class="anchor" style="border:none;padding:0">Vinh comp ≈ 800 USD/sqm (~20.4M VND)</span></div>
+      </div></div>
+      <div class="move"><div class="rk">3</div><div>
+        <p class="mt">Below the 12% hurdle, stop negotiating the headline. A 3–5% rent bump does not rescue a sub-WACC deal. The real move is a restructure: revenue-share for fixed rent, earn-out for upfront, CAPEX pushed to the counterparty, or it is a walk.</p>
+        <div class="mm"><span class="who">CRV/TM-01 · ELA</span><span class="anchor" style="border:none;padding:0">PM lease NPV@12% = −7.3 bn</span></div>
+      </div></div>
+      <div class="move"><div class="rk">4</div><div>
+        <p class="mt">Legal-gate the ELA ~40bn social-infra commit. For a binary legal risk (the Vitalia/DKGroup licence), disburse one small tranche to buy a written external Go/No-Go first; a No-Go halts the program with the rest untouched.</p>
+        <div class="mm"><span class="who">ELA · KSNB/QTRR</span><span class="anchor" style="border:none;padding:0">tranche buys the Go/No-Go before the ~89% commit</span></div>
+      </div></div>
+      <div class="move"><div class="rk">5</div><div>
+        <p class="mt">Fix the weekly report before scaling anything. Signed-but-dark space is a bigger and cheaper-to-fix loss than vacancy, and occupancy conceals it. Add a leased-but-dark count and a downgrade-rate line; measure the pipeline by rent value.</p>
+        <div class="mm"><span class="who">ELA · TMDV · KSNB/QTRR</span><span class="anchor" style="border:none;padding:0">"It is leased space that never opened."</span></div>
+      </div></div>
+      <div class="move"><div class="rk">6</div><div>
+        <p class="mt">Lock kill criteria before the money moves. A threshold with no named data source cannot fire, and every risk owner must be a real person who agreed, not a hypothetical role. Do this on the ELA commit and on Vitals.</p>
+        <div class="mm"><span class="who">KSNB/QTRR · Vitals</span><span class="anchor" style="border:none;padding:0">"a threshold with no data feed cannot fire"</span></div>
+      </div></div>
+      <div class="move"><div class="rk">7</div><div>
+        <p class="mt">On the TM-01 transfer question: never sell the land. If transfer-at-cost is floated against a lease, set the floor at the NPV-zero price including opportunity cost, then bridge with an earn-out rather than parting with title.</p>
+        <div class="mm"><span class="who">CRV/TM-01</span><span class="anchor" style="border:none;padding:0">transfer needs 244 bn just to reach NPV = 0</span></div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <h2>The full library</h2>
+    <p class="sub">57 lessons, one line each, every one with a verbatim anchor from its source. Filter to your thread.</p>
+    <input class="search" id="q" type="search" placeholder="Search the lessons…" aria-label="Search lessons">
+    <div class="chips" id="domchips">
+      <span class="lab">Domain</span>
+      <button class="chip" data-dom="all" aria-pressed="true">All</button>
+      <button class="chip" data-dom="deals" aria-pressed="false">Deals &amp; Negotiation</button>
+      <button class="chip" data-dom="finance" aria-pressed="false">Financial Architecture</button>
+      <button class="chip" data-dom="controls" aria-pressed="false">Controls</button>
+      <button class="chip" data-dom="operator" aria-pressed="false">Operator &amp; Leverage</button>
+      <button class="chip" data-dom="mind" aria-pressed="false">Mind &amp; Method</button>
+      <button class="chip" data-dom="markets" aria-pressed="false">Markets &amp; Benchmarks</button>
+      <button class="chip" data-dom="voice" aria-pressed="false">Voice &amp; Writing</button>
+      <button class="chip" data-dom="ai" aria-pressed="false">AI &amp; Systems</button>
+      <button class="chip" data-dom="health" aria-pressed="false">Health &amp; Longevity</button>
+    </div>
+    <div class="chips" id="prjchips">
+      <span class="lab">Thread</span>
+      <button class="chip" data-prj="all" aria-pressed="true">All</button>
+      <button class="chip" data-prj="crv" aria-pressed="false">CRV/TM-01</button>
+      <button class="chip" data-prj="ela" aria-pressed="false">ELA</button>
+      <button class="chip" data-prj="tmdv" aria-pressed="false">TMDV</button>
+      <button class="chip" data-prj="mvillage" aria-pressed="false">MVillage</button>
+      <button class="chip" data-prj="eph" aria-pressed="false">EPH</button>
+      <button class="chip" data-prj="eh" aria-pressed="false">EH</button>
+      <button class="chip" data-prj="ksnb" aria-pressed="false">KSNB/QTRR</button>
+      <button class="chip" data-prj="salon" aria-pressed="false">Salon</button>
+      <button class="chip" data-prj="flip" aria-pressed="false">Flip</button>
+      <button class="chip" data-prj="vitals" aria-pressed="false">Vitals</button>
+      <button class="chip" data-prj="personal" aria-pressed="false">Personal</button>
+      <button class="chip" data-prj="aiops" aria-pressed="false">AI-ops</button>
+    </div>
+  </div>
+
+  <div class="matrix" id="matrix">
+
+    <section class="dom" data-domain="deals">
+      <div class="dom-head"><h3>Deals &amp; Negotiation</h3><span class="ct"></span></div>
+      <article class="lesson" data-domain="deals" data-apply="crv tmdv" data-text="control over cost operational control clean exits cost of delay haggling">
+        <p class="lz">Weight total asset control, operational speed and clean exits above a 5% price fight, and size the cost of delay before conceding on any of them.</p>
+        <p class="anchor">"Saving basis points while losing 6–12 months is a losing trade."</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">TMDV</span><span class="src">playbooks_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="deals" data-apply="crv tmdv dealsgen" data-text="four part dossier reshape cash flow counterparty wants behaviour">
+        <p class="lz">Run every deal through four passes; reshape the cash-flow structure in the financial pass and infer the counterparty's real wants from behaviour, not their stated position.</p>
+        <p class="anchor">"how can the cash-flow structure be reshaped to extract more value?"</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">TMDV</span><span class="src">playbooks_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="deals" data-apply="crv ksnb" data-text="leadership sign off before term sheet external walkback prevention">
+        <p class="lz">Require a short leadership sign-off before any term sheet leaves the internal desk; a walkback after it is external costs both the deal and reputation.</p>
+        <p class="anchor">"một bước sign-off ngắn từ lãnh đạo trong 12 giờ trước send"</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">KSNB/QTRR</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="deals" data-apply="tmdv ksnb" data-text="arms length host one way indemnifying commitment not two way contract partnership">
+        <p class="lz">To back a third party without taking on liability, bind them with a one-way indemnifying commitment; a two-way contract turns support into a partnership.</p>
+        <p class="anchor">"cam kết một chiều thì không" [tạo quan hệ hợp tác]</p>
+        <div class="meta"><span class="apply">TMDV</span><span class="apply">KSNB/QTRR</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="deals" data-apply="crv dealsgen" data-text="chairman walkback protective terms structural stage floors guarantees legal review">
+        <p class="lz">Expect a midday intervention to cut protective terms first and keep structural ones; pre-empt by staging floors and guarantees into a later legal-review step.</p>
+        <p class="anchor">"8 of 9 protective terms" were the ones that died</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">Deals-general</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="deals" data-apply="crv dealsgen" data-text="transfer vs lease floor npv zero opportunity cost earn out">
+        <p class="lz">When transfer-at-cost is floated against a lease, set your floor at the NPV-zero price including opportunity cost, then bridge the gap with an earn-out.</p>
+        <p class="anchor">"244 bn" just to reach NPV = 0</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">Deals-general</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="deals" data-apply="crv dealsgen" data-text="walkback tell new principal mid session leadership meeting between send reply">
+        <p class="lz">Read a new counterparty principal introduced mid-session, plus a leadership meeting slotted between your morning send and afternoon reply, as a walkback warning.</p>
+        <p class="anchor">"Ms. Ngân introduced as new Director of Investment"</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">Deals-general</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="deals" data-apply="crv eph" data-text="bundling multi asset thread leverage keep each asset separate track">
+        <p class="lz">When a counterparty bundles several assets into one thread, use their interest as leverage but keep each asset on its own separate negotiating track.</p>
+        <p class="anchor">"use the hook as leverage but keep Hưng Yên separate from the TM-01 MOU"</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">EPH</span><span class="src">eph_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="deals" data-apply="dealsgen salon" data-text="pe deal screen predictable cash flow fragmented industry founder exit consolidation">
+        <p class="lz">Screen a business as an acquirer would: predictable cash flow, a fragmented industry, a founder wanting out, and a consolidation or tech-scaling angle at exit.</p>
+        <p class="anchor">"A good LBO keeps buyers awake at night thinking of ways to make money"</p>
+        <div class="meta"><span class="apply">Deals-general</span><span class="apply">Salon</span><span class="src">learning_kb</span></div>
+      </article>
+    </section>
+
+    <section class="dom" data-domain="finance">
+      <div class="dom-head"><h3>Financial Architecture</h3><span class="ct"></span></div>
+      <article class="lesson" data-domain="finance" data-apply="crv eph" data-text="npv 12 wacc three scenarios restructure sub wacc headline price">
+        <p class="lz">Score every multi-year deal on NPV at a 12% WACC across three scenarios, and restructure a sub-WACC deal rather than trying to negotiate the headline price up.</p>
+        <p class="anchor">"NPV at WACC 12% = -7.3 bn"</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">EPH</span><span class="src">playbooks_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="finance" data-apply="crv dealsgen" data-text="price each protective term npv cost priced tradeoff not instinct">
+        <p class="lz">Bring a one-line NPV cost for each protective term into the meeting, so cutting one becomes a priced, conscious tradeoff instead of an instinct.</p>
+        <p class="anchor">"-25.8 bn in NPV" was the cost of one afternoon</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">Deals-general</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="finance" data-apply="tmdv ela" data-text="split budget pillars financial nature own disbursement gate close one">
+        <p class="lz">Split a program budget into pillars by financial nature, each with its own disbursement gate, so one pillar can be closed without collapsing the rest.</p>
+        <p class="anchor">"705,5 triệu" ring-fenced in its own pillar</p>
+        <div class="meta"><span class="apply">TMDV</span><span class="apply">ELA</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="finance" data-apply="mvillage eh" data-text="capex signed operating fee only irr lever payback ten years">
+        <p class="lz">Once CAPEX is signed, the operating-fee load is the only IRR lever left; even day-one full occupancy still leaves payback near ten years.</p>
+        <p class="anchor">"9.12 years" to payback at full occupancy</p>
+        <div class="meta"><span class="apply">MVillage</span><span class="apply">EH</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="finance" data-apply="eph dealsgen" data-text="unresolved dispute entity under valuation discount lever settle cheaply">
+        <p class="lz">An unresolved operational dispute on an entity under valuation becomes a brand-impairment hit or a buyer's forced-discount lever; settle it cheaply first.</p>
+        <p class="anchor">"Settling the voucher dispute cheaply protects the headline valuation."</p>
+        <div class="meta"><span class="apply">EPH</span><span class="apply">Deals-general</span><span class="src">eph_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="finance" data-apply="vitals dealsgen" data-text="fundable proprietary defensible scalable better than rivals service not venture">
+        <p class="lz">A business is fundable only if it owns something proprietary, defensible and scalable; doing it better than rivals is a service, not a venture.</p>
+        <p class="anchor">"own something unique, defensible, and scalable"</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">Deals-general</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="finance" data-apply="personal salon" data-text="wall off each business llc separate personal trading estate operating risk">
+        <p class="lz">Wall off each operating business in its own limited-liability entity, and keep personal trading and estate separate from operating risk.</p>
+        <p class="anchor">"If your business is your stuff and your stuff is your business, one bad day could wipe you out."</p>
+        <div class="meta"><span class="apply">Personal</span><span class="apply">Salon</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="finance" data-apply="crv ela personal" data-text="never sell land lease develop borrow keep title compound">
+        <p class="lz">Never sell appreciating land. Lease it, develop it, or borrow against it, but keep the title and let it compound.</p>
+        <p class="anchor">"Never sell the land. Lease it. Develop it. Borrow against it. But never sell it."</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">ELA</span><span class="apply">Personal</span><span class="src">learning_kb</span></div>
+      </article>
+    </section>
+
+    <section class="dom" data-domain="controls">
+      <div class="dom-head"><h3>Controls</h3><span class="ct"></span></div>
+      <article class="lesson" data-domain="controls" data-apply="vitals ksnb" data-text="kill criteria measurable threshold date named triggered action re read cadence">
+        <p class="lz">Lock measurable fail thresholds with dates and a named triggered action before launch, then re-read them on a fixed cadence so discretion cannot creep back.</p>
+        <p class="anchor">"Below 35% on three consecutive cohorts"</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">KSNB/QTRR</span><span class="src">playbooks_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="controls" data-apply="ela eh" data-text="binary legal risk small tranche written external go no go halt">
+        <p class="lz">For a binary legal risk, disburse a small tranche first to buy a written external Go/No-Go; a No-Go then halts the program with the rest untouched.</p>
+        <p class="anchor">"89%" of the spend held behind the gate</p>
+        <div class="meta"><span class="apply">ELA</span><span class="apply">EH</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="controls" data-apply="tmdv ksnb" data-text="tenant support proposal three linkage tests co operator risk">
+        <p class="lz">Screen any tenant-support proposal against three linkage tests before the meeting; the more it trips, the more you read as a co-operator, not a landlord.</p>
+        <p class="anchor">"người cùng kinh doanh" is the line you must not cross</p>
+        <div class="meta"><span class="apply">TMDV</span><span class="apply">KSNB/QTRR</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="controls" data-apply="tmdv ela" data-text="hard legal eligibility conditions real asset list before locking kpi scope">
+        <p class="lz">Run the hard legal eligibility conditions against the real asset list before locking KPIs; one condition can silently shrink the whole program's scope.</p>
+        <p class="anchor">"hợp đồng mua bán ghi mục đích 'để ở'" quietly excludes units</p>
+        <div class="meta"><span class="apply">TMDV</span><span class="apply">ELA</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="controls" data-apply="ksnb eh" data-text="verify signed contract body negotiation checklist performance guarantee waiver">
+        <p class="lz">Verify the signed contract body against the negotiation checklist; the MVillage deal shipped without a money-form performance guarantee and without the setup-fee waiver.</p>
+        <p class="anchor">"No money-form Performance Guarantee"</p>
+        <div class="meta"><span class="apply">KSNB/QTRR</span><span class="apply">EH</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="controls" data-apply="tmdv ksnb" data-text="track units sliding backward funnel downgrade rate not fill rate occupancy hid">
+        <p class="lz">Track the units sliding backward through the funnel, not the fill rate; backward flow caught a one-week reversal that occupancy completely hid.</p>
+        <p class="anchor">"21.2% of the entire negotiating pipeline" moved backward</p>
+        <div class="meta"><span class="apply">TMDV</span><span class="apply">KSNB/QTRR</span><span class="src">tmdv_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="controls" data-apply="tmdv ksnb" data-text="policy breach sales handoff not leasing desk control file before tenant signs">
+        <p class="lz">Policy breaches enter at the sales handoff, not the leasing desk; put the control on the file before the tenant signs, because countersignature has no cheap fix.</p>
+        <p class="anchor">"The control point is the handoff, not the countersignature."</p>
+        <div class="meta"><span class="apply">TMDV</span><span class="apply">KSNB/QTRR</span><span class="src">tmdv_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="controls" data-apply="ksnb vitals" data-text="kill criterion threshold no named data source cannot fire name source">
+        <p class="lz">A kill criterion with a threshold but no named data source cannot fire; name the source that produces each number when you write the rule.</p>
+        <p class="anchor">"a threshold with no data feed cannot fire"</p>
+        <div class="meta"><span class="apply">KSNB/QTRR</span><span class="apply">Vitals</span><span class="src">ala_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="controls" data-apply="ksnb vitals" data-text="risk owner day one real person agreed hypothetical role test">
+        <p class="lz">Test every risk owner on day one: is the named owner a real person who has agreed, or a role that is still hypothetical?</p>
+        <p class="anchor">"is the named owner a person who has agreed, or a role that is still hypothetical"</p>
+        <div class="meta"><span class="apply">KSNB/QTRR</span><span class="apply">Vitals</span><span class="src">ala_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="controls" data-apply="ksnb dealsgen" data-text="lazy diligence easy to see not diligence small physical sample beats paper review">
+        <p class="lz">Inspecting what is easy to see is not diligence; a small physical sample beats a full paper review every time.</p>
+        <p class="anchor">"hope wearing inspection's clothes"</p>
+        <div class="meta"><span class="apply">KSNB/QTRR</span><span class="apply">Deals-general</span><span class="src">learning_kb</span></div>
+      </article>
+    </section>
+
+    <section class="dom" data-domain="operator">
+      <div class="dom-head"><h3>Operator &amp; Leverage</h3><span class="ct"></span></div>
+      <article class="lesson" data-domain="operator" data-apply="ela tmdv" data-text="weekly report footfall headcount hides cost demand revenue kpi before scaling staff">
+        <p class="lz">A report that counts only footfall and headcount hides a rising cost base against falling demand; add a revenue KPI before you scale staff.</p>
+        <p class="anchor">"An operation measured only on motion will optimize motion."</p>
+        <div class="meta"><span class="apply">ELA</span><span class="apply">TMDV</span><span class="src">ela_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="operator" data-apply="tmdv ela" data-text="signed but dark space biggest recoverable loss not vacancy no new tenant price">
+        <p class="lz">The biggest recoverable loss is signed-but-dark space, not vacancy; occupancy conceals it and the fix needs no new tenant and no price change.</p>
+        <p class="anchor">"It is leased space that never opened."</p>
+        <div class="meta"><span class="apply">TMDV</span><span class="apply">ELA</span><span class="src">tmdv_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="operator" data-apply="eph ela" data-text="amenity grievance settle cheaply before deadline public escalation contagion next project">
+        <p class="lz">Settle a well-formed amenity-at-sale grievance cheaply before its deadline; public escalation contaminates the next project you market with the same amenity.</p>
+        <p class="anchor">"Cost is small; press exposure cost is not."</p>
+        <div class="meta"><span class="apply">EPH</span><span class="apply">ELA</span><span class="src">eph_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="operator" data-apply="vitals dealsgen" data-text="principal not operator capital ip relationships runs without you replace operator">
+        <p class="lz">Deploy capital, IP and relationships so a venture runs without you operating it; if it needs more than a few hours a week, replace the operator rather than compensate.</p>
+        <p class="anchor">"the operator is the wrong operator; replace, don't compensate"</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">Deals-general</span><span class="src">ala_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="operator" data-apply="vitals dealsgen" data-text="killing venture does not destroy ip carve reusable asset finish shelve abandon">
+        <p class="lz">Killing a venture does not destroy its IP; carve the reusable asset out of the kill and force a finish, shelve, or abandon decision on it.</p>
+        <p class="anchor">"killing the venture does not destroy the IP"</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">Deals-general</span><span class="src">ala_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="operator" data-apply="salon" data-text="fragmented vietnamese service market deepest moat trusted regular tho ruot">
+        <p class="lz">In fragmented Vietnamese service markets the deepest moat is the customer's trusted regular, which price and advertising cannot break.</p>
+        <p class="anchor">"60% hộ gia đình ở Việt Nam có ít nhất một 'thợ ruột'"</p>
+        <div class="meta"><span class="apply">Salon</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="operator" data-apply="crv" data-text="retail site daily foot traffic not destination frequency lower rent special trip">
+        <p class="lz">Pick retail sites by daily foot traffic, not prestige destination pull; frequency and lower rent beat special-trip demand.</p>
+        <p class="anchor">"focus on daily foot traffic, not destination visits."</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="operator" data-apply="crv salon" data-text="compete what chains cannot copy experience replaces marketing small format out earn scale">
+        <p class="lz">Compete on what big chains cannot copy and let real customer experience replace marketing; a small format can out-earn scale.</p>
+        <p class="anchor">"Trải nghiệm khách hàng có thể thay thế marketing."</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">Salon</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="operator" data-apply="salon flip vitals" data-text="income stops when you stop selling you own a job enterprise value distribution narrative">
+        <p class="lz">If income stops when you stop selling, you own a job; enterprise value comes from distribution systems and narrative control, not effort.</p>
+        <p class="anchor">"can the founder leave for 60 days without revenue dropping more than 10%?"</p>
+        <div class="meta"><span class="apply">Salon</span><span class="apply">Flip</span><span class="apply">Vitals</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="operator" data-apply="personal aiops" data-text="sort hours labor capital code media convert rented time owned assets pay while away">
+        <p class="lz">Sort your hours into labor, capital, code and media; convert rented time into owned assets that keep paying while you are away.</p>
+        <p class="anchor">"stopping it for 6 months doesn't stop the income"</p>
+        <div class="meta"><span class="apply">Personal</span><span class="apply">AI-ops</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="operator" data-apply="vitals dealsgen" data-text="first to ship proven foreign model at scale slow market rejection proof of demand">
+        <p class="lz">In a slow-to-localize market, first to ship a proven foreign model at scale wins; treat rejection as proof-of-demand data, not a verdict.</p>
+        <p class="anchor">"Distribution beats invention in slow markets."</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">Deals-general</span><span class="src">learning_kb</span></div>
+      </article>
+    </section>
+
+    <section class="dom" data-domain="mind">
+      <div class="dom-head"><h3>Mind &amp; Method</h3><span class="ct"></span></div>
+      <article class="lesson" data-domain="mind" data-apply="vitals ela" data-text="premortem four passes 100m vnd identity risks operator specific">
+        <p class="lz">Before committing 6+ months or 100M+ VND, run four premortem passes; the operator-specific passes three and four surface the identity risks you instinctively defend.</p>
+        <p class="anchor">"100M+ VND of capital"</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">ELA</span><span class="src">playbooks_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="mind" data-apply="ksnb ela" data-text="assumption book board memo approver marks real guesses before signing">
+        <p class="lz">Build an explicit assumption book into every board memo, so the approver has to mark which numbers are real and which are guesses before signing.</p>
+        <p class="anchor">"self-declared assumption book"</p>
+        <div class="meta"><span class="apply">KSNB/QTRR</span><span class="apply">ELA</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="mind" data-apply="ksnb mvillage" data-text="same basis baseline before flagging cost gap vat stale estimate">
+        <p class="lz">Put both figures on the same basis and baseline before flagging a cost gap; the 9.4bn "unexplained" gap was just VAT plus a stale pre-restaurant estimate.</p>
+        <p class="anchor">"internal v4 × 1.10"</p>
+        <div class="meta"><span class="apply">KSNB/QTRR</span><span class="apply">MVillage</span><span class="src">ecp_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="mind" data-apply="vitals mind" data-text="plan needs almost nothing still never opens first conversation answer is no kill">
+        <p class="lz">If a plan engineered to need almost nothing from you still never opens its first conversation, the bandwidth answer is already no; kill it.</p>
+        <p class="anchor">"the plan still did not clear a bar that low"</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">Mind</span><span class="src">ala_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="mind" data-apply="dealsgen ksnb" data-text="sort risks evidence backed anxiety driven name fake ones refuse to debate">
+        <p class="lz">Sort risks into evidence-backed and anxiety-driven; name the fake ones in the room and refuse to spend meeting time debating them.</p>
+        <p class="anchor">"anxious-team risk vs evidence-backed risk"</p>
+        <div class="meta"><span class="apply">Deals-general</span><span class="apply">KSNB/QTRR</span><span class="src">ala_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="mind" data-apply="vitals mind" data-text="cut scope hard every axis decision cut free build needs a person">
+        <p class="lz">Cut scope hard across every axis at once; a decision-cut executes for free, while every build needs a person you may not have.</p>
+        <p class="anchor">"cuts land, builds do not"</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">Mind</span><span class="src">ala_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="mind" data-apply="vitals mind" data-text="kill on judgment before trigger date deadline legible clean kill slow bleed">
+        <p class="lz">Kill on judgment before the trigger date arrives; a hard deadline makes inaction legible, and a clean early kill beats a slow bleed.</p>
+        <p class="anchor">"a clean kill instead of a slow bleed"</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">Mind</span><span class="src">ala_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="mind" data-apply="dealsgen trading" data-text="premortem assume failed 90 days five causes fix each score readiness">
+        <p class="lz">Before a high-stakes move, assume it failed 90 days from now, list five concrete causes, fix each one, then score your readiness.</p>
+        <p class="anchor">"Assume it failed 90 days from now."</p>
+        <div class="meta"><span class="apply">Deals-general</span><span class="apply">Trading</span><span class="src">learning_kb</span></div>
+      </article>
+    </section>
+
+    <section class="dom" data-domain="markets">
+      <div class="dom-head"><h3>Markets &amp; Benchmarks</h3><span class="ct"></span></div>
+      <article class="lesson" data-domain="markets" data-apply="crv tmdv" data-text="crv 60m gmv 2.9x vinh comparable band 20 40 60 conservative anchor">
+        <p class="lz">The CRV model's 60M VND/sqm GMV runs about 2.9× the Vinh comparable, so model a 20–40–60M band and anchor to the conservative end.</p>
+        <p class="anchor">"800 USD/sqm/year (~20.4M VND)"</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">TMDV</span><span class="src">benchmarks_kb</span></div>
+      </article>
+    </section>
+
+    <section class="dom" data-domain="voice">
+      <div class="dom-head"><h3>Voice &amp; Writing</h3><span class="ct"></span></div>
+      <article class="lesson" data-domain="voice" data-apply="tmdv salon" data-text="noi nhu ty open with acknowledgement before the ask position firm wrapper warm">
+        <p class="lz">For tenant, team and community messages, open with acknowledgement before the ask; the position stays firm while the wrapper stays warm.</p>
+        <p class="anchor">"Open with acknowledgement, not the ask."</p>
+        <div class="meta"><span class="apply">TMDV</span><span class="apply">Salon</span><span class="src">playbooks_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="voice" data-apply="crv eph" data-text="pragmatic technocrat lead with number take a side math inside recommendation not appendix">
+        <p class="lz">For board and investor audiences, lead with the number, take a side, and put the math inside the recommendation rather than in an appendix.</p>
+        <p class="anchor">"IRR drops from 19% to 14% if we accept the 36-month free rent"</p>
+        <div class="meta"><span class="apply">CRV/TM-01</span><span class="apply">EPH</span><span class="src">playbooks_kb</span></div>
+      </article>
+    </section>
+
+    <section class="dom" data-domain="ai">
+      <div class="dom-head"><h3>AI &amp; Systems</h3><span class="ct"></span></div>
+      <article class="lesson" data-domain="ai" data-apply="aiops" data-text="limit ai output prompt specificity not model power make model interview you draft prompt">
+        <p class="lz">The limit on AI output is prompt specificity, not model power; make the model interview you and draft the prompt before it answers.</p>
+        <p class="anchor">"Be my prompt engineer. Clarify my goal, restate it, ask questions, then create the optimized prompt."</p>
+        <div class="meta"><span class="apply">AI-ops</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="ai" data-apply="vitals" data-text="ai product moat proprietary data feedback loop sell finished result not the tool">
+        <p class="lz">For an AI product the moat is the proprietary data and feedback loop it captures, not the model; sell the finished result, not the tool.</p>
+        <p class="anchor">"The best AI startup moat is not the model."</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="ai" data-apply="vitals aiops" data-text="commission code cannot read ai engineering audit before after handoff cosmetic refactor">
+        <p class="lz">When you commission code you cannot read, run an AI engineering audit before and after handoff to catch a cosmetic refactor passed off as real work.</p>
+        <p class="anchor">"run #8 to surface whether the refactor was real or cosmetic"</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">AI-ops</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="ai" data-apply="vitals aiops" data-text="commission software named default stack make developer justify every deviation">
+        <p class="lz">When commissioning software you cannot build, give the developer a named default stack and make them justify every deviation from it.</p>
+        <p class="anchor">"hand the developer this stack as the default and make them justify any deviation"</p>
+        <div class="meta"><span class="apply">Vitals</span><span class="apply">AI-ops</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="ai" data-apply="aiops" data-text="set context once project fresh chat per topic specify output length shape before start">
+        <p class="lz">Set context once in a project, start a fresh chat per topic, and specify the output's length and shape before the model starts writing.</p>
+        <p class="anchor">"set context once, keep each session narrow, and tell the model the shape of the answer before it starts"</p>
+        <div class="meta"><span class="apply">AI-ops</span><span class="src">learning_kb</span></div>
+      </article>
+    </section>
+
+    <section class="dom" data-domain="health">
+      <div class="dom-head"><h3>Health &amp; Longevity</h3><span class="ct"></span></div>
+      <article class="lesson" data-domain="health" data-apply="personal vitals" data-text="health inputs dose response curve optimum where curve peaks more is better">
+        <p class="lz">Health inputs follow a dose-response curve with an optimum; ask where the curve peaks before assuming more is better.</p>
+        <p class="anchor">"more exercise is not always better"</p>
+        <div class="meta"><span class="apply">Personal</span><span class="apply">Vitals</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="health" data-apply="personal vitals" data-text="visceral fat active organ east asian men waist warning 90cm not 40 inches">
+        <p class="lz">Visceral fat is an active organ driving disease; for East-Asian men the waist warning line is 90cm, not the US 40 inches.</p>
+        <p class="anchor">"waist circumference ≥90 cm (35.5 in) for men is the population-adjusted visceral-fat warning line"</p>
+        <div class="meta"><span class="apply">Personal</span><span class="apply">Vitals</span><span class="src">learning_kb</span></div>
+      </article>
+      <article class="lesson" data-domain="health" data-apply="personal" data-text="chronic stress ages biologically parasympathetic practice breathwork gratitude hrv">
+        <p class="lz">Chronic stress ages you biologically; a daily parasympathetic practice like breathwork or gratitude is the reversing input, and HRV tracks it.</p>
+        <p class="anchor">"You don't age from time, you age from your state."</p>
+        <div class="meta"><span class="apply">Personal</span><span class="src">learning_kb</span></div>
+      </article>
+    </section>
+
+    <p class="empty" id="noresult" hidden>No lessons match that filter. Clear the search or pick "All".</p>
+
+  </div>
+
+  <footer>
+    <b>How to read this.</b> Each line is one applicable lesson distilled from a Wiki article, carrying a verbatim anchor as proof it was read. Filter by domain, by the thread you are working, or by keyword. <b>Coverage:</b> 57 lessons across 10 knowledge bases; 13 low-signal learning_kb entries were filtered out this pass.
+    <details>
+      <summary>What was filtered (13, low-signal)</summary>
+      <ul>
+        <li>Dated or speculative: ALA market-sizing screenshot, YC RFS wishlist, VinFast divestment rumor, the Claude "atlas" feature catalog.</li>
+        <li>Redundant with the kernel: anti-AI-tells prompt, the Vietnamese token-saving subset, the ecosystem-supremacy audit, the CLAUDE.md context builder.</li>
+        <li>Generic or captured elsewhere: two bulk prompt libraries, the VC pitch-deck template, a habit platitude.</li>
+        <li>One empty article — <code>vietnam-construction-project-sequence</code> is a pointer stub with no body (flagged for the KB health check).</li>
+      </ul>
+    </details>
+    <div style="margin-top:10px">Sources: the Wiki layer of playbooks_kb, ecp_kb, ela_kb, eph_kb, tmdv_kb, benchmarks_kb, ala_kb and learning_kb. Anchors are quoted verbatim from those articles. Restricted commercial data; private to Ty. Compiled from the second brain's RAW → Wiki pipeline, 14 Sep 2026.</div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var q = document.getElementById('q');
+  var domChips = document.querySelectorAll('#domchips .chip');
+  var prjChips = document.querySelectorAll('#prjchips .chip');
+  var lessons = Array.prototype.slice.call(document.querySelectorAll('.lesson'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.dom'));
+  var noResult = document.getElementById('noresult');
+  var state = {dom:'all', prj:'all', q:''};
+
+  function press(group, val, attr){
+    group.forEach(function(c){ c.setAttribute('aria-pressed', c.getAttribute(attr)===val ? 'true':'false'); });
+  }
+  function apply(){
+    var total = 0;
+    lessons.forEach(function(el){
+      var okDom = state.dom==='all' || el.getAttribute('data-domain')===state.dom;
+      var okPrj = state.prj==='all' || (' '+el.getAttribute('data-apply')+' ').indexOf(' '+state.prj+' ')>-1;
+      var okQ = state.q==='' || (el.getAttribute('data-text')+' '+el.textContent.toLowerCase()).indexOf(state.q)>-1;
+      var show = okDom && okPrj && okQ;
+      el.hidden = !show;
+      if(show) total++;
+    });
+    sections.forEach(function(sec){
+      var vis = sec.querySelectorAll('.lesson:not([hidden])').length;
+      sec.hidden = vis===0;
+      var ct = sec.querySelector('.ct');
+      if(ct) ct.textContent = vis;
+    });
+    noResult.hidden = total>0;
+  }
+  domChips.forEach(function(c){ c.addEventListener('click', function(){ state.dom=c.getAttribute('data-dom'); press(domChips, state.dom, 'data-dom'); apply(); }); });
+  prjChips.forEach(function(c){ c.addEventListener('click', function(){ state.prj=c.getAttribute('data-prj'); press(prjChips, state.prj, 'data-prj'); apply(); }); });
+  q.addEventListener('input', function(){ state.q = q.value.trim().toLowerCase(); apply(); });
+  apply();
+})();
+</script>

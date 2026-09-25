@@ -183,7 +183,7 @@ body{display:flex;flex-direction:column;overflow:hidden}
 
 <h2>3 &middot; The twenty-five artifacts</h2>
 
-<h3 style="margin-top:18px">Nine are previews of a Pages site</h3>
+<h3 style="margin-top:18px">Eight are previews of a Pages site</h3>
 <p class="lede">Each is named as its mirror target in the routine prompt that publishes it.</p>
 <div class="scroll">
 <table>
@@ -196,10 +196,12 @@ body{display:flex;flex-direction:column;overflow:hidden}
 <tr><td><strong>Webull Trade Journal</strong></td><td><a href="https://ttrng3.github.io/Trade-Journal/">ttrng3.github.io/Trade-Journal/</a></td><td><a href="https://claude.ai/artifact/GcWosLDVDFFqwEE7NS2hqV"><span class="pill p-ok">Open</span></a></td></tr>
 <tr><td><strong>Thẩm định Giáo dục Sông Hồng</strong></td><td><a href="https://ttrng3.github.io/gdsh-report/">ttrng3.github.io/gdsh-report/</a></td><td><a href="https://claude.ai/artifact/A5DNPFCcerdjgoBk2c5vVd"><span class="pill p-ok">Open</span></a></td></tr>
 <tr><td><strong>Dashboard Giám sát Ngân sách &amp; Dòng tiền — KSNB</strong></td><td><a href="https://ttrng3.github.io/Ops-Dashboard/">ttrng3.github.io/Ops-Dashboard/</a></td><td><a href="https://claude.ai/artifact/Ny2dknmJCxADa95gJn6DMx"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>Ecosystem Audit</strong></td><td><a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a></td><td><a href="https://claude.ai/artifact/8zhD3Cm1hYW3KUxZ3YWajS"><span class="pill p-ok">Open</span></a></td></tr>
 <tr><td><strong>Pipeline Wiring</strong> (this page)</td><td><a href="https://ttrng3.github.io/pipeline-wiring/">ttrng3.github.io/pipeline-wiring/</a></td><td><a href="https://claude.ai/artifact/1jJocxY9ehSu9DJigt9ZmW"><span class="pill p-ok">Open</span></a></td></tr>
 </tbody>
 </table>
+</div>
+<div class="card tight" style="border-color:#FFE0B2;background:var(--amber-t)">
+  <p style="margin:0"><strong>Ecosystem Audit was removed from this table on 25/09 &mdash; by your own ruling it has no Cowork preview.</strong> <code>docs/audit-refresh.md</code> in the Omni-Audit repo says <em>&ldquo;One surface, on purpose: GitHub Pages is the ONLY published surface, no claude.ai artifact mirror.&rdquo;</em> Its address is <a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a> and nothing else. The monthly run&rsquo;s prompt carried a contradicting mirror step (B7) until 25/09; the test run that day correctly skipped it because the runbook outranks the prompt, and the step has now been deleted from the prompt. <strong>Artifact <code>8zhD3Cm1hYW3KUxZ3YWajS</code> still exists, frozen at the 09-12 run.</strong> Nothing updates it and nothing should &mdash; it is awaiting your word to delete.</p>
 </div>
 
 <h3 style="margin-top:22px">Sixteen have no Pages twin that a routine keeps in sync</h3>
@@ -296,6 +298,13 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
 <details open>
 <summary><span class="pill p-mute">Parked</span> The two Japan routines with Mac tools &mdash; revisit before 23/11</summary>
 <p style="margin-bottom:16px">Ty, 25/09: leave them for now. They fire once each, 23/11 and 11/12, and still hold the remote-devices tools. Come back to this before the first one fires.</p>
+</details>
+
+<details open>
+<summary><span class="pill p-ok">Fixed 25/09</span> Second Brain, Applied had silently stopped refreshing</summary>
+<p>Its owner was <code>KB Monthly Update</code>, which was folded into <a href="https://claude.ai/code/routines/trig_01UrAFG2ZNXtQvv9MHXmjjoB">Monthly system run</a> (1st, 03:00). The merged prompt kept the republish as Part C step 4 &mdash; but the 25/09 test run <strong>skipped it</strong>, and skipped the Ecosystem Health db-write with it.</p>
+<p><strong>The cause is worth knowing, because it will recur elsewhere.</strong> The run probed for the Artifact tool with <code>ToolSearch</code>, which searches only <em>deferred</em> tools. An already-attached tool returns &ldquo;No matching deferred tools found&rdquo; &mdash; so a present tool looks exactly like a missing one. The run read that as unavailable and dropped both artifact steps without flagging it. <code>Artifact</code> and <code>ArtifactData</code> were in its <code>allowed_tools</code> the whole time.</p>
+<p style="margin-bottom:16px">The prompt now states the tools are attached, forbids the ToolSearch probe, marks both steps mandatory, and reports each outcome on its own notification line. <strong>This page has no Pages site</strong> &mdash; the artifact is its only address, so a skipped step shows up nowhere. Next real run: 1 Oct.</p>
 </details>
 
 <details>

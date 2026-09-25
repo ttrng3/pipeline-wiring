@@ -117,14 +117,18 @@ body{display:flex;flex-direction:column;overflow:hidden}
     <div class="wrap">
 <h1>Pipeline Wiring</h1>
 <p class="sub">Every repo, every artifact, every routine &mdash; and which of them are copies of each other.</p>
-<p class="cap">Updated 25/09/2026 &middot; schedules, next-run times and artifact list read live from the routine and artifact APIs &mdash; not from memory</p>
+<p class="cap">Re-audited 25/09/2026, 05:00&ndash;06:00 UTC, against live data: <code>gh repo list</code> + the Pages API, <code>curl</code> on every Pages URL, the routine API (list <em>and</em> individual <code>get</code> by id), and the artifact API. Anything not re-checked in that pass is labelled.</p>
 <p class="cap" style="margin-top:6px">Address: <a href="https://ttrng3.github.io/pipeline-wiring/"><strong>ttrng3.github.io/pipeline-wiring/</strong></a> &middot; source <a href="https://github.com/ttrng3/pipeline-wiring">ttrng3/pipeline-wiring</a> &middot; <a href="https://claude.ai/code/routines">all routines</a></p>
 
 <div class="grid c4" style="margin-top:22px">
-  <div class="card tight"><div class="stat">8</div><div class="cap">pipelines, all complete</div></div>
-  <div class="card tight"><div class="stat">12</div><div class="cap">repositories <span style="color:var(--green-ink)">&minus;2</span></div></div>
-  <div class="card tight"><div class="stat">20</div><div class="cap">artifacts</div></div>
-  <div class="card tight"><div class="stat">0</div><div class="cap">touch your Mac</div></div>
+  <div class="card tight"><div class="stat">14</div><div class="cap">repositories &middot; 10 with a live Pages site</div></div>
+  <div class="card tight"><div class="stat">25</div><div class="cap">artifacts</div></div>
+  <div class="card tight"><div class="stat">13</div><div class="cap">enabled routines found (10 scheduled, 1 recurring briefing, 2 one-shot)</div></div>
+  <div class="card tight"><div class="stat" style="color:var(--amber-ink,#8A5200)">2</div><div class="cap">enabled routines can touch your Mac</div></div>
+</div>
+
+<div class="card tight" style="margin-top:14px">
+  <p style="margin:0"><span class="pill p-warn">Corrected 25/09</span> The 24/09 version of this page said <strong>12 repos, 20 artifacts, 0 touch your Mac</strong>, listed a repo called <code>famrec</code> that does not exist, called Signal Desk broken after its repo had been restored, and swapped two preview labels. All of that is fixed below; the full list is in section 7.</p>
 </div>
 
 <h2>The flow</h2>
@@ -138,50 +142,52 @@ body{display:flex;flex-direction:column;overflow:hidden}
         artifact (mirror)</div>
 
 <div class="card tight" style="border-color:#CFE0FF;background:var(--blue-t)">
-  <p style="margin:0"><strong>Two links, and they are not the same thing.</strong> The <strong>address</strong> is the Pages URL &mdash; that is what goes in a document, an email or a message, and it is the one worth remembering. The <strong>Cowork</strong> link opens the preview of that same page inside Claude. Every row below carries both, so nothing here needs copying by hand. The artifacts stay private either way: a link alone opens nothing for anyone you have not shared it with.</p>
+  <p style="margin:0"><strong>Two links, and they are not the same thing.</strong> The <strong>address</strong> is the Pages URL &mdash; that is what goes in a document, an email or a message. The <strong>Cowork</strong> link opens the preview of that same page inside Claude. The artifacts stay private either way: a link alone opens nothing for anyone you have not shared it with.</p>
 </div>
 
 <h2>1 &middot; The eight pipelines</h2>
-<p class="lede">Each one: a routine on a schedule, and a preview in Cowork. Nothing else to watch.</p>
+<p class="lede">Each row: a routine on a schedule &rarr; its repo &rarr; its Pages site &rarr; the mirror artifact named in that routine&rsquo;s own prompt. All eight Pages URLs returned HTTP&nbsp;200 on 25/09.</p>
 <div class="scroll">
 <table>
-<thead><tr><th>Pipeline</th><th>Fires (UTC) &mdash; opens the routine</th><th>Next</th><th>Source</th><th>Repo</th><th>Address</th><th>Cowork</th></tr></thead>
+<thead><tr><th>Pipeline</th><th>Fires (UTC) &mdash; opens the routine</th><th>Next</th><th>Last heartbeat in repo</th><th>Source</th><th>Repo</th><th>Address</th><th>Cowork</th></tr></thead>
 <tbody>
-<tr><td><strong>TMDV</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01Ff3aQaqt1w2YEpUvo7LmXe">Sun 11:00</a></td><td class="num">27/09</td><td>Drive trackers + Outlook</td><td><a href="https://github.com/ttrng3/Omni-TMDV">ttrng3/Omni-TMDV</a></td><td><a href="https://ttrng3.github.io/Omni-TMDV/">ttrng3.github.io/Omni-TMDV/</a></td><td><a href="https://claude.ai/artifact/3hNqXDiwsssZBe34b6mK73"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>OMNI Sitecheck</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LRyJphqNgprVTbyUmubw5h">Mon 15:45</a></td><td class="num">28/09</td><td>SharePoint &mdash; OMNI tree</td><td><a href="https://github.com/ttrng3/Omni-sitecheck">ttrng3/Omni-sitecheck</a></td><td><a href="https://ttrng3.github.io/Omni-sitecheck/">ttrng3.github.io/Omni-sitecheck/</a></td><td><a href="https://claude.ai/artifact/KR1dnH91u1qdzhoop4Dqkr"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>ECOPM Sitecheck</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_016gpDjeZBU2f9GLhfVqb3BR">Mon 14:00</a></td><td class="num">28/09</td><td>SharePoint &mdash; ECOPM tree</td><td><a href="https://github.com/ttrng3/Ecopm-Sitecheck">ttrng3/Ecopm-Sitecheck</a></td><td><a href="https://ttrng3.github.io/Ecopm-Sitecheck/">ttrng3.github.io/Ecopm-Sitecheck/</a></td><td><a href="https://claude.ai/artifact/Gxr48hVPm7YGEuE2947eoZ"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>ECP &times; ELA</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01TsaptFpFhEY4eFUxcQSaNU">Sun 14:00</a></td><td class="num">27/09</td><td>Drive weekly PDFs</td><td><a href="https://github.com/ttrng3/ecp-ela-weekly">ttrng3/ecp-ela-weekly</a></td><td><a href="https://ttrng3.github.io/ecp-ela-weekly/">ttrng3.github.io/ecp-ela-weekly/</a></td><td><a href="https://claude.ai/artifact/22fboAK5NyitZHc4iiVgTx"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>Trade Journal</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LWyx19N6D7gUqcy3FewYP1">Tue&ndash;Sat 01:07</a></td><td class="num">26/09</td><td>Webull CSVs on Drive</td><td><a href="https://github.com/ttrng3/Trade-Journal">ttrng3/Trade-Journal</a></td><td><a href="https://ttrng3.github.io/Trade-Journal/">ttrng3.github.io/Trade-Journal/</a></td><td><a href="https://claude.ai/artifact/GcWosLDVDFFqwEE7NS2hqV"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>GDSH</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01FEgjqUEhG88GtAGFdLE4hE">Mon 01:00</a></td><td class="num">28/09</td><td>Drive budget workbook</td><td><a href="https://github.com/ttrng3/gdsh-report">ttrng3/gdsh-report</a></td><td><a href="https://ttrng3.github.io/gdsh-report/">ttrng3.github.io/gdsh-report/</a></td><td><a href="https://claude.ai/artifact/A5DNPFCcerdjgoBk2c5vVd"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>Ops-Dashboard</strong> <span class="cap">KSNB</span></td><td class="num"><a href="https://claude.ai/code/routines/trig_01HqP8u1h6LYYRXmS8aXmSre">1st &amp; 15th 06:00</a></td><td class="num">01/10</td><td>Outlook + Drive <code>08 Omni Service - OMNI/09 TCKT</code></td><td><a href="https://github.com/ttrng3/Ops-Dashboard">ttrng3/Ops-Dashboard</a></td><td><a href="https://ttrng3.github.io/Ops-Dashboard/">ttrng3.github.io/Ops-Dashboard/</a></td><td><a href="https://claude.ai/artifact/Ny2dknmJCxADa95gJn6DMx"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>Omni-Audit</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01AXUmgrW5pxPFdRcQtYv1Tv">1st 09:00</a></td><td class="num">01/10</td><td>Drive handoff</td><td><a href="https://github.com/ttrng3/Omni-Audit">ttrng3/Omni-Audit</a></td><td><a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a></td><td><a href="https://claude.ai/artifact/8zhD3Cm1hYW3KUxZ3YWajS"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>TMDV</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01Ff3aQaqt1w2YEpUvo7LmXe">Sun 11:00</a></td><td class="num">27/09</td><td class="num">22/09</td><td>Drive trackers + Outlook</td><td><a href="https://github.com/ttrng3/Omni-TMDV">ttrng3/Omni-TMDV</a></td><td><a href="https://ttrng3.github.io/Omni-TMDV/">ttrng3.github.io/Omni-TMDV/</a></td><td><a href="https://claude.ai/artifact/3hNqXDiwsssZBe34b6mK73"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>OMNI Sitecheck</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LRyJphqNgprVTbyUmubw5h">Mon 15:45</a></td><td class="num">28/09</td><td class="num">22/09</td><td>SharePoint &mdash; OMNI tree</td><td><a href="https://github.com/ttrng3/Omni-sitecheck">ttrng3/Omni-sitecheck</a></td><td><a href="https://ttrng3.github.io/Omni-sitecheck/">ttrng3.github.io/Omni-sitecheck/</a></td><td><a href="https://claude.ai/artifact/KR1dnH91u1qdzhoop4Dqkr"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>ECOPM Sitecheck</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_016gpDjeZBU2f9GLhfVqb3BR">Mon 14:00</a></td><td class="num">28/09</td><td class="num">22/09</td><td>SharePoint &mdash; ECOPM tree</td><td><a href="https://github.com/ttrng3/Ecopm-Sitecheck">ttrng3/Ecopm-Sitecheck</a></td><td><a href="https://ttrng3.github.io/Ecopm-Sitecheck/">ttrng3.github.io/Ecopm-Sitecheck/</a></td><td><a href="https://claude.ai/artifact/Gxr48hVPm7YGEuE2947eoZ"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>ECP &times; ELA</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01TsaptFpFhEY4eFUxcQSaNU">Sun 14:00</a></td><td class="num">27/09</td><td class="num">23/09</td><td>Drive weekly PDFs</td><td><a href="https://github.com/ttrng3/ecp-ela-weekly">ttrng3/ecp-ela-weekly</a></td><td><a href="https://ttrng3.github.io/ecp-ela-weekly/">ttrng3.github.io/ecp-ela-weekly/</a></td><td><a href="https://claude.ai/artifact/22fboAK5NyitZHc4iiVgTx"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Trade Journal</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LWyx19N6D7gUqcy3FewYP1">Tue&ndash;Sat 01:07</a></td><td class="num">26/09</td><td class="num">25/09</td><td>Webull CSVs on Drive</td><td><a href="https://github.com/ttrng3/Trade-Journal">ttrng3/Trade-Journal</a></td><td><a href="https://ttrng3.github.io/Trade-Journal/">ttrng3.github.io/Trade-Journal/</a></td><td><a href="https://claude.ai/artifact/GcWosLDVDFFqwEE7NS2hqV"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>GDSH</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01FEgjqUEhG88GtAGFdLE4hE">Mon 01:00</a></td><td class="num">28/09</td><td class="num">22/09</td><td>Drive budget workbook</td><td><a href="https://github.com/ttrng3/gdsh-report">ttrng3/gdsh-report</a></td><td><a href="https://ttrng3.github.io/gdsh-report/">ttrng3.github.io/gdsh-report/</a></td><td><a href="https://claude.ai/artifact/A5DNPFCcerdjgoBk2c5vVd"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Ops-Dashboard</strong> <span class="cap">KSNB</span></td><td class="num"><a href="https://claude.ai/code/routines/trig_01HqP8u1h6LYYRXmS8aXmSre">1st &amp; 15th 06:00</a></td><td class="num">01/10</td><td class="num">25/09</td><td>Outlook + Drive <code>08 Omni Service - OMNI/09 TCKT</code></td><td><a href="https://github.com/ttrng3/Ops-Dashboard">ttrng3/Ops-Dashboard</a></td><td><a href="https://ttrng3.github.io/Ops-Dashboard/">ttrng3.github.io/Ops-Dashboard/</a></td><td><a href="https://claude.ai/artifact/Ny2dknmJCxADa95gJn6DMx"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Omni-Audit</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01UrAFG2ZNXtQvv9MHXmjjoB">1st 03:00</a> (monthly system run, Part B)<br><span class="cap">fallback <a href="https://claude.ai/code/routines/trig_01AXUmgrW5pxPFdRcQtYv1Tv">2nd 01:00</a></span></td><td class="num">01/10</td><td class="num">25/09</td><td>Drive audit handoff</td><td><a href="https://github.com/ttrng3/Omni-Audit">ttrng3/Omni-Audit</a></td><td><a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a></td><td><a href="https://claude.ai/artifact/8zhD3Cm1hYW3KUxZ3YWajS"><span class="pill p-ok">Open</span></a></td></tr>
 </tbody>
 </table>
 </div>
-<p class="cap">All eight Pages sites verified live (HTTP&nbsp;200) on 24/09. Every mirror was checked for the silent-blank failure: exactly one <code>&lt;html&gt;</code> tag on read-back, which is correct &mdash; two would mean the page nested inside the service wrapper and renders blank with no console error.</p>
+<p class="cap">&ldquo;Last heartbeat&rdquo; is the timestamp in each repo&rsquo;s <code>data/.last-check</code> as of 25/09. Every schedule above is the live cron read from the routine API on 25/09. The one-<code>&lt;html&gt;</code>-tag mirror check was done on 24/09 and was <em>not</em> repeated on 25/09.</p>
 
-<h2>2 &middot; Repos nothing drives</h2>
-<p class="lede">Four repos with no routine. They move only by hand &mdash; so none has a heartbeat, and a stale one looks identical to a healthy one.</p>
+<h2>2 &middot; The other six repos</h2>
+<p class="lede">14 repos in total: the eight above plus these six.</p>
 <div class="scroll">
 <table>
-<thead><tr><th>Repo</th><th>Visibility</th><th>What it is</th><th>Status</th></tr></thead>
+<thead><tr><th>Repo</th><th>Visibility</th><th>Pages</th><th>What drives it</th><th>Last push</th></tr></thead>
 <tbody>
-<tr><td><strong><a href="https://github.com/ttrng3/famrec">famrec</a></strong></td><td>Public</td><td>Personal health record trend</td><td><span class="pill p-info">Hand-driven</span></td></tr>
-<tr><td><strong><a href="https://github.com/ttrng3/vitals-journal">vitals-journal</a></strong></td><td>Private</td><td>Local-only medical record book</td><td><span class="pill p-info">Hand-driven</span></td></tr>
-<tr><td><strong><a href="https://github.com/ttrng3/vitals-app">vitals-app</a></strong></td><td>Private</td><td>The Vitals product code</td><td><span class="pill p-mute">Commercial closed 23/09</span></td></tr>
-<tr><td><strong><a href="https://github.com/ttrng3/japan-travel-2026">japan-travel-2026</a></strong></td><td>Public</td><td>Japan trip &mdash; store only</td><td><span class="pill p-ok">Pages off 23/09</span></td></tr>
+<tr><td><strong><a href="https://github.com/ttrng3/pipeline-wiring">pipeline-wiring</a></strong></td><td>Public</td><td>Live</td><td>This page, by hand; <code>learning-matrix.html</code> by the <a href="https://claude.ai/code/routines/trig_018PmBcho9kt7KdbaJcFi9nN">Learning Matrix routine</a> (2nd, 02:00)</td><td class="num">25/09</td></tr>
+<tr><td><strong><a href="https://github.com/ttrng3/signal-desk-collector">signal-desk-collector</a></strong></td><td>Private</td><td>None</td><td>Git source of the <a href="https://claude.ai/code/routines/trig_01DWVuBPuUsqjMWEBRYh7bPc">Signal Desk briefing</a> (daily 00:10). Restored after the 24/09 deletion</td><td class="num">25/09</td></tr>
+<tr><td><strong><a href="https://github.com/ttrng3/passbook">passbook</a></strong></td><td>Public</td><td>Live</td><td>By hand &mdash; no routine names it</td><td class="num">25/09</td></tr>
+<tr><td><strong><a href="https://github.com/ttrng3/vitals-journal">vitals-journal</a></strong></td><td>Private</td><td>None</td><td>By hand</td><td class="num">23/09</td></tr>
+<tr><td><strong><a href="https://github.com/ttrng3/vitals-app">vitals-app</a></strong></td><td>Private</td><td>None</td><td>By hand</td><td class="num">24/09</td></tr>
+<tr><td><strong><a href="https://github.com/ttrng3/japan-travel-2026">japan-travel-2026</a></strong></td><td>Public</td><td>Off (404)</td><td>By hand &mdash; store only</td><td class="num">07/09</td></tr>
 </tbody>
 </table>
 </div>
-<p class="cap">12 repos total: the 8 pipelines above, plus these four. <code>market-intel-collector</code> and <code>signal-desk-collector</code> were deleted on 24/09 &mdash; see below for what that broke.</p>
+<p class="cap">Hand-driven repos have no heartbeat, so a stale one looks the same as a healthy one. <code>market-intel-collector</code> is not in the account (deleted 24/09, not restored).</p>
 
-<h2>3 &middot; The twenty artifacts</h2>
+<h2>3 &middot; The twenty-five artifacts</h2>
 
-<h3 style="margin-top:18px">Eight are previews of a Pages site</h3>
-<p class="lede">Both links work: the Pages address is the one to circulate, the Cowork column opens the preview in one click.</p>
+<h3 style="margin-top:18px">Nine are previews of a Pages site</h3>
+<p class="lede">Each is named as its mirror target in the routine prompt that publishes it.</p>
 <div class="scroll">
 <table>
-<thead><tr><th>Preview</th><th>Address (circulate this)</th><th>Cowork</th></tr></thead>
+<thead><tr><th>Preview (artifact title)</th><th>Address (circulate this)</th><th>Cowork</th></tr></thead>
 <tbody>
 <tr><td><strong>TMDV Điều hành</strong></td><td><a href="https://ttrng3.github.io/Omni-TMDV/">ttrng3.github.io/Omni-TMDV/</a></td><td><a href="https://claude.ai/artifact/3hNqXDiwsssZBe34b6mK73"><span class="pill p-ok">Open</span></a></td></tr>
 <tr><td><strong>OMNI Sitecheck Điều hành</strong></td><td><a href="https://ttrng3.github.io/Omni-sitecheck/">ttrng3.github.io/Omni-sitecheck/</a></td><td><a href="https://claude.ai/artifact/KR1dnH91u1qdzhoop4Dqkr"><span class="pill p-ok">Open</span></a></td></tr>
@@ -189,129 +195,130 @@ body{display:flex;flex-direction:column;overflow:hidden}
 <tr><td><strong>Điều Hành Vận Hành ECP × ELA</strong></td><td><a href="https://ttrng3.github.io/ecp-ela-weekly/">ttrng3.github.io/ecp-ela-weekly/</a></td><td><a href="https://claude.ai/artifact/22fboAK5NyitZHc4iiVgTx"><span class="pill p-ok">Open</span></a></td></tr>
 <tr><td><strong>Webull Trade Journal</strong></td><td><a href="https://ttrng3.github.io/Trade-Journal/">ttrng3.github.io/Trade-Journal/</a></td><td><a href="https://claude.ai/artifact/GcWosLDVDFFqwEE7NS2hqV"><span class="pill p-ok">Open</span></a></td></tr>
 <tr><td><strong>Thẩm định Giáo dục Sông Hồng</strong></td><td><a href="https://ttrng3.github.io/gdsh-report/">ttrng3.github.io/gdsh-report/</a></td><td><a href="https://claude.ai/artifact/A5DNPFCcerdjgoBk2c5vVd"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>Ecosystem Audit</strong></td><td><a href="https://ttrng3.github.io/Ops-Dashboard/">ttrng3.github.io/Ops-Dashboard/</a></td><td><a href="https://claude.ai/artifact/Ny2dknmJCxADa95gJn6DMx"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>Dashboard Giám sát Ngân sách &amp; Dòng tiền — KSNB</strong></td><td><a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a></td><td><a href="https://claude.ai/artifact/8zhD3Cm1hYW3KUxZ3YWajS"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Dashboard Giám sát Ngân sách &amp; Dòng tiền — KSNB</strong></td><td><a href="https://ttrng3.github.io/Ops-Dashboard/">ttrng3.github.io/Ops-Dashboard/</a></td><td><a href="https://claude.ai/artifact/Ny2dknmJCxADa95gJn6DMx"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Ecosystem Audit</strong></td><td><a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a></td><td><a href="https://claude.ai/artifact/8zhD3Cm1hYW3KUxZ3YWajS"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Pipeline Wiring</strong> (this page)</td><td><a href="https://ttrng3.github.io/pipeline-wiring/">ttrng3.github.io/pipeline-wiring/</a></td><td><a href="https://claude.ai/artifact/1jJocxY9ehSu9DJigt9ZmW"><span class="pill p-ok">Open</span></a></td></tr>
 </tbody>
 </table>
 </div>
-<h3 style="margin-top:22px">Twelve are the only surface</h3>
-<p class="lede">No Pages site behind these, so the artifact link <em>is</em> the address. Deleting one destroys the output rather than de-duplicating it.</p>
+
+<h3 style="margin-top:22px">Sixteen have no Pages twin that a routine keeps in sync</h3>
+<p class="lede">For these the artifact link is the address. Deleting one destroys the output rather than de-duplicating it. Dates are the artifact API&rsquo;s &ldquo;updated&rdquo; value on 25/09.</p>
 <div class="scroll">
 <table>
-<thead><tr><th>Artifact</th><th>Updated</th><th>What it is</th></tr></thead>
+<thead><tr><th>Artifact</th><th>Updated</th><th>What writes it</th></tr></thead>
 <tbody>
-<tr><td><strong>Signal Desk</strong><br><a class="aurl" href="https://claude.ai/artifact/PETvCeZufa32XyvdhyEAG3">claude.ai/artifact/PETvCeZufa32XyvdhyEAG3</a></td><td class="num">23/09</td><td>Daily briefing. <strong>Its repo <code>signal-desk-collector</code> was deleted 24/09</strong> &mdash; the routine cannot provision until it is restored. See &ldquo;Broken&rdquo; above.</td></tr>
-<tr><td><strong>Second Brain, Applied</strong><br><a class="aurl" href="https://claude.ai/artifact/Kkzb2BgUjKgMcosCEtwhFd">claude.ai/artifact/Kkzb2BgUjKgMcosCEtwhFd</a></td><td class="num">15/09</td><td>Republished monthly by KB Monthly Update, 1st 02:00.</td></tr>
-<tr><td><strong>Ecosystem Health</strong><br><a class="aurl" href="https://claude.ai/artifact/4GFQXbNh97Q9qmtNMfnyWR">claude.ai/artifact/4GFQXbNh97Q9qmtNMfnyWR</a></td><td class="num">12/09</td><td>Written monthly by the Ecosystem Audit producer, 1st 03:00.</td></tr>
-<tr><td><strong>Pipeline Wiring</strong><br><a class="aurl" href="https://claude.ai/artifact/1jJocxY9ehSu9DJigt9ZmW">claude.ai/artifact/1jJocxY9ehSu9DJigt9ZmW</a></td><td class="num">24/09</td><td>This page. Describes the system; is not part of it.</td></tr>
-<tr><td><strong>Vitals Journal</strong><br><a class="aurl" href="https://claude.ai/artifact/DFX3AXsi8tLyCeadMcwuBa">claude.ai/artifact/DFX3AXsi8tLyCeadMcwuBa</a></td><td class="num">23/09</td><td>Sits alongside the private <code>vitals-journal</code> repo, which has no Pages site.</td></tr>
-<tr><td><strong>Vitals Build Blueprint</strong><br><a class="aurl" href="https://claude.ai/artifact/V6kCKarz6NnqWLAP2yqMhg">claude.ai/artifact/V6kCKarz6NnqWLAP2yqMhg</a></td><td class="num">14/09</td><td rowspan="2" style="vertical-align:middle">Commercial Vitals closed 23/09. These describe a venture you killed.</td></tr>
+<tr><td><strong>Signal Desk</strong><br><a class="aurl" href="https://claude.ai/artifact/PETvCeZufa32XyvdhyEAG3">claude.ai/artifact/PETvCeZufa32XyvdhyEAG3</a></td><td class="num">25/09</td><td>Signal Desk routine, daily 00:10. Sessions were created at 00:11 and 02:06&nbsp;UTC on 25/09, so it provisions again; I did not read those run logs for their outcome.</td></tr>
+<tr><td><strong>Ecosystem Health</strong><br><a class="aurl" href="https://claude.ai/artifact/4GFQXbNh97Q9qmtNMfnyWR">claude.ai/artifact/4GFQXbNh97Q9qmtNMfnyWR</a></td><td class="num">12/09</td><td rowspan="2" style="vertical-align:middle">Named by title (not id) in the <a href="https://claude.ai/code/routines/trig_01UrAFG2ZNXtQvv9MHXmjjoB">monthly system run</a>: Part A writes Ecosystem Health, Part C writes Second Brain. Next run 01/10 03:00. KB Monthly Update, which used to write Second Brain, is disabled.</td></tr>
+<tr><td><strong>Second Brain, Applied</strong><br><a class="aurl" href="https://claude.ai/artifact/Kkzb2BgUjKgMcosCEtwhFd">claude.ai/artifact/Kkzb2BgUjKgMcosCEtwhFd</a></td><td class="num">15/09</td></tr>
+<tr><td><strong>Passbook</strong><br><a class="aurl" href="https://claude.ai/artifact/DFX3AXsi8tLyCeadMcwuBa">claude.ai/artifact/DFX3AXsi8tLyCeadMcwuBa</a></td><td class="num">24/09</td><td>Renamed from &ldquo;Vitals Journal&rdquo;. A public <code>passbook</code> Pages site also exists; no routine links the two, and I have not checked whether this artifact mirrors it.</td></tr>
+<tr><td><strong>Passbook Review</strong><br><a class="aurl" href="https://claude.ai/artifact/EhdVm1z8r1qVhjJPScp9G7">claude.ai/artifact/EhdVm1z8r1qVhjJPScp9G7</a></td><td class="num">24/09</td><td rowspan="2" style="vertical-align:middle"><span class="pill p-warn">Two artifacts, same title</span> Possibly a duplicate. Not opened or compared; nothing deleted.</td></tr>
+<tr><td><strong>Passbook Review</strong><br><a class="aurl" href="https://claude.ai/artifact/3Fn4VgjSCWDxZMuYAaYepN">claude.ai/artifact/3Fn4VgjSCWDxZMuYAaYepN</a></td><td class="num">24/09</td></tr>
+<tr><td><strong>Passbook Thirty Visitors</strong><br><a class="aurl" href="https://claude.ai/artifact/7U3SLMCd4A4gBHWwumSdfd">claude.ai/artifact/7U3SLMCd4A4gBHWwumSdfd</a></td><td class="num">24/09</td><td>One-off document.</td></tr>
+<tr><td><strong>Omni Next Level</strong><br><a class="aurl" href="https://claude.ai/artifact/D6pxjFc3H8BjAkzt3aawTY">claude.ai/artifact/D6pxjFc3H8BjAkzt3aawTY</a></td><td class="num">25/09</td><td>Omni strategy blueprint; record in <code>Claude outputs/Omni Strategy/</code>. One-off, updated by hand.</td></tr>
+<tr><td><strong>GDSH Turnaround v2</strong><br><a class="aurl" href="https://claude.ai/artifact/EmD8cX8kDtdPUVmRvYxUBW">claude.ai/artifact/EmD8cX8kDtdPUVmRvYxUBW</a></td><td class="num">24/09</td><td>One-off document. Not the GDSH pipeline mirror (that is &ldquo;Thẩm định Giáo dục Sông Hồng&rdquo;).</td></tr>
+<tr><td><strong>Vitals Build Blueprint</strong><br><a class="aurl" href="https://claude.ai/artifact/V6kCKarz6NnqWLAP2yqMhg">claude.ai/artifact/V6kCKarz6NnqWLAP2yqMhg</a></td><td class="num">14/09</td><td rowspan="2" style="vertical-align:middle">Describe commercial Vitals, closed 23/09.</td></tr>
 <tr><td><strong>Tư Cách Pháp Lý Vitals</strong><br><a class="aurl" href="https://claude.ai/artifact/GNU6Qga1dTX5xfumWHLG8D">claude.ai/artifact/GNU6Qga1dTX5xfumWHLG8D</a></td><td class="num">20/09</td></tr>
-<tr><td><strong>Chuyến Nhật 2026</strong><br><a class="aurl" href="https://claude.ai/artifact/NpqPpXjuLnpVdrYuMPB8Nn">claude.ai/artifact/NpqPpXjuLnpVdrYuMPB8Nn</a></td><td class="num">07/09</td><td rowspan="3" style="vertical-align:middle">Japan trip. The repo is the store; its Pages site was switched off 23/09, so these three are the only way to read it.</td></tr>
+<tr><td><strong>Chuyến Nhật 2026</strong><br><a class="aurl" href="https://claude.ai/artifact/NpqPpXjuLnpVdrYuMPB8Nn">claude.ai/artifact/NpqPpXjuLnpVdrYuMPB8Nn</a></td><td class="num">07/09</td><td rowspan="3" style="vertical-align:middle">Japan trip. The repo&rsquo;s Pages site is off (404), so these are the only readable copies.</td></tr>
 <tr><td><strong>Nhật 2026 Bỏ Túi</strong><br><a class="aurl" href="https://claude.ai/artifact/Qh2AH4356xDDyJePqB8msp">claude.ai/artifact/Qh2AH4356xDDyJePqB8msp</a></td><td class="num">07/09</td></tr>
 <tr><td><strong>Mẫu Kế Hoạch Chuyến Đi</strong><br><a class="aurl" href="https://claude.ai/artifact/7mqZkXdoZgDfr1m7T1xsSY">claude.ai/artifact/7mqZkXdoZgDfr1m7T1xsSY</a></td><td class="num">07/09</td></tr>
-<tr><td><strong>Ecosystem Map</strong><br><a class="aurl" href="https://claude.ai/artifact/4pjUSfRctWCbkeMHgH7Vfk">claude.ai/artifact/4pjUSfRctWCbkeMHgH7Vfk</a></td><td class="num">22/09</td><td rowspan="2" style="vertical-align:middle">One-off documents. No repo, no routine, no Pages twin.</td></tr>
+<tr><td><strong>Ecosystem Map</strong><br><a class="aurl" href="https://claude.ai/artifact/4pjUSfRctWCbkeMHgH7Vfk">claude.ai/artifact/4pjUSfRctWCbkeMHgH7Vfk</a></td><td class="num">22/09</td><td rowspan="2" style="vertical-align:middle">One-off documents. No repo, no routine.</td></tr>
 <tr><td><strong>Portfolio Position</strong><br><a class="aurl" href="https://claude.ai/artifact/E8vEJ5Qxn1ovETsaHJrFQg">claude.ai/artifact/E8vEJ5Qxn1ovETsaHJrFQg</a></td><td class="num">23/09</td></tr>
 </tbody>
 </table>
 </div>
-<p class="cap">Every artifact above is <strong>private</strong> &mdash; the links work for you, and for nobody else until you share them from the page&rsquo;s Share menu.</p>
+<p class="cap">Every artifact is <strong>private</strong> until you share it from the page&rsquo;s Share menu.</p>
 
 <h2>4 &middot; How the routines connect</h2>
-<p class="lede">Only one pair is coupled. That is deliberate &mdash; one failure cannot cascade.</p>
-<div class="flow">1st, 03:00 UTC      Monthly Ecosystem Audit &mdash;writes&rarr; Drive: Claude outputs/Audit/index.html
-                              &#9474;                                       &#9474;
-                              &#9492;&mdash;writes&rarr; Ecosystem Health           &#9474;  (1-hour margin)
-                                           (artifact)                 &darr;
-Mondays, 04:00 UTC  Omni-Audit publisher &mdash;&mdash;reads&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&#9496;
-                              &#9492;&mdash;writes&rarr; ttrng3/Omni-Audit &rarr; Pages &rarr; preview
+<p class="lede">One routine carries three coupled parts; one routine is its fallback. Everything else is independent.</p>
+<div class="flow">1st, 03:00 UTC   Monthly system run
+                  Part A  Ecosystem Audit  &mdash;writes&rarr; Drive Claude outputs/Audit/ + Ecosystem Health
+                  Part B  publish          &mdash;writes&rarr; ttrng3/Omni-Audit &rarr; Pages &rarr; preview
+                  Part C  KB update        &mdash;writes&rarr; Drive Claude outputs/SYS/ + Second Brain, Applied
+2nd, 01:00 UTC   Omni-Audit publisher (fallback) &mdash; picks up the Drive handoff if Part B did not publish
+2nd, 02:00 UTC   Learning Matrix &mdash;writes&rarr; pipeline-wiring/learning-matrix.html
 
-1st, 02:00 UTC      KB Monthly Update &mdash;writes&rarr; Drive SYS report + Second Brain, Applied
+independent      TMDV &middot; OMNI &middot; ECOPM &middot; ECP&times;ELA &middot; Trade Journal &middot; GDSH &middot; Ops-Dashboard &middot; Signal Desk
+                 own source, own repo, own page, no shared state
 
-everything else     TMDV &middot; OMNI &middot; ECOPM &middot; ECP&times;ELA &middot; Trade Journal &middot; GDSH &middot; Signal Desk
-                    independent &mdash; own source, own repo, own page, no shared state</div>
+one-shot         Nhật 2026 pre-trip brief 23/11 02:00 &middot; post-trip wrap-up 11/12 03:00
+disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (replaced by Ops-Dashboard 1st &amp; 15th) &middot; 9 one-off test/verify routines</div>
+<p class="cap">The last monthly system run (fired 25/09 02:57&nbsp;UTC) reports <code>SUCCEEDED</code>.</p>
 
-<h2>5 &middot; Mac dependency &mdash; all clear</h2>
+<h2>5 &middot; Mac dependency &mdash; two routines still carry it</h2>
 <div class="card">
-  <p style="margin-bottom:10px"><span class="pill p-ok">Verified</span> Every enabled routine, three independent signals:</p>
+  <p style="margin-bottom:10px"><span class="pill p-warn">Found 25/09</span> Two <strong>enabled</strong> one-shot routines hold the full remote-devices tool set (<code>device_bash</code>, <code>device_list_dir</code>, <code>device_stage_files</code>, <code>device_commit_files</code>, credential autofill and more):</p>
   <ul>
-    <li><strong>Tools</strong> &mdash; zero routines hold <code>device_bash</code>, <code>device_list_dir</code>, <code>device_stage_files</code> or any remote-devices tool.</li>
-    <li><strong>Binding</strong> &mdash; every routine reports <code>bound = false</code>.</li>
-    <li><strong>Mounts</strong> &mdash; every routine has <code>file_mounts: []</code>.</li>
+    <li><a href="https://claude.ai/code/routines/trig_01JqRxfBAKTPGrVECULGAsc3">Nhật 2026 — Bản tóm tắt 1 trang trước chuyến</a>, fires once on <strong>23/11/2026 02:00&nbsp;UTC</strong>.</li>
+    <li><a href="https://claude.ai/code/routines/trig_01FCThppytbnNxkYbAh3JsGS">Nhật 2026 — Tổng kết sau chuyến + cập nhật Kho điểm</a>, fires once on <strong>11/12/2026 03:00&nbsp;UTC</strong>.</li>
   </ul>
-  <p style="margin-bottom:0">Five prompts contain the string <code>device_bash</code> or <code>remote-devices</code> &mdash; in all five inside a prohibition, not a use. A keyword scan reads those as dependency; they are the opposite.</p>
+  <p>Both were created from a Cowork project on 05/09. Neither appears in the routine list call (see Caution in section 7); they were found only by fetching their ids one by one. Neither has a file mount.</p>
+  <p style="margin-bottom:0"><strong>The ten enabled routines in the list</strong>, and TMDV (fetched by id), hold no remote-devices tool and have <code>file_mounts: []</code>. The 24/09 claim that every routine reports <code>bound = false</code> cannot be re-checked: the API response has no <code>bound</code> field.</p>
 </div>
 
 <hr class="rule">
 
-<h2>6 &middot; Done</h2>
+<h2>6 &middot; Done &mdash; the 24/09 change log, as written then</h2>
+<details>
+<summary>Open the 24/09 log. Two lines in it are now wrong, and are marked.</summary>
 <div class="card">
   <p><strong>The flow is now uniform across all seven.</strong> Each routine writes its source into GitHub, Pages serves it, and the mirror publishes last. A failed mirror reports and stops &mdash; it can never cause an undo, retry or rewrite of the repo.</p>
   <p><strong>Every mirror was verified, not assumed.</strong> Fragments built with zero doctype/<code>&lt;html&gt;</code>/<code>&lt;head&gt;</code>/<code>&lt;body&gt;</code> tags; data files published first and the page second on the larger payloads, because a page sent alongside a big files payload comes back blank; exactly one <code>&lt;html&gt;</code> tag on read-back.</p>
   <p><strong>Five renderers fetch <code>data/</code> relatively</strong> and only fall back to the absolute Pages URL &mdash; which CSP blocks inside an artifact. That is why each mirror carries its own <code>data/</code> copy. GDSH is the exception: <code>build_auto.py</code> bakes the numbers in and it fetches nothing, so there the mirror <em>is</em> the page. Each routine now carries that distinction in writing.</p>
-  <p><strong>Audit publisher moved 02:00 &rarr; 04:00 Monday.</strong> It used to fire one hour <em>before</em> its own producer, so whenever the 1st fell on a Monday the fresh audit waited a week &mdash; 2027-02-01, 2027-03-01, 2027-11-01. Now one hour behind, with the reason written into the prompt so nobody moves it back.</p>
+  <p><span class="pill p-warn">Superseded</span> <strong>Audit publisher moved 02:00 &rarr; 04:00 Monday.</strong> Since then the publisher became Part B of the monthly system run (1st 03:00), and the old publisher is a fallback on the 2nd at 01:00. It used to fire one hour <em>before</em> its own producer, so whenever the 1st fell on a Monday the fresh audit waited a week &mdash; 2027-02-01, 2027-03-01, 2027-11-01. Now one hour behind, with the reason written into the prompt so nobody moves it back.</p>
   <p><strong>GDSH renamed</strong> to &ldquo;weekly check, monthly period&rdquo; &mdash; the cron was always weekly. Typo fixed: <em>SINH BẮNG CODE</em> &rarr; <em>SINH BẰNG CODE</em>.</p>
   <p><strong>Three plaintext credential files moved to Drive trash</strong> &mdash; a <code>github_pat_&hellip;</code>, an <code>sk-ant-oat01-&hellip;</code>, and a third PAT-shaped file.</p>
   <p><strong>Japan Pages switched off</strong> &mdash; the public URL 404s; the repo is untouched.</p>
   <p><strong>Ops-Dashboard restyled to the Ty Artifact Standard</strong> &mdash; it was the last page on the retired palette. Variable <em>names</em> were kept, because <code>ksnb-render.js</code> builds its SVG charts from them and writes <code>color:var(--red)</code> onto 12.5px table numbers; so every accent is now a text-safe ink (blue 8.2:1, red 6.6:1, amber 6.4:1, green 6.6:1 on white) rather than a bright mark. Chart pairs checked with the CVD validator: blue/red &Delta;E 24.3, blue/amber 25.9, green/red 7.0 deutan &mdash; the last is legal because the bars also encode sign by position around a zero axis and the MoM table repeats every signed figure. Nothing outside the stylesheet changed; the file is otherwise byte-identical.</p>
   <p><strong>That restyle fixed a real defect.</strong> The old sheet carried a second, dead <code>:root</code> block from the 20/09 reskin that aliased <code>--blue</code> and <code>--green</code> to the <em>same</em> colour. Anywhere both appeared &mdash; the <em>info</em> vs <em>good</em> bullet dots, the KPI border tops &mdash; they were indistinguishable. They are now two distinct hues.</p>
-  <p><strong>Ops-Dashboard became the eighth pipeline.</strong> The repo was already repo-first with a runbook, heartbeat and freshness check — but <strong>no routine had ever been created</strong>, so it only moved when run by hand. It now has one, Mondays 06:00 UTC.</p>
+  <p><strong>Ops-Dashboard became the eighth pipeline.</strong> The repo was already repo-first with a runbook, heartbeat and freshness check — but <strong>no routine had ever been created</strong>, so it only moved when run by hand. It now has one. <span class="pill p-warn">Superseded</span> not Mondays: the live cron is <code>0 6 1,15 * *</code>, the 1st and 15th.</p>
   <p><strong>Its "mounted folder" was never a Mac dependency.</strong> The source it calls <em>thư mục Drive cục bộ 09 TCKT</em> is a Google Drive folder the connector reads from the cloud (since 2026-09-25 at <code>08 Omni Service - OMNI/09 TCKT</code>, same folderId) — the same false constraint Trade Journal had. Both PnL files are readable; the routine now scans Outlook <em>and</em> that folder, because TCKT has started delivering reports there instead of by email.</p>
   <p style="margin-bottom:0"><strong>Three artifacts became one</strong> &mdash; Starter Story and Learning Matrix are tabs on this page. <strong>One duplicate deleted</strong> &mdash; the old Ecosystem Audit copy, after confirming the repo already held the same run.</p>
 </div>
+</details>
 
 <h2>7 &middot; Open &mdash; needs you</h2>
 
 <details open>
-<summary><span class="pill p-ok">Corrected 25/09</span> Four dead registry URLs, two wrong schedules, one duplicate I created</summary>
-<p><strong>Two schedules on this page were wrong.</strong> Read against the live routine API on 25/09: <strong>Ops-Dashboard</strong> fires <code>0 6 1,15 * *</code> &mdash; the 1st and the 15th, not &ldquo;Mon 06:00&rdquo;; <strong>Omni-Audit</strong> fires <code>0 9 1 * *</code> &mdash; the 1st at 09:00, not &ldquo;Mon 04:00&rdquo;. Section 6 still describes an audit-publisher move to Monday 04:00; that move is not what the cron now says. Both rows above are corrected.</p>
-<p><strong>The artifact registry had four dead URLs.</strong> <code>_tools/artifact-registry.md</code> pointed at deleted artifacts for TMDV (both the short and uuid forms), ECP&times;ELA, OMNI Sitecheck and Trade Journal &mdash; all four verified <em>artifact not found</em>. Cause: those artifacts were recreated on 24/09 and the routine prompts were updated, but the registry was not. No routine was ever at risk, because each carries its publish target in its own prompt and states that older ids are dead. The rows now record the <strong>Pages address</strong> instead of an artifact id, which is what those prompts require.</p>
-<p><strong>ECOPM Sitecheck was an unregistered artifact</strong> &mdash; no row at all. It has one now. It is a sibling of OMNI Sitecheck, not a copy: different SharePoint tree, different repo, different week-slug format. <strong>Still open: ECOPM&rsquo;s newest week is 2026-09-W01 while OMNI is at 2026-09-W3</strong>, roughly two weeks behind. Worth checking whether the source stopped or the routine did.</p>
-<p><strong>Trade Journal is not Mac-bound.</strong> The registry called its nightly sync a device-bound autonomy debt. It is a cloud routine and ran clean at 01:50&nbsp;UTC on 25/09.</p>
-<p style="margin-bottom:16px"><strong>And one duplicate, which was mine.</strong> The 14/09 record for the Learning Matrix named an artifact id that no longer resolved, so a standalone Learning Matrix was rebuilt from it &mdash; without noticing the page had already been folded into this one as a tab on 24/09. That is exactly the second-copy failure the registry exists to prevent, caused by the repair rather than by the original fault. The standalone was deleted; the Learning Matrix tab here is the only one.</p>
+<summary><span class="pill p-warn">Corrected 25/09</span> What the 24/09 page got wrong</summary>
+<ul>
+  <li><strong>Repos: 12 &rarr; 14.</strong> <code>famrec</code> does not exist in the account. <code>passbook</code>, <code>pipeline-wiring</code> and a restored <code>signal-desk-collector</code> were missing from the count.</li>
+  <li><strong>Artifacts: 20 &rarr; 25.</strong> New since then: Omni Next Level, GDSH Turnaround v2, Passbook Thirty Visitors and two called Passbook Review. &ldquo;Vitals Journal&rdquo; is now titled Passbook. Pipeline Wiring now has a Pages site, so it moves to the preview list.</li>
+  <li><strong>Two preview labels were swapped.</strong> The Ops-Dashboard preview is &ldquo;Dashboard Giám sát Ngân sách &amp; Dòng tiền — KSNB&rdquo;; the Omni-Audit preview is &ldquo;Ecosystem Audit&rdquo;. The links were right; the names were on the wrong rows.</li>
+  <li><strong>Omni-Audit schedule.</strong> The page said 1st 09:00. The live system is the monthly system run on the 1st at 03:00, plus a fallback on the 2nd at 01:00. None of the routines I could find has cron <code>0 9 1 * *</code>.</li>
+  <li><strong>&ldquo;0 touch your Mac&rdquo; was false.</strong> See section 5.</li>
+  <li><strong>Signal Desk was listed as broken.</strong> Its repo is back and the routine created sessions on 25/09.</li>
+  <li><strong>ECOPM was said to be two weeks behind (newest week 2026-09-W01).</strong> Its <code>data/index.json</code> runs to <strong>2026-09-W03</strong> (as of &ldquo;Tuần 03/09/2026&rdquo;, generated 22/09), the same week as OMNI. What <em>is</em> true: the per-week detail files in <code>data/weeks/</code> stop at <code>2026-09-W01</code>, so W02 and W03 have no detail file. I have not checked whether the page needs them.</li>
+  <li><strong>The routine-connection diagram</strong> still showed KB Monthly Update and a Monday publisher. Both are retired; section 4 is redrawn.</li>
+</ul>
 </details>
 
 <details open>
-<summary><span class="pill p-stop">Broken</span> Signal Desk loses its source tonight at 00:10 UTC</summary>
-<p><code>signal-desk-collector</code> was deleted on 24/09, but the <strong>Signal Desk daily briefing</strong> routine still names it as its git source &mdash; and its prompt opens <em>"everything you need is in the cloned repo."</em> It reads <code>PUBLISH-CONTRACT.md</code>, <code>BRIEFING-SPEC.md</code>, <code>data/latest.json</code> and the collector's raw file from that repo. With the repo gone it cannot provision, so the run fails before a session exists.</p>
-<p>Three ways out, and the choice is yours:</p>
-<ul>
-  <li><strong>Restore the repo.</strong> GitHub keeps a deleted repo recoverable for 90 days &mdash; Settings &rarr; your repositories &rarr; Deleted repositories. This is the only option that keeps the briefing working as designed.</li>
-  <li><strong>Disable the routine</strong> until you decide. No data is lost; the artifact keeps its last briefing.</li>
-  <li><strong>Retire Signal Desk</strong> deliberately, and delete the routine and the artifact together.</li>
-</ul>
-<p style="margin-bottom:16px">I have not touched it. A failed run is harmless &mdash; it publishes nothing and leaves the existing briefing intact &mdash; but it will fail every night until one of the above happens.</p>
+<summary><span class="pill p-warn">Decide</span> The two Japan routines with Mac tools</summary>
+<p style="margin-bottom:16px">They will not fire until 23/11 and 11/12. When they do, they can reach your Mac and autofill credentials. Options: strip the remote-devices tools from both (the prompts only need to read a Cowork project and write a file), or leave them. I have not changed them.</p>
 </details>
 
 <details>
-<summary><span class="pill p-stop">Security</span> Revoke the two tokens &mdash; deleting the files did not</summary>
-<p><strong>Trashing a file does not revoke a credential.</strong> Two need action at the provider:</p>
+<summary><span class="pill p-stop">Security</span> Revoke the two tokens &mdash; carried from 24/09, not re-verified</summary>
+<p><strong>Trashing a file does not revoke a credential.</strong> On 24/09 two files needed action at the provider:</p>
 <ul>
   <li><code>routine_fire_token.txt</code> &mdash; an Anthropic <code>sk-ant-oat01-&hellip;</code> session token. Revoke it in your account settings.</li>
-  <li><code>.github-token</code> &mdash; 94 bytes, PAT-shaped, created 20/05. If it is not one of the three you already revoked, revoke it too.</li>
+  <li><code>.github-token</code> &mdash; 94 bytes, PAT-shaped, created 20/05. Revoke it if it is not one you already revoked.</li>
 </ul>
-<p style="margin-bottom:16px">The third held the Trade-Journal PAT you already killed &mdash; dead residue, now gone. No routine reads any of the three.</p>
+<p style="margin-bottom:16px">I cannot see revocation status from here, so this item stays open until you confirm.</p>
 </details>
 
 <details>
-<summary><span class="pill p-info">Housekeeping</span> One dead routine, one unclaimed repo</summary>
-<p>Delete the routine now named <strong>&ldquo;⚠ DELETE ME — retired Mac-bound Trade Journal&rdquo;</strong> at <a href="https://claude.ai/code/routines">claude.ai/code/routines</a>. I renamed it so it cannot be confused with the live one. It is the last thing in the system that is device-bound and still carries <code>device_bash</code>; disabled, so no rush. I cannot delete routines &mdash; the API has no delete action.</p>
-<p style="margin-bottom:16px"><strong>Resolved 25/09 &mdash; Ops-Dashboard does have a routine.</strong> This paragraph used to say it had none, which contradicted section 6 two screens above. The live listing shows <a href="https://claude.ai/code/routines/trig_01HqP8u1h6LYYRXmS8aXmSre"><code>Ops-Dashboard KSNB refresh</code></a>, enabled, cron <code>0 6 1,15 * *</code>, last succeeded 25/09 01:55&nbsp;UTC. It is live, not abandoned.</p>
-</details>
-
-<details>
-<summary><span class="pill p-ok">Corrected</span> Two things I reported wrongly</summary>
-<p><strong>There was no token in the TMDV runbook.</strong> All four copies contain a placeholder &mdash; <code>DÁN_TOKEN_VÀO_ĐÂY</code> &mdash; and instructions to revoke a token that lived elsewhere. I repeated that claim from a 14/09 audit without checking. The runbook is documentation and stays.</p>
-<p><strong>KSNB is not a duplicate — then it turned out it was.</strong> I first flagged it as a Pages duplicate, then corrected myself saying no KSNB repo existed. Both were wrong in different ways: the repo is <code>Ops-Dashboard</code>, whose page carries the title "Dashboard Giám sát Ngân sách &amp; Dòng tiền — KSNB". The artifact was the original; the repo was built from it on 20/09 and became the source of truth.</p>
-<p style="margin-bottom:16px">It had drifted: the artifact was frozen at the 15/09 snapshot while the repo had moved to 20/09 — so the September compliance count read <code>0 / 8</code> in Cowork and <code>2 / 10</code> on Pages, because both PnLs arrived on 16/09. It is now a thin mirror of the repo, so that gap cannot reopen. I read the full 1,030-line original first and diffed it: every substantive figure survived into the repo.</p>
+<summary><span class="pill p-info">Housekeeping</span> A routine I could not find</summary>
+<p style="margin-bottom:16px">The 24/09 page asked you to delete a routine renamed <strong>&ldquo;⚠ DELETE ME — retired Mac-bound Trade Journal&rdquo;</strong>. It is not among the 20 rows the list call returns, and its id is not recorded anywhere I can read, so I could not confirm whether it still exists. Check <a href="https://claude.ai/code/routines">claude.ai/code/routines</a>; the API has no delete action.</p>
 </details>
 
 <details>
 <summary><span class="pill p-mute">Caution</span> The routine listing is capped and drops rows silently</summary>
-<p style="margin-bottom:16px">Listing routines returned 20 rows and omitted <strong>TMDV</strong> &mdash; an enabled, active dashboard. I only caught it because I knew the ID and fetched it directly. Never audit from that listing alone.</p>
+<p style="margin-bottom:16px">On 25/09 the list call returned 20 rows plus a next-page cursor the tool cannot follow. Four routines were missing from it and were found only by fetching ids one by one: TMDV (enabled), the two Japan one-shots (enabled) and the retired KSNB weekly (disabled). Of 23 other ids found in old notes, 19 no longer exist. Any routine whose id is not written down anywhere could still be missing from this page.</p>
 </details>
 
-<p class="foot">Pipeline Wiring &middot; 24/09/2026 &middot; tabs: Wiring &middot; Starter Story &middot; Learning Matrix &middot; schedules, tool lists and bindings read live from the routine API; artifact list read live from the artifact API. Nothing here is from memory.</p>
+<p class="foot">Pipeline Wiring &middot; re-audited 25/09/2026 &middot; tabs: Wiring &middot; Starter Story &middot; Learning Matrix &middot; repos from the GitHub API, Pages by HTTP status, routines from the routine API (list + get by id), artifacts from the artifact API. Items not re-checked on 25/09 are labelled.</p>
 </div>
   </section>
   <section class="pane" id="p-starter" role="tabpanel" aria-labelledby="t-starter" tabindex="0" hidden>

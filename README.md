@@ -7,8 +7,8 @@ disagree, the repo wins and the artifact is what gets corrected.
 
 One page describing the whole system: every repo, every artifact, every routine, which
 of them are copies of each other, and what is currently broken. It **describes** the
-eight pipelines; it is not one of them. Nothing refreshes it on a schedule — it is
-updated by hand when the system changes.
+eight pipelines; it is not one of them. `index.html` is updated by hand when the system changes; `learning-matrix.html` is
+rewritten by the Learning Matrix routine on the 2nd of each month.
 
 ## Layout
 

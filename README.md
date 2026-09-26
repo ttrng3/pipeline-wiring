@@ -6,9 +6,14 @@ Claude, published only after the repo is correct, and never authoritative. If th
 disagree, the repo wins and the artifact is what gets corrected.
 
 One page describing the whole system: every repo, every artifact, every routine, which
-of them are copies of each other, and what is currently broken. It **describes** the
-eight pipelines; it is not one of them. `index.html` is updated by hand when the system changes; `learning-matrix.html` is
-rewritten by the Learning Matrix routine on the 2nd of each month.
+of them are copies of each other, and what is currently broken. Since 2026-09-26 it is
+also the **ninth pipeline**: the routine *Pipeline Wiring weekly check* (Sunday 16:00 UTC)
+runs `tools/collect_status.py` against the nine public repos, checks the nine Cowork
+previews with the Artifact tool, commits `data/status.json` + `data/.last-check`, and
+refreshes this page's preview. The page's "Next", "Last heartbeat" and preview cells
+render from that file; the prose in `index.html` is still edited by hand, and
+`learning-matrix.html` is rewritten by the Learning Matrix routine on the 2nd of each month.
+The routine writes **only** the two data files — never a page.
 
 ## Layout
 
@@ -18,6 +23,8 @@ rewritten by the Learning Matrix routine on the 2nd of each month.
 | `starter-story.html` | Tab 2, loaded in an iframe. |
 | `learning-matrix.html` | Tab 3, loaded in an iframe. The **only** Learning Matrix — see below. |
 | `tools/build-fragment.py` | Builds `build/artifact.html` for the mirror. |
+| `tools/collect_status.py` | Weekly: heartbeats, commits, next fire per pipeline → `data/status.json`; `--preview key=state` records the artifact checks. |
+| `data/status.json`, `data/.last-check` | Written by the weekly check. The mirror needs `data/status.json` beside the page. |
 
 `build/` is generated. Do not edit it and do not commit a hand-edited copy.
 

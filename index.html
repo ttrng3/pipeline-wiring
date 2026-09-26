@@ -123,7 +123,7 @@ body{display:flex;flex-direction:column;overflow:hidden}
 <div class="grid c4" style="margin-top:22px">
   <div class="card tight"><div class="stat">14</div><div class="cap">repositories &middot; 10 with a live Pages site</div></div>
   <div class="card tight"><div class="stat">25</div><div class="cap">artifacts</div></div>
-  <div class="card tight"><div class="stat">13</div><div class="cap">enabled routines found (10 scheduled, 1 recurring briefing, 2 one-shot)</div></div>
+  <div class="card tight"><div class="stat">14</div><div class="cap">enabled routines (11 scheduled, 1 recurring briefing, 2 one-shot) &mdash; Pipeline Wiring weekly added 26/09</div></div>
   <div class="card tight"><div class="stat" style="color:var(--amber-ink,#8A5200)">2</div><div class="cap">enabled routines can touch your Mac</div></div>
 </div>
 
@@ -132,7 +132,7 @@ body{display:flex;flex-direction:column;overflow:hidden}
 </div>
 
 <h2>The flow</h2>
-<p class="lede">All eight pipelines are built in this order. The artifact is the last step, never the source, and never a step that can block the repo write.</p>
+<p class="lede">All nine pipelines are built in this order. The artifact is the last step, never the source, and never a step that can block the repo write.</p>
 <div class="flow">schedule &rarr; cloud routine &rarr; source
               &darr;
            GitHub
@@ -145,32 +145,32 @@ body{display:flex;flex-direction:column;overflow:hidden}
   <p style="margin:0"><strong>Two links, and they are not the same thing.</strong> The <strong>address</strong> is the Pages URL &mdash; that is what goes in a document, an email or a message. The <strong>Cowork</strong> link opens the preview of that same page inside Claude. The artifacts stay private either way: a link alone opens nothing for anyone you have not shared it with.</p>
 </div>
 
-<h2>1 &middot; The eight pipelines</h2>
-<p class="lede">Each row: a routine on a schedule &rarr; its repo &rarr; its Pages site &rarr; the mirror artifact named in that routine&rsquo;s own prompt. All eight Pages URLs returned HTTP&nbsp;200 on 25/09.</p>
+<h2>1 &middot; The nine pipelines</h2>
+<p class="lede">Each row: a routine on a schedule &rarr; its repo &rarr; its Pages site &rarr; the preview named in that routine&rsquo;s own prompt. All Pages URLs returned HTTP&nbsp;200 on 25/09. Since 26/09 this page is the ninth: a Sunday routine reads the other eight (and itself) and writes <code>data/status.json</code>, which fills the live cells below.</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Pipeline</th><th>Fires (UTC) &mdash; opens the routine</th><th>Next</th><th>Last heartbeat in repo</th><th>Source</th><th>Repo</th><th>Address</th><th>Cowork</th></tr></thead>
 <tbody>
-<tr><td><strong>TMDV</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01Ff3aQaqt1w2YEpUvo7LmXe">Sun 11:00</a></td><td class="num">27/09</td><td class="num">22/09</td><td>Drive trackers + Outlook</td><td><a href="https://github.com/ttrng3/Omni-TMDV">ttrng3/Omni-TMDV</a></td><td><a href="https://ttrng3.github.io/Omni-TMDV/">ttrng3.github.io/Omni-TMDV/</a></td><td><a href="https://claude.ai/artifact/3hNqXDiwsssZBe34b6mK73"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>OMNI Sitecheck</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LRyJphqNgprVTbyUmubw5h">Mon 15:45</a></td><td class="num">28/09</td><td class="num">22/09</td><td>SharePoint &mdash; OMNI tree</td><td><a href="https://github.com/ttrng3/Omni-sitecheck">ttrng3/Omni-sitecheck</a></td><td><a href="https://ttrng3.github.io/Omni-sitecheck/">ttrng3.github.io/Omni-sitecheck/</a></td><td><a href="https://claude.ai/artifact/KR1dnH91u1qdzhoop4Dqkr"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>ECOPM Sitecheck</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_016gpDjeZBU2f9GLhfVqb3BR">Mon 14:00</a></td><td class="num">28/09</td><td class="num">22/09</td><td>SharePoint &mdash; ECOPM tree</td><td><a href="https://github.com/ttrng3/Ecopm-Sitecheck">ttrng3/Ecopm-Sitecheck</a></td><td><a href="https://ttrng3.github.io/Ecopm-Sitecheck/">ttrng3.github.io/Ecopm-Sitecheck/</a></td><td><a href="https://claude.ai/artifact/Gxr48hVPm7YGEuE2947eoZ"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>ECP &times; ELA</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01TsaptFpFhEY4eFUxcQSaNU">Sun 14:00</a></td><td class="num">27/09</td><td class="num">23/09</td><td>Drive weekly PDFs</td><td><a href="https://github.com/ttrng3/ecp-ela-weekly">ttrng3/ecp-ela-weekly</a></td><td><a href="https://ttrng3.github.io/ecp-ela-weekly/">ttrng3.github.io/ecp-ela-weekly/</a></td><td><a href="https://claude.ai/artifact/22fboAK5NyitZHc4iiVgTx"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>Trade Journal</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LWyx19N6D7gUqcy3FewYP1">Tue&ndash;Sat 04:00</a> <span class="cap">11:00 Hanoi, since 26/09</span></td><td class="num">29/09</td><td class="num">26/09</td><td>Webull CSVs on Drive</td><td><a href="https://github.com/ttrng3/Trade-Journal">ttrng3/Trade-Journal</a></td><td><a href="https://ttrng3.github.io/Trade-Journal/">ttrng3.github.io/Trade-Journal/</a></td><td><a href="https://claude.ai/artifact/LgPF5yVUG2J1bfV3M72FQ1"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>GDSH</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01FEgjqUEhG88GtAGFdLE4hE">Mon 01:00</a></td><td class="num">28/09</td><td class="num">22/09</td><td>Drive budget workbook</td><td><a href="https://github.com/ttrng3/gdsh-report">ttrng3/gdsh-report</a></td><td><a href="https://ttrng3.github.io/gdsh-report/">ttrng3.github.io/gdsh-report/</a></td><td><a href="https://claude.ai/artifact/A5DNPFCcerdjgoBk2c5vVd"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>Ops-Dashboard</strong> <span class="cap">KSNB</span></td><td class="num"><a href="https://claude.ai/code/routines/trig_01HqP8u1h6LYYRXmS8aXmSre">1st &amp; 15th 06:00</a></td><td class="num">01/10</td><td class="num">25/09</td><td>Outlook + Drive <code>08 Omni Service - OMNI/09 TCKT</code></td><td><a href="https://github.com/ttrng3/Ops-Dashboard">ttrng3/Ops-Dashboard</a></td><td><a href="https://ttrng3.github.io/Ops-Dashboard/">ttrng3.github.io/Ops-Dashboard/</a></td><td><a href="https://claude.ai/artifact/Ny2dknmJCxADa95gJn6DMx"><span class="pill p-ok">Open</span></a></td></tr>
-<tr><td><strong>Omni-Audit</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01UrAFG2ZNXtQvv9MHXmjjoB">1st 03:00</a> (monthly system run, Part B)<br><span class="cap">fallback <a href="https://claude.ai/code/routines/trig_01AXUmgrW5pxPFdRcQtYv1Tv">2nd 01:00</a></span></td><td class="num">01/10</td><td class="num">25/09</td><td>Drive audit handoff</td><td><a href="https://github.com/ttrng3/Omni-Audit">ttrng3/Omni-Audit</a></td><td><a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a></td><td><a href="https://claude.ai/artifact/BeTHcWt6A7zKN66j51Jr81"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>TMDV</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01Ff3aQaqt1w2YEpUvo7LmXe">Sun 11:00</a></td><td class="num" data-next="tmdv">27/09</td><td class="num" data-hb="tmdv">22/09</td><td>Drive trackers + Outlook</td><td><a href="https://github.com/ttrng3/Omni-TMDV">ttrng3/Omni-TMDV</a></td><td><a href="https://ttrng3.github.io/Omni-TMDV/">ttrng3.github.io/Omni-TMDV/</a></td><td data-preview="tmdv"><a href="https://claude.ai/artifact/3hNqXDiwsssZBe34b6mK73"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>OMNI Sitecheck</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LRyJphqNgprVTbyUmubw5h">Mon 15:45</a></td><td class="num" data-next="omni-sitecheck">28/09</td><td class="num" data-hb="omni-sitecheck">22/09</td><td>SharePoint &mdash; OMNI tree</td><td><a href="https://github.com/ttrng3/Omni-sitecheck">ttrng3/Omni-sitecheck</a></td><td><a href="https://ttrng3.github.io/Omni-sitecheck/">ttrng3.github.io/Omni-sitecheck/</a></td><td data-preview="omni-sitecheck"><a href="https://claude.ai/artifact/KR1dnH91u1qdzhoop4Dqkr"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>ECOPM Sitecheck</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_016gpDjeZBU2f9GLhfVqb3BR">Mon 14:00</a></td><td class="num" data-next="ecopm-sitecheck">28/09</td><td class="num" data-hb="ecopm-sitecheck">22/09</td><td>SharePoint &mdash; ECOPM tree</td><td><a href="https://github.com/ttrng3/Ecopm-Sitecheck">ttrng3/Ecopm-Sitecheck</a></td><td><a href="https://ttrng3.github.io/Ecopm-Sitecheck/">ttrng3.github.io/Ecopm-Sitecheck/</a></td><td data-preview="ecopm-sitecheck"><a href="https://claude.ai/artifact/Gxr48hVPm7YGEuE2947eoZ"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>ECP &times; ELA</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01TsaptFpFhEY4eFUxcQSaNU">Sun 14:00</a></td><td class="num" data-next="ecp-ela">27/09</td><td class="num" data-hb="ecp-ela">23/09</td><td>Drive weekly PDFs</td><td><a href="https://github.com/ttrng3/ecp-ela-weekly">ttrng3/ecp-ela-weekly</a></td><td><a href="https://ttrng3.github.io/ecp-ela-weekly/">ttrng3.github.io/ecp-ela-weekly/</a></td><td data-preview="ecp-ela"><a href="https://claude.ai/artifact/22fboAK5NyitZHc4iiVgTx"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Trade Journal</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LWyx19N6D7gUqcy3FewYP1">Tue&ndash;Sat 04:00</a> <span class="cap">11:00 Hanoi, since 26/09</span></td><td class="num" data-next="trade-journal">29/09</td><td class="num" data-hb="trade-journal">26/09</td><td>Webull CSVs on Drive</td><td><a href="https://github.com/ttrng3/Trade-Journal">ttrng3/Trade-Journal</a></td><td><a href="https://ttrng3.github.io/Trade-Journal/">ttrng3.github.io/Trade-Journal/</a></td><td data-preview="trade-journal"><a href="https://claude.ai/artifact/LgPF5yVUG2J1bfV3M72FQ1"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>GDSH</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01FEgjqUEhG88GtAGFdLE4hE">Mon 01:00</a></td><td class="num" data-next="gdsh">28/09</td><td class="num" data-hb="gdsh">22/09</td><td>Drive budget workbook</td><td><a href="https://github.com/ttrng3/gdsh-report">ttrng3/gdsh-report</a></td><td><a href="https://ttrng3.github.io/gdsh-report/">ttrng3.github.io/gdsh-report/</a></td><td data-preview="gdsh"><a href="https://claude.ai/artifact/A5DNPFCcerdjgoBk2c5vVd"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Ops-Dashboard</strong> <span class="cap">KSNB</span></td><td class="num"><a href="https://claude.ai/code/routines/trig_01HqP8u1h6LYYRXmS8aXmSre">1st &amp; 15th 06:00</a></td><td class="num" data-next="ops-dashboard">01/10</td><td class="num" data-hb="ops-dashboard">25/09</td><td>Outlook + Drive <code>08 Omni Service - OMNI/09 TCKT</code></td><td><a href="https://github.com/ttrng3/Ops-Dashboard">ttrng3/Ops-Dashboard</a></td><td><a href="https://ttrng3.github.io/Ops-Dashboard/">ttrng3.github.io/Ops-Dashboard/</a></td><td data-preview="ops-dashboard"><a href="https://claude.ai/artifact/Ny2dknmJCxADa95gJn6DMx"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Omni-Audit</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01UrAFG2ZNXtQvv9MHXmjjoB">1st 03:00</a> (monthly system run, Part B)<br><span class="cap">fallback <a href="https://claude.ai/code/routines/trig_01AXUmgrW5pxPFdRcQtYv1Tv">2nd 01:00</a></span></td><td class="num" data-next="omni-audit">01/10</td><td class="num" data-hb="omni-audit">25/09</td><td>Drive audit handoff</td><td><a href="https://github.com/ttrng3/Omni-Audit">ttrng3/Omni-Audit</a></td><td><a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a></td><td data-preview="omni-audit"><a href="https://claude.ai/artifact/BeTHcWt6A7zKN66j51Jr81"><span class="pill p-ok">Open</span></a></td></tr>
+<tr><td><strong>Pipeline Wiring</strong> <span class="cap">this page</span></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LBNQNgvDEWZNg8KkuiR3rU">Sun 16:00</a> <span class="cap">23:00 Hanoi, since 26/09</span></td><td class="num" data-next="pipeline-wiring">27/09</td><td class="num" data-hb="pipeline-wiring">&mdash;</td><td>The nine public repos + the nine previews</td><td><a href="https://github.com/ttrng3/pipeline-wiring">ttrng3/pipeline-wiring</a></td><td><a href="https://ttrng3.github.io/pipeline-wiring/">ttrng3.github.io/pipeline-wiring/</a></td><td data-preview="pipeline-wiring"><a href="https://claude.ai/artifact/1jJocxY9ehSu9DJigt9ZmW"><span class="pill p-ok">Open</span></a></td></tr>
 </tbody>
 </table>
 </div>
-<p class="cap">&ldquo;Last heartbeat&rdquo; is the timestamp in each repo&rsquo;s <code>data/.last-check</code> as of 25/09. Every schedule above is the live cron read from the routine API on 25/09. Mirror check repeated 25/09: all eight previews in section 3 have exactly one <code>&lt;html&gt;</code> tag on read-back, so none renders blank.</p>
+<p class="cap" id="status-line">&ldquo;Last heartbeat&rdquo; is the timestamp in each repo&rsquo;s <code>data/.last-check</code>; &ldquo;Next&rdquo; is computed from each cron. <span id="status-when">Static values as of 25/09 until <code>data/status.json</code> loads.</span> Every schedule above is the live cron read from the routine API on 25/09. Mirror check repeated 25/09: all eight previews in section 3 have exactly one <code>&lt;html&gt;</code> tag on read-back, so none renders blank.</p>
 
-<h2>2 &middot; The other six repos</h2>
-<p class="lede">14 repos in total: the eight above plus these six.</p>
+<h2>2 &middot; The other five repos</h2>
+<p class="lede">14 repos in total: the nine above plus these five.</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Repo</th><th>Visibility</th><th>Pages</th><th>What drives it</th><th>Last push</th></tr></thead>
 <tbody>
-<tr><td><strong><a href="https://github.com/ttrng3/pipeline-wiring">pipeline-wiring</a></strong></td><td>Public</td><td>Live</td><td>This page, by hand; <code>learning-matrix.html</code> by the <a href="https://claude.ai/code/routines/trig_018PmBcho9kt7KdbaJcFi9nN">Learning Matrix routine</a> (2nd, 02:00)</td><td class="num">25/09</td></tr>
 <tr><td><strong><a href="https://github.com/ttrng3/signal-desk-collector">signal-desk-collector</a></strong></td><td>Private</td><td>None</td><td>Git source of the <a href="https://claude.ai/code/routines/trig_01DWVuBPuUsqjMWEBRYh7bPc">Signal Desk briefing</a> (daily 00:10). Restored after the 24/09 deletion</td><td class="num">25/09</td></tr>
 <tr><td><strong><a href="https://github.com/ttrng3/passbook">passbook</a></strong></td><td>Public</td><td>Live</td><td>By hand &mdash; no routine names it</td><td class="num">25/09</td></tr>
 <tr><td><strong><a href="https://github.com/ttrng3/vitals-journal">vitals-journal</a></strong></td><td>Private</td><td>None</td><td>By hand</td><td class="num">23/09</td></tr>
@@ -243,6 +243,7 @@ body{display:flex;flex-direction:column;overflow:hidden}
 
 independent      TMDV &middot; OMNI &middot; ECOPM &middot; ECP&times;ELA &middot; Trade Journal &middot; GDSH &middot; Ops-Dashboard &middot; Signal Desk
                  own source, own repo, own page, no shared state
+Sun, 16:00 UTC   Pipeline Wiring weekly check &mdash;reads&rarr; all nine repos + previews &mdash;writes&rarr; pipeline-wiring/data/status.json (read-only everywhere else)
 
 one-shot         Nhật 2026 pre-trip brief 23/11 02:00 &middot; post-trip wrap-up 11/12 03:00
 disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (replaced by Ops-Dashboard 1st &amp; 15th) &middot; 9 one-off test/verify routines</div>
@@ -289,6 +290,7 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
   <li><strong>The Cowork preview is a new artifact.</strong> The old one was deleted on 26/09 by reading &ldquo;no artifact link&rdquo; as &ldquo;no artifact&rdquo; &mdash; the same mistake as 23/09 &mdash; and Ty reversed it within the hour. Rebuilt from the repo (fragment, then the 50 data files), routine repointed, README now reads <em>One address, one preview</em>: the Pages URL is the only link, the preview must exist, its URL lives only in the routine prompt. The rule applies to every row above.</li>
   <li><strong>The page keeps a per-browser overlay.</strong> A CSV dropped on ttrng3.github.io/Trade-Journal/ used to vanish on reload (the snapshot alone was loaded). Imports, notes and settings made on the page now persist in that browser on top of the nightly snapshot, and prune themselves once the sync commits the same fills. The drop zone is also a click/tap/keyboard control &mdash; it only listened for a drag before.</li>
   <li><strong>Omni-Audit preview rebuilt too, same afternoon.</strong> Same misreading on 25/09, same fix: new artifact, Part B7 restored in the monthly run, fallback repointed, docs rewritten to <em>One address, one preview</em>. Section 3 counts nine previews and 25 artifacts again.</li>
+  <li><strong>Pipeline Wiring became the ninth pipeline (Ty, 26/09).</strong> A Sunday 16:00 UTC routine runs <code>tools/collect_status.py</code> against the nine public repos, checks the nine previews with the Artifact tool, commits <code>data/status.json</code> + a heartbeat, and refreshes this preview. The &ldquo;Next&rdquo;, &ldquo;Last heartbeat&rdquo; and preview cells in section 1 now render from that file; the prose stays hand-written.</li>
   <li><strong>Routine renamed</strong> <em>Trade Journal daily sync (Drive CSVs &rarr; GitHub &rarr; Pages, preview after)</em>; report now says whether the newest CSV arrived after the fire.</li>
 </ul>
 </details>
@@ -355,6 +357,32 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
   </section>
 </div>
 
+<script>
+/* Live cells: filled from data/status.json, written by the Pipeline Wiring weekly check (Sun 16:00 UTC).
+   Relative fetch, so it works on Pages and inside the preview (the file is published beside the page). */
+(function () {
+  function dm(iso){ if(!iso) return '\u2014'; var d=new Date(iso); if(isNaN(d)) return '\u2014';
+    return String(d.getUTCDate()).padStart(2,'0')+'/'+String(d.getUTCMonth()+1).padStart(2,'0'); }
+  function pill(cls,txt){ return '<span class="pill '+cls+'">'+txt+'</span>'; }
+  fetch('data/status.json?t='+Date.now(),{cache:'no-store'}).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(function(st){
+    (st.pipelines||[]).forEach(function(p){
+      var n=document.querySelector('[data-next="'+p.key+'"]'); if(n) n.textContent=dm(p.nextFireUtc);
+      var h=document.querySelector('[data-hb="'+p.key+'"]');
+      if(h){ h.innerHTML=dm(p.heartbeat)+' '+(p.heartbeat?pill(p.fresh?'p-ok':'p-stop',p.fresh?'fresh':'stale '+Math.round(p.heartbeatAgeDays)+'d'):pill('p-mute','none'));
+             if(p.heartbeatNote) h.title=p.heartbeatNote; }
+      var v=document.querySelector('[data-preview="'+p.key+'"]'); var pr=p.preview||{};
+      if(v && pr.state && pr.state!=='not checked'){
+        var a=v.querySelector('a'); var cls=pr.state==='in-sync'?'p-ok':pr.state==='behind'?'p-warn':pr.state==='unreachable'?'p-stop':'p-mute';
+        var txt=pr.state==='in-sync'?'Open \u00b7 in sync':pr.state==='behind'?'Open \u00b7 behind':pr.state==='unreachable'?'dead':'Open';
+        if(a){ a.innerHTML=pill(cls,txt); if(pr.note) a.title=pr.note; }
+      }
+    });
+    var w=document.getElementById('status-when');
+    if(w && st.generatedUtc){ var s=st.summary||{}; w.innerHTML='<strong>Checked '+st.generatedUtc.slice(0,16).replace('T',' ')+' UTC</strong> by the weekly check: '+(s.fresh||0)+'/'+(s.pipelines||0)+' heartbeats fresh'+(st.previewsCheckedAt?', '+(s.previewsInSync||0)+'/'+(s.pipelines||0)+' previews in sync':'')+(s.stale&&s.stale.length?' \u00b7 stale: '+s.stale.join(', '):'')+'.'; }
+  }).catch(function(e){ var w=document.getElementById('status-when'); if(w) w.textContent='Live status not loaded ('+e.message+'); values shown are as of 25/09.'; });
+})();
+</script>
 <script>
 (function () {
   var tabs  = [].slice.call(document.querySelectorAll('.tabbar button'));

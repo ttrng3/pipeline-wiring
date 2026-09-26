@@ -5,13 +5,15 @@ The page (index.html) renders the "Next" and "Last heartbeat" cells and the
 preview pills from this file, so the weekly routine writes DATA, never the
 page. Two passes:
 
-  python3 tools/collect_status.py            # repo side: heartbeats, commits, next fire
+  python3 tools/collect_status.py            # repo side: heartbeats, manifest stamps, next fire
   python3 tools/collect_status.py --preview trade-journal=in-sync ...   # artifact side, after the Artifact checks
 
 Every fetch failure is recorded as a value ("unreachable"), never raised, so a
-single bad request cannot blank the whole status. Sources are the public
-repos only: raw.githubusercontent.com for files, api.github.com for commit
-dates (unauthenticated, 60/h — this script uses 9).
+single bad request cannot blank the whole status. The only source is
+raw.githubusercontent.com (public repos, no token). api.github.com is NOT
+used: inside a cloud routine it answers 403 for every repo except the one
+attached to the session (verified on the first run, 2026-09-26), and the
+heartbeat file is the signal anyway.
 """
 import argparse, datetime as dt, json, pathlib, sys, urllib.request, urllib.error
 
@@ -110,14 +112,6 @@ def collect(now):
             row["fresh"] = (row["heartbeatAgeDays"] is not None and row["heartbeatAgeDays"] <= max_age)
         else:
             row.update(heartbeat=None, heartbeatNote=f"no data/.last-check ({st})", heartbeatAgeDays=None, fresh=False)
-        # last commit on main
-        body, st = fetch(f"https://api.github.com/repos/{OWNER}/{repo}/commits?per_page=1")
-        try:
-            c = json.loads(body)[0]["commit"]
-            row["lastCommit"] = c["committer"]["date"]
-            row["lastCommitMessage"] = c["message"].splitlines()[0][:120]
-        except Exception:
-            row["lastCommit"] = None; row["lastCommitMessage"] = f"unreachable ({st})"
         # manifest stamp, if the repo has one (used by the preview comparison)
         body, st = fetch(f"https://raw.githubusercontent.com/{OWNER}/{repo}/main/data/index.json")
         stamp = None

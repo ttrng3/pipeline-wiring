@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-09-26T12:49:23Z",
+ "generatedUtc": "2026-09-26T12:53:30Z",
  "pipelines": [
   {
    "key": "tmdv",
@@ -9,14 +9,16 @@
    "maxHeartbeatAgeDays": 9,
    "preview": {
     "id": "3hNqXDiwsssZBe34b6mK73",
-    "state": "not checked"
+    "state": "in-sync",
+    "note": "",
+    "checkedAt": "2026-09-26T12:54:53Z"
    },
    "heartbeat": "2026-09-22T08:59:30Z",
    "heartbeatNote": "newest-source=ER_Bazaar_2026-09-15T10:04:52Z",
    "heartbeatAgeDays": 4.2,
    "fresh": true,
-   "lastCommit": "2026-09-25T02:15:31Z",
-   "lastCommitMessage": "Drop the duplicated pillars wrapper from ops.json",
+   "lastCommit": null,
+   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-22T11:49:42Z",
    "nextFireUtc": "2026-09-27T11:00:00Z"
   },
@@ -28,14 +30,16 @@
    "maxHeartbeatAgeDays": 9,
    "preview": {
     "id": "KR1dnH91u1qdzhoop4Dqkr",
-    "state": "not checked"
+    "state": "in-sync",
+    "note": "",
+    "checkedAt": "2026-09-26T12:54:53Z"
    },
    "heartbeat": "2026-09-22T07:19:06Z",
    "heartbeatNote": "newest-source=2026-09-W03_Sitecheck.xlsx",
    "heartbeatAgeDays": 4.2,
    "fresh": true,
-   "lastCommit": "2026-09-24T08:33:01Z",
-   "lastCommitMessage": "Apple system colours throughout",
+   "lastCommit": null,
+   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-22T04:44:21Z",
    "nextFireUtc": "2026-09-28T15:45:00Z"
   },
@@ -47,14 +51,16 @@
    "maxHeartbeatAgeDays": 9,
    "preview": {
     "id": "Gxr48hVPm7YGEuE2947eoZ",
-    "state": "not checked"
+    "state": "in-sync",
+    "note": "",
+    "checkedAt": "2026-09-26T12:54:53Z"
    },
    "heartbeat": "2026-09-22T08:23:16Z",
    "heartbeatNote": "newest-source=2026-09-W03",
    "heartbeatAgeDays": 4.2,
    "fresh": true,
-   "lastCommit": "2026-09-25T09:05:44Z",
-   "lastCommitMessage": "Sửa phần chữ nói sai: W02/W03 đã có danh sách theo dòng",
+   "lastCommit": null,
+   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-25T08:54:10Z",
    "nextFireUtc": "2026-09-28T14:00:00Z"
   },
@@ -66,14 +72,16 @@
    "maxHeartbeatAgeDays": 9,
    "preview": {
     "id": "22fboAK5NyitZHc4iiVgTx",
-    "state": "not checked"
+    "state": "in-sync",
+    "note": "",
+    "checkedAt": "2026-09-26T12:54:53Z"
    },
    "heartbeat": "2026-09-23T10:20:43Z",
    "heartbeatNote": "newest-source=ECP-W38/ELA-W38 (no W39 either side; ELA W38 source unchanged at 164,495,308 bytes, still unreadable, ELA figures held at W37)",
    "heartbeatAgeDays": 3.1,
    "fresh": true,
-   "lastCommit": "2026-09-24T08:33:20Z",
-   "lastCommitMessage": "Apple system colours throughout",
+   "lastCommit": null,
+   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-22T08:43:21Z",
    "nextFireUtc": "2026-09-27T14:00:00Z"
   },
@@ -85,14 +93,16 @@
    "maxHeartbeatAgeDays": 4,
    "preview": {
     "id": "LgPF5yVUG2J1bfV3M72FQ1",
-    "state": "not checked"
+    "state": "in-sync",
+    "note": "",
+    "checkedAt": "2026-09-26T12:54:53Z"
    },
    "heartbeat": "2026-09-26T07:52:45Z",
    "heartbeatNote": "newest-source=Webull_Orders_Records_Options_copy_2__2026-09-26T02-46-41Z__1bLbS9I.csv (83 new fills, last 2026-09-25T15:36:15)",
    "heartbeatAgeDays": 0.2,
    "fresh": true,
-   "lastCommit": "2026-09-26T09:47:03Z",
-   "lastCommitMessage": "README: one address, one preview — the artifact exists, its URL is never shown",
+   "lastCommit": null,
+   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-26T07:52:45.400Z",
    "nextFireUtc": "2026-09-29T04:00:00Z"
   },
@@ -104,14 +114,16 @@
    "maxHeartbeatAgeDays": 9,
    "preview": {
     "id": "A5DNPFCcerdjgoBk2c5vVd",
-    "state": "not checked"
+    "state": "in-sync",
+    "note": "",
+    "checkedAt": "2026-09-26T12:54:53Z"
    },
    "heartbeat": "2026-09-22T09:49:06Z",
    "heartbeatNote": "newest-source=08.2026 — không có kỳ mới (đang hiển thị 08/2026, file mới nhất trên Drive là 08.2026 Ver.4, modified 2026-09-18T11:38:55Z)",
    "heartbeatAgeDays": 4.1,
    "fresh": true,
-   "lastCommit": "2026-09-26T09:37:23Z",
-   "lastCommitMessage": "Brief: shorten lead to two sentences",
+   "lastCommit": null,
+   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-20T00:00:00Z",
    "nextFireUtc": "2026-09-28T01:00:00Z"
   },
@@ -123,14 +135,16 @@
    "maxHeartbeatAgeDays": 20,
    "preview": {
     "id": "Ny2dknmJCxADa95gJn6DMx",
-    "state": "not checked"
+    "state": "in-sync",
+    "note": "",
+    "checkedAt": "2026-09-26T12:54:53Z"
    },
    "heartbeat": "2026-09-25T01:56:59Z",
    "heartbeatNote": "newest-source=drive 09 TCKT \"BC tổng hợp BOD T8.26 - PnL.docx\" 2026-09-16 + ảnh chụp nhóm chat BC tài chính 2026-09-20 (cả hai đã xuất bản trong kỳ 2026-09 chốt",
    "heartbeatAgeDays": 1.5,
    "fresh": true,
-   "lastCommit": "2026-09-25T04:19:35Z",
-   "lastCommitMessage": "Point TCKT source at its new Drive location (08 Omni Service - OMNI/09 TCKT, same folderId)",
+   "lastCommit": null,
+   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-20T04:00:00Z",
    "nextFireUtc": "2026-10-01T06:00:00Z"
   },
@@ -142,14 +156,16 @@
    "maxHeartbeatAgeDays": 35,
    "preview": {
     "id": "BeTHcWt6A7zKN66j51Jr81",
-    "state": "not checked"
+    "state": "in-sync",
+    "note": "",
+    "checkedAt": "2026-09-26T12:54:53Z"
    },
    "heartbeat": "2026-09-25T03:56:37Z",
    "heartbeatNote": "newest-source=2026-09-25T03:54:54Z",
    "heartbeatAgeDays": 1.4,
    "fresh": true,
-   "lastCommit": "2026-09-26T10:03:12Z",
-   "lastCommitMessage": "Docs: one address, one preview — the Cowork preview exists, its URL is never shown",
+   "lastCommit": null,
+   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-25T03:54:54Z",
    "nextFireUtc": "2026-10-01T03:00:00Z"
   },
@@ -161,25 +177,26 @@
    "maxHeartbeatAgeDays": 9,
    "preview": {
     "id": "1jJocxY9ehSu9DJigt9ZmW",
-    "state": "not checked"
+    "state": "in-sync",
+    "note": "no manifest, existence only",
+    "checkedAt": "2026-09-26T12:54:53Z"
    },
-   "heartbeat": null,
-   "heartbeatNote": "no data/.last-check (404)",
-   "heartbeatAgeDays": null,
-   "fresh": false,
-   "lastCommit": "2026-09-26T10:03:16Z",
-   "lastCommitMessage": "Omni-Audit preview rebuilt 26/09: row, previews table, counts",
+   "heartbeat": "2026-09-26T12:49:23Z",
+   "heartbeatNote": "newest-source=weekly status check, 8/9 heartbeats fresh",
+   "heartbeatAgeDays": 0.0,
+   "fresh": true,
+   "lastCommit": "2026-09-26T12:52:01Z",
+   "lastCommitMessage": "Pipeline Wiring is the ninth pipeline: weekly status collector, live cells from data/status.json, Sunday routine",
    "manifestStamp": null,
    "nextFireUtc": "2026-09-27T16:00:00Z"
   }
  ],
  "summary": {
   "pipelines": 9,
-  "fresh": 8,
-  "stale": [
-   "pipeline-wiring"
-  ],
-  "previewsInSync": 0,
+  "fresh": 9,
+  "stale": [],
+  "previewsInSync": 9,
   "previewsBehind": []
- }
+ },
+ "previewsCheckedAt": "2026-09-26T12:54:53Z"
 }

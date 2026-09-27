@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-09-26T12:53:30Z",
+ "generatedUtc": "2026-09-27T16:08:01Z",
  "pipelines": [
   {
    "key": "tmdv",
@@ -9,18 +9,16 @@
    "maxHeartbeatAgeDays": 9,
    "preview": {
     "id": "3hNqXDiwsssZBe34b6mK73",
-    "state": "in-sync",
-    "note": "",
-    "checkedAt": "2026-09-26T12:54:53Z"
+    "state": "behind",
+    "note": "artifact 2026-09-22T11:49:42Z, repo 2026-09-27T11:11:40Z",
+    "checkedAt": "2026-09-27T16:09:42Z"
    },
-   "heartbeat": "2026-09-22T08:59:30Z",
+   "heartbeat": "2026-09-27T11:11:40Z",
    "heartbeatNote": "newest-source=ER_Bazaar_2026-09-15T10:04:52Z",
-   "heartbeatAgeDays": 4.2,
+   "heartbeatAgeDays": 0.2,
    "fresh": true,
-   "lastCommit": null,
-   "lastCommitMessage": "unreachable (403)",
-   "manifestStamp": "2026-09-22T11:49:42Z",
-   "nextFireUtc": "2026-09-27T11:00:00Z"
+   "manifestStamp": "2026-09-27T11:11:40Z",
+   "nextFireUtc": "2026-10-04T11:00:00Z"
   },
   {
    "key": "omni-sitecheck",
@@ -32,14 +30,12 @@
     "id": "KR1dnH91u1qdzhoop4Dqkr",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-26T12:54:53Z"
+    "checkedAt": "2026-09-27T16:09:42Z"
    },
    "heartbeat": "2026-09-22T07:19:06Z",
    "heartbeatNote": "newest-source=2026-09-W03_Sitecheck.xlsx",
-   "heartbeatAgeDays": 4.2,
+   "heartbeatAgeDays": 5.4,
    "fresh": true,
-   "lastCommit": null,
-   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-22T04:44:21Z",
    "nextFireUtc": "2026-09-28T15:45:00Z"
   },
@@ -53,14 +49,12 @@
     "id": "Gxr48hVPm7YGEuE2947eoZ",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-26T12:54:53Z"
+    "checkedAt": "2026-09-27T16:09:42Z"
    },
    "heartbeat": "2026-09-22T08:23:16Z",
    "heartbeatNote": "newest-source=2026-09-W03",
-   "heartbeatAgeDays": 4.2,
+   "heartbeatAgeDays": 5.3,
    "fresh": true,
-   "lastCommit": null,
-   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-25T08:54:10Z",
    "nextFireUtc": "2026-09-28T14:00:00Z"
   },
@@ -74,16 +68,14 @@
     "id": "22fboAK5NyitZHc4iiVgTx",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-26T12:54:53Z"
+    "checkedAt": "2026-09-27T16:09:42Z"
    },
-   "heartbeat": "2026-09-23T10:20:43Z",
-   "heartbeatNote": "newest-source=ECP-W38/ELA-W38 (no W39 either side; ELA W38 source unchanged at 164,495,308 bytes, still unreadable, ELA figures held at W37)",
-   "heartbeatAgeDays": 3.1,
+   "heartbeat": "2026-09-27T14:04:45Z",
+   "heartbeatNote": "newest-source=ECP-W38/ELA-W38 (no W39 either side, 8 days since ECP/ELA last filed; both W38 sources byte-identical to last run — ECP 3,178,874 B, ELA 164,495,3",
+   "heartbeatAgeDays": 0.1,
    "fresh": true,
-   "lastCommit": null,
-   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-22T08:43:21Z",
-   "nextFireUtc": "2026-09-27T14:00:00Z"
+   "nextFireUtc": "2026-10-04T14:00:00Z"
   },
   {
    "key": "trade-journal",
@@ -95,14 +87,12 @@
     "id": "LgPF5yVUG2J1bfV3M72FQ1",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-26T12:54:53Z"
+    "checkedAt": "2026-09-27T16:09:42Z"
    },
    "heartbeat": "2026-09-26T07:52:45Z",
    "heartbeatNote": "newest-source=Webull_Orders_Records_Options_copy_2__2026-09-26T02-46-41Z__1bLbS9I.csv (83 new fills, last 2026-09-25T15:36:15)",
-   "heartbeatAgeDays": 0.2,
+   "heartbeatAgeDays": 1.3,
    "fresh": true,
-   "lastCommit": null,
-   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-26T07:52:45.400Z",
    "nextFireUtc": "2026-09-29T04:00:00Z"
   },
@@ -116,14 +106,12 @@
     "id": "A5DNPFCcerdjgoBk2c5vVd",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-26T12:54:53Z"
+    "checkedAt": "2026-09-27T16:09:42Z"
    },
    "heartbeat": "2026-09-22T09:49:06Z",
    "heartbeatNote": "newest-source=08.2026 — không có kỳ mới (đang hiển thị 08/2026, file mới nhất trên Drive là 08.2026 Ver.4, modified 2026-09-18T11:38:55Z)",
-   "heartbeatAgeDays": 4.1,
+   "heartbeatAgeDays": 5.3,
    "fresh": true,
-   "lastCommit": null,
-   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-20T00:00:00Z",
    "nextFireUtc": "2026-09-28T01:00:00Z"
   },
@@ -137,14 +125,12 @@
     "id": "Ny2dknmJCxADa95gJn6DMx",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-26T12:54:53Z"
+    "checkedAt": "2026-09-27T16:09:42Z"
    },
    "heartbeat": "2026-09-25T01:56:59Z",
    "heartbeatNote": "newest-source=drive 09 TCKT \"BC tổng hợp BOD T8.26 - PnL.docx\" 2026-09-16 + ảnh chụp nhóm chat BC tài chính 2026-09-20 (cả hai đã xuất bản trong kỳ 2026-09 chốt",
-   "heartbeatAgeDays": 1.5,
+   "heartbeatAgeDays": 2.6,
    "fresh": true,
-   "lastCommit": null,
-   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-20T04:00:00Z",
    "nextFireUtc": "2026-10-01T06:00:00Z"
   },
@@ -158,14 +144,12 @@
     "id": "BeTHcWt6A7zKN66j51Jr81",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-26T12:54:53Z"
+    "checkedAt": "2026-09-27T16:09:42Z"
    },
    "heartbeat": "2026-09-25T03:56:37Z",
    "heartbeatNote": "newest-source=2026-09-25T03:54:54Z",
-   "heartbeatAgeDays": 1.4,
+   "heartbeatAgeDays": 2.5,
    "fresh": true,
-   "lastCommit": null,
-   "lastCommitMessage": "unreachable (403)",
    "manifestStamp": "2026-09-25T03:54:54Z",
    "nextFireUtc": "2026-10-01T03:00:00Z"
   },
@@ -179,24 +163,24 @@
     "id": "1jJocxY9ehSu9DJigt9ZmW",
     "state": "in-sync",
     "note": "no manifest, existence only",
-    "checkedAt": "2026-09-26T12:54:53Z"
+    "checkedAt": "2026-09-27T16:09:42Z"
    },
-   "heartbeat": "2026-09-26T12:49:23Z",
-   "heartbeatNote": "newest-source=weekly status check, 8/9 heartbeats fresh",
-   "heartbeatAgeDays": 0.0,
+   "heartbeat": "2026-09-26T12:53:30Z",
+   "heartbeatNote": "newest-source=weekly status check, 9/9 heartbeats fresh",
+   "heartbeatAgeDays": 1.1,
    "fresh": true,
-   "lastCommit": "2026-09-26T12:52:01Z",
-   "lastCommitMessage": "Pipeline Wiring is the ninth pipeline: weekly status collector, live cells from data/status.json, Sunday routine",
    "manifestStamp": null,
-   "nextFireUtc": "2026-09-27T16:00:00Z"
+   "nextFireUtc": "2026-10-04T16:00:00Z"
   }
  ],
  "summary": {
   "pipelines": 9,
   "fresh": 9,
   "stale": [],
-  "previewsInSync": 9,
-  "previewsBehind": []
+  "previewsInSync": 8,
+  "previewsBehind": [
+   "tmdv"
+  ]
  },
- "previewsCheckedAt": "2026-09-26T12:54:53Z"
+ "previewsCheckedAt": "2026-09-27T16:09:42Z"
 }

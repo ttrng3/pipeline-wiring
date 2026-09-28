@@ -1,0 +1,16 @@
+# Files GitHub Pages publishes. Nothing else in this repo is served.
+# Line types:  path or glob = published (a * never crosses a /; a glob must
+# match a file) · !path = known, deliberately not published · @prefix/ = a
+# watched area: every file the routine changes under it must match a line
+# above, or the Pages run fails "UNCOVERED".
+# The workflow deploys only once Pages is set to GitHub Actions; until then
+# every run is a dry run that stages and checks but publishes nothing.
+# Writers: the Sunday status routine (data/status.json, data/.last-check) and
+# the monthly Learning Matrix routine (learning-matrix.html only).
+index.html
+learning-matrix.html
+starter-story.html
+# The page's live cells fetch this on every load, so it must be published.
+data/status.json
+!data/.last-check
+@data/

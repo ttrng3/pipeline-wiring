@@ -257,6 +257,7 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
     <li><a href="https://claude.ai/code/routines/trig_01FCThppytbnNxkYbAh3JsGS">Nhật 2026 — Tổng kết sau chuyến + cập nhật Kho điểm</a>, fires once on <strong>11/12/2026 03:00&nbsp;UTC</strong>.</li>
   </ul>
   <p>Both were created from a Cowork project on 05/09. Neither appears in the routine list call (see Caution in section 7); they were found only by fetching their ids one by one. Neither has a file mount.</p>
+  <p><span class="pill p-info">Added 28/09</span> <strong>The knowledge graph is Mac-bound too, by design, and is not a routine.</strong> It is the graphify index over <code>93 Knowledge Base/</code> (Markdown only), at <code>graphify-out/</code> on Drive. A cloud routine cannot run it, because extraction dispatches subagents from a live Claude Code session. Rebuilt by hand with <code>/graphify . --update</code>. Last built <strong>28/09/2026</strong>: 2,498 nodes, 4,304 edges, health check clean (0 dangling). Next due <strong>about 28/10/2026</strong>. Nothing from the graph is published here: its content is internal.</p>
   <p style="margin-bottom:0"><strong>The ten enabled routines in the list</strong>, and TMDV (fetched by id), hold no remote-devices tool and have <code>file_mounts: []</code>. The 24/09 claim that every routine reports <code>bound = false</code> cannot be re-checked: the API response has no <code>bound</code> field.</p>
 </div>
 

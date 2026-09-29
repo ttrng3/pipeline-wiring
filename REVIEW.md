@@ -37,12 +37,12 @@ When unsure between two levels, pick the higher one and say why.
 - [ ] **Verify before you assert:** every number in a doc or page has a source named beside it or in its section.
 
 ## Repo-specific rules
-Rules specific to pipeline-wiring. **Every standing ruling in the README applies as well; a PR that breaks one is at least High, and Critical where a line below says so.** The lines below are the ones most often at risk.
+Rules specific to pipeline-wiring. **Every standing ruling in the README applies as well, except its description of how Pages serves the repo (see below); a PR that breaks one is at least High, and Critical where a line below says so.** The lines below are the ones most often at risk.
 
-- **Each page has one writer.** The weekly check writes `data/status.json` and `data/.last-check` only, never a page; `learning-matrix.html` is rewritten only by the Learning Matrix routine on the 2nd; the prose in `index.html` and `starter-story.html` is edited by hand (README). A change that gives a page a second writer is High.
+- **Each page has one writer.** The weekly check writes `data/status.json` and `data/.last-check` only, never a page; `learning-matrix.html` is rewritten only by the Learning Matrix routine on the 2nd; the prose in `index.html` is edited by hand (README), and no routine writes `starter-story.html`. A change that gives a page a second writer is High.
 - **Publishing has changed since the README was written.** Once Pages runs from GitHub Actions, only the paths in `.pages-allow` are served; the README's "a push is the publish" predates the allowlist.
 - **`build/` is generated.** A hand-edited `build/` file in a diff is High (README, "Layout").
-- **The mirror has two silent failure modes** (README, "Publishing"): publishing `index.html` itself nests and renders blank, and the two iframe files must exist beside the page. A publish step that does either is High.
+- **The mirror has silent failure modes** (README, "Publishing" and "Layout"): publishing `index.html` itself nests and renders blank; the two iframe files must exist beside the page; and `data/status.json` must be published beside it, or the live cells break. A publish step that misses any of these is High.
 - **The builders are not interchangeable.** This repo's `tools/build-fragment.py` strips document wrappers; the Omni-TMDV and Ecopm-Sitecheck builders cut at `<title>` (README, "Publishing"). Copying one repo's builder into another is High.
 - **The Learning Matrix lives here and nowhere else.** A change that recreates a standalone Starter Story or Learning Matrix is High. A dead artifact id means "retired", not "missing" (README, "The Learning Matrix lives here and nowhere else").
 - **The page describes every pipeline, so it carries status only.** Heartbeats, stamps, schedules and preview states, never a pipeline's own figures. A business number from any dashboard on this page is High; OMNI or ECOPM data by value is **Critical**.

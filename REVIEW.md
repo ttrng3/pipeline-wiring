@@ -37,7 +37,7 @@ When unsure between two levels, pick the higher one and say why.
 - [ ] **Verify before you assert:** every number in a doc or page has a source named beside it or in its section.
 
 ## Repo-specific rules
-Rules specific to pipeline-wiring. **Every standing ruling in the README applies as well; a PR that breaks one is High.** The lines below are the ones most often at risk.
+Rules specific to pipeline-wiring. **Every standing ruling in the README applies as well; a PR that breaks one is at least High, and Critical where a line below says so.** The lines below are the ones most often at risk.
 
 - **Each page has one writer.** The weekly check writes `data/status.json` and `data/.last-check` only, never a page; `learning-matrix.html` is rewritten only by the Learning Matrix routine on the 2nd; the prose in `index.html` and `starter-story.html` is edited by hand (README). A change that gives a page a second writer is High.
 - **Publishing has changed since the README was written.** Once Pages runs from GitHub Actions, only the paths in `.pages-allow` are served; the README's "a push is the publish" predates the allowlist.

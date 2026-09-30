@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-09-29T02:48:18Z",
+ "generatedUtc": "2026-09-30T10:38:10Z",
  "pipelines": [
   {
    "key": "tmdv",
@@ -9,15 +9,15 @@
    "maxHeartbeatAgeDays": 9,
    "preview": {
     "id": "3hNqXDiwsssZBe34b6mK73",
-    "state": "behind",
-    "note": "artifact 2026-09-22T11:49:42Z, repo 2026-09-27T11:11:40Z",
-    "checkedAt": "2026-09-29T02:49:41Z"
+    "state": "in-sync",
+    "note": "",
+    "checkedAt": "2026-09-30T10:40:19Z"
    },
-   "heartbeat": "2026-09-27T11:11:40Z",
-   "heartbeatNote": "newest-source=ER_Bazaar_2026-09-15T10:04:52Z",
-   "heartbeatAgeDays": 1.7,
+   "heartbeat": "2026-09-29T17:29:39Z",
+   "heartbeatNote": "newest-source=Database-Vinh-lead-log_2026-09-16T03:39:22Z (ER_Bazaar 2026-09-15T10:04:52Z; ECP_CT1_Tien-do-khach 2026-09-15T03:38:03Z; ECP_CT1_chao-thue 2026-09",
+   "heartbeatAgeDays": 0.7,
    "fresh": true,
-   "manifestStamp": "2026-09-27T11:11:40Z",
+   "manifestStamp": "2026-09-29T17:34:35Z",
    "nextFireUtc": "2026-10-04T11:00:00Z"
   },
   {
@@ -30,13 +30,13 @@
     "id": "KR1dnH91u1qdzhoop4Dqkr",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-29T02:49:41Z"
+    "checkedAt": "2026-09-30T10:40:19Z"
    },
-   "heartbeat": "2026-09-28T15:47:04Z",
-   "heartbeatNote": "newest-source=2026-09-W03_Sitecheck.xlsx",
-   "heartbeatAgeDays": 0.5,
+   "heartbeat": "2026-09-30T08:44:38Z",
+   "heartbeatNote": "newest-source=2026-09-W04_Sitecheck.xlsx",
+   "heartbeatAgeDays": 0.1,
    "fresh": true,
-   "manifestStamp": "2026-09-22T04:44:21Z",
+   "manifestStamp": "2026-09-30T08:44:38Z",
    "nextFireUtc": "2026-10-05T15:45:00Z"
   },
   {
@@ -49,13 +49,13 @@
     "id": "Gxr48hVPm7YGEuE2947eoZ",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-29T02:49:41Z"
+    "checkedAt": "2026-09-30T10:40:19Z"
    },
-   "heartbeat": "2026-09-28T14:08:24Z",
-   "heartbeatNote": "newest-source=2026-09-W03",
-   "heartbeatAgeDays": 0.5,
+   "heartbeat": "2026-09-30T08:42:20Z",
+   "heartbeatNote": "newest-source=2026-09-W04",
+   "heartbeatAgeDays": 0.1,
    "fresh": true,
-   "manifestStamp": "2026-09-25T08:54:10Z",
+   "manifestStamp": "2026-09-30T08:42:20Z",
    "nextFireUtc": "2026-10-05T14:00:00Z"
   },
   {
@@ -68,13 +68,13 @@
     "id": "22fboAK5NyitZHc4iiVgTx",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-29T02:49:41Z"
+    "checkedAt": "2026-09-30T10:40:19Z"
    },
-   "heartbeat": "2026-09-27T14:04:45Z",
-   "heartbeatNote": "newest-source=ECP-W38/ELA-W38 (no W39 either side, 8 days since ECP/ELA last filed; both W38 sources byte-identical to last run — ECP 3,178,874 B, ELA 164,495,3",
-   "heartbeatAgeDays": 1.5,
+   "heartbeat": "2026-09-30T01:38:29Z",
+   "heartbeatNote": "newest-source=ECP-2026-W39/ELA-2026-W39 (no new week — both sides' newest is still W39, already published as `current`; heartbeat-only run. Folder 1HClu60khhkzQ",
+   "heartbeatAgeDays": 0.4,
    "fresh": true,
-   "manifestStamp": "2026-09-22T08:43:21Z",
+   "manifestStamp": "2026-09-29T16:36:01Z",
    "nextFireUtc": "2026-10-04T14:00:00Z"
   },
   {
@@ -87,14 +87,14 @@
     "id": "LgPF5yVUG2J1bfV3M72FQ1",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-29T02:49:41Z"
+    "checkedAt": "2026-09-30T10:40:19Z"
    },
-   "heartbeat": "2026-09-26T07:52:45Z",
-   "heartbeatNote": "newest-source=Webull_Orders_Records_Options_copy_2__2026-09-26T02-46-41Z__1bLbS9I.csv (83 new fills, last 2026-09-25T15:36:15)",
-   "heartbeatAgeDays": 2.8,
+   "heartbeat": "2026-09-30T04:12:10Z",
+   "heartbeatNote": "newest-source=Webull_Orders_Records_Options copy 3.csv (53 new fills, last 2026-09-29T13:51:26)",
+   "heartbeatAgeDays": 0.3,
    "fresh": true,
-   "manifestStamp": "2026-09-26T07:52:45.400Z",
-   "nextFireUtc": "2026-09-29T04:00:00Z"
+   "manifestStamp": "2026-09-30T04:12:10.623Z",
+   "nextFireUtc": "2026-10-01T04:00:00Z"
   },
   {
    "key": "gdsh",
@@ -106,11 +106,11 @@
     "id": "A5DNPFCcerdjgoBk2c5vVd",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-29T02:49:41Z"
+    "checkedAt": "2026-09-30T10:40:19Z"
    },
-   "heartbeat": "2026-09-28T01:10:00Z",
+   "heartbeat": "2026-09-30T01:35:00Z",
    "heartbeatNote": "newest-source=08.2026 — không có kỳ mới (đang hiển thị 08/2026, file mới nhất trên Drive là \"260915_SHE_BC KT Tình hình Sử dụng Ngân sách 08.2026 (Ver.4)- Xuân ",
-   "heartbeatAgeDays": 1.1,
+   "heartbeatAgeDays": 0.4,
    "fresh": true,
    "manifestStamp": "2026-09-20T00:00:00Z",
    "nextFireUtc": "2026-10-05T01:00:00Z"
@@ -125,11 +125,11 @@
     "id": "Ny2dknmJCxADa95gJn6DMx",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-29T02:49:41Z"
+    "checkedAt": "2026-09-30T10:40:19Z"
    },
-   "heartbeat": "2026-09-25T01:56:59Z",
-   "heartbeatNote": "newest-source=drive 09 TCKT \"BC tổng hợp BOD T8.26 - PnL.docx\" 2026-09-16 + ảnh chụp nhóm chat BC tài chính 2026-09-20 (cả hai đã xuất bản trong kỳ 2026-09 chốt",
-   "heartbeatAgeDays": 4.0,
+   "heartbeat": "2026-09-29T02:50:26Z",
+   "heartbeatNote": "newest-source=drive 09 TCKT \"RE: BC so sánh Ngân sách và Thực tế chi phí kỳ T1-T6/2026.pdf\" lưu 2026-09-25T04:04Z — bản lưu trữ chuỗi thư tháng 8, mọi số liệu đ",
+   "heartbeatAgeDays": 1.3,
    "fresh": true,
    "manifestStamp": "2026-09-20T04:00:00Z",
    "nextFireUtc": "2026-10-01T06:00:00Z"
@@ -144,11 +144,11 @@
     "id": "BeTHcWt6A7zKN66j51Jr81",
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-09-29T02:49:41Z"
+    "checkedAt": "2026-09-30T10:40:19Z"
    },
-   "heartbeat": "2026-09-25T03:56:37Z",
-   "heartbeatNote": "newest-source=2026-09-25T03:54:54Z",
-   "heartbeatAgeDays": 4.0,
+   "heartbeat": "2026-09-30T01:42:00Z",
+   "heartbeatNote": "fallback: already published (handoff 2026-09-25T03:54:54Z = repo)",
+   "heartbeatAgeDays": 0.4,
    "fresh": true,
    "manifestStamp": "2026-09-25T03:54:54Z",
    "nextFireUtc": "2026-10-01T03:00:00Z"
@@ -163,11 +163,11 @@
     "id": "1jJocxY9ehSu9DJigt9ZmW",
     "state": "in-sync",
     "note": "no manifest, existence only",
-    "checkedAt": "2026-09-29T02:49:41Z"
+    "checkedAt": "2026-09-30T10:40:19Z"
    },
-   "heartbeat": "2026-09-27T16:08:01Z",
+   "heartbeat": "2026-09-29T02:48:18Z",
    "heartbeatNote": "newest-source=weekly status check, 9/9 heartbeats fresh",
-   "heartbeatAgeDays": 1.4,
+   "heartbeatAgeDays": 1.3,
    "fresh": true,
    "manifestStamp": null,
    "nextFireUtc": "2026-10-04T16:00:00Z"
@@ -177,10 +177,8 @@
   "pipelines": 9,
   "fresh": 9,
   "stale": [],
-  "previewsInSync": 8,
-  "previewsBehind": [
-   "tmdv"
-  ]
+  "previewsInSync": 9,
+  "previewsBehind": []
  },
- "previewsCheckedAt": "2026-09-29T02:49:41Z"
+ "previewsCheckedAt": "2026-09-30T10:40:19Z"
 }

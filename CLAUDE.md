@@ -19,7 +19,7 @@ The wiring page: every repo, preview and routine, and what is broken. Ty's own i
 - Changes reach `main` through a PR and Ty's ship. The only direct writes are the ones a routine's prompt and runbook allow.
 - The routine prompts, `README.md` and `REVIEW.md` win over this file and any memory note.
 - The page carries status only: heartbeats, stamps, schedules, preview states. Never a pipeline's own figures, and never any entity's business data.
-- Never add a Cowork preview URL or artifact id, a trigger id, a person's details or a secret to this public repo. The nine preview ids live only in the weekly routine's prompt, which checks the previews (moved out of the repo 2026-09-30, Ty's 29/09 ruling).
+- Never add a Cowork preview URL or artifact id, a trigger id, a person's details or a secret to this public repo. The nine preview ids are kept in the weekly routine's prompt, which checks the previews; they left the current files on 2026-09-30 (Ty's 29/09 ruling) but remain in git history before that.
 
 ## Known mistakes
 - The cron table in `PIPELINES` (`tools/collect_status.py`) is a second copy of every schedule; when a routine's cron changed without it, the "Next" column was wrong (2026-09-26).

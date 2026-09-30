@@ -2,15 +2,16 @@
 
 The wiring page: every repo, preview and routine, and what is broken. Ty's own infrastructure page, OMNI side. Live: https://ttrng3.github.io/pipeline-wiring/
 
-**If you are a scheduled routine:** each routine follows its own prompt and the files that prompt names (the weekly status check's prompt names `tools/collect_status.py` and limits writes to `data/status.json` and `data/.last-check`; the monthly Learning Matrix prompt names `README.md`). Your prompt and those files outrank this file. This file adds no step to a run.
+**If you are a scheduled routine:** each routine follows its own prompt and the files that prompt names (the daily status check's prompt names `tools/collect_status.py` and limits writes to `data/status.json`, `data/.last-check` and new files under `triage/`; the monthly Learning Matrix prompt names `README.md`). Your prompt and those files outrank this file. This file adds no step to a run.
 
 ## Commands
 - Build the Cowork preview page: `python3 tools/build-fragment.py` (writes `build/artifact.html`). When the routine refreshes the preview is set by its runbook, not here. Never send `index.html` itself to the preview; Pages does serve it.
+- Test the bands and the triage folder offline (no network, writes nothing in the repo): `python3 tools/test_bands.py` (must print ALL PASS)
 - Check `data/status.json` parses and its summary count matches: `python3 -c "import json;d=json.load(open('data/status.json'));assert d['summary']['pipelines']==len(d['pipelines'])"`
 
 ## Layout
 - `index.html` is the page (three tabs; its prose is edited by hand). `starter-story.html` and `learning-matrix.html` are tabs 2 and 3, loaded in iframes.
-- Each page has one writer: the weekly check writes only `data/status.json` and `data/.last-check`; `learning-matrix.html` is rewritten only by the Learning Matrix routine; no routine writes `starter-story.html` (REVIEW.md).
+- Each page has one writer: the daily check writes only `data/status.json`, `data/.last-check` and new `triage/<yymmdd>-<key>-<kind>/intent.md` files (never a page); `learning-matrix.html` is rewritten only by the Learning Matrix routine; no routine writes `starter-story.html` (REVIEW.md).
 - `build/` is generated and git-ignored. Never hand-edit or commit it.
 - `.pages-allow` lists what Pages publishes; `.github/workflows/pages.yml` deploys only that. Every tracked file under a watched area needs a `.pages-allow` line (published, or `!` for known but not published); a new kind of file needs Ty's say-so and that line in its own PR first.
 - `README.md` explains the page and the mirror; `REVIEW.md` holds the reviewer's rules and says where the README is out of date.
@@ -19,7 +20,7 @@ The wiring page: every repo, preview and routine, and what is broken. Ty's own i
 - Changes reach `main` through a PR and Ty's ship. The only direct writes are the ones a routine's prompt and runbook allow.
 - The routine prompts, `README.md` and `REVIEW.md` win over this file and any memory note.
 - The page carries status only: heartbeats, stamps, schedules, preview states. Never a pipeline's own figures, and never any entity's business data.
-- Never add a Cowork preview URL or artifact id, a trigger id, a person's details or a secret to this public repo. The nine preview ids are kept in the weekly routine's prompt, which checks the previews; they left the current files on 2026-09-30 (Ty's 29/09 ruling) but remain in git history before that.
+- Never add a Cowork preview URL or artifact id, a trigger id, a person's details or a secret to this public repo. The nine preview ids are kept in the status routine's prompt, which checks the previews; they left the current files on 2026-09-30 (Ty's 29/09 ruling) but remain in git history before that.
 
 ## Known mistakes
 - The cron table in `PIPELINES` (`tools/collect_status.py`) is a second copy of every schedule; when a routine's cron changed without it, the "Next" column was wrong (2026-09-26).

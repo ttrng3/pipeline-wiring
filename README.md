@@ -7,13 +7,13 @@ disagree, the repo wins and the artifact is what gets corrected.
 
 One page describing the whole system: every repo, every artifact, every routine, which
 of them are copies of each other, and what is currently broken. Since 2026-09-26 it is
-also the **ninth pipeline**: the routine *Pipeline Wiring weekly check* (Sunday 16:00 UTC)
+also the **ninth pipeline**: the routine *Pipeline Wiring weekly check* (daily 16:00 UTC since Phase 4 shipped; Sundays only before, which is why the name says weekly)
 runs `tools/collect_status.py` against the nine public repos, checks the nine Cowork
-previews with the Artifact tool, commits `data/status.json` + `data/.last-check`, and
+previews with the Artifact tool, commits `data/status.json` + `data/.last-check` (and any new `triage/` intent), and
 refreshes this page's preview. The page's "Next", "Last heartbeat" and preview cells
 render from that file; the prose in `index.html` is still edited by hand, and
 `learning-matrix.html` is rewritten by the Learning Matrix routine on the 2nd of each month.
-The routine writes **only** the two data files — never a page.
+The routine writes **only** the two data files and new `triage/` intent files — never a page.
 
 ## Layout
 
@@ -23,8 +23,10 @@ The routine writes **only** the two data files — never a page.
 | `starter-story.html` | Tab 2, loaded in an iframe. |
 | `learning-matrix.html` | Tab 3, loaded in an iframe. The **only** Learning Matrix — see below. |
 | `tools/build-fragment.py` | Builds `build/artifact.html` for the mirror. |
-| `tools/collect_status.py` | Weekly: heartbeats, commits, next fire per pipeline → `data/status.json`; `--preview key=state` records the artifact checks. |
-| `data/status.json`, `data/.last-check` | Written by the weekly check. The mirror needs `data/status.json` beside the page. |
+| `tools/collect_status.py` | Daily: heartbeats, commits, next fire and band per pipeline → `data/status.json`; `--preview key=state` records the artifact checks. |
+| `bands.yaml` | The two response tiers' thresholds: *log* = one late heartbeat; *diagnose* = a missed run or a heartbeat older than its watchdog. Not served by Pages; visible in the public repo. |
+| `triage/` | One `<yymmdd>-<key>-<kind>/intent.md` per diagnose finding, for Ty to triage. Not served by Pages; visible in the public repo, so status only. |
+| `data/status.json`, `data/.last-check` | Written by the daily check. The mirror needs `data/status.json` beside the page. |
 
 `build/` is generated. Do not edit it and do not commit a hand-edited copy.
 

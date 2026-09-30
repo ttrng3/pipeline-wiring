@@ -8,7 +8,7 @@ Plants heartbeats for all nine pipelines through a fake fetch, in a temp folder:
   one stale      -> exactly one triage intent.md; a second run adds none
   one missed run -> diagnose (missed-run); a run still inside the grace -> log only
 """
-import datetime as dt, pathlib, sys, tempfile
+import contextlib, datetime as dt, io, json, pathlib, sys, tempfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import collect_status as cs
@@ -142,6 +142,30 @@ def main():
         cs.BANDS.write_text("lateGraceHours: 3  # a YAML edit\n")
         rows, _ = run(at(NOW))
         check("bad bands.yaml: run completes, nine rows banded", len(rows) == 9 and all(r["band"] == "ok" for r in rows))
+
+        # The routine commits what main() prints as "triage written:"; check that line and the summary
+        cs.BANDS.write_text('{"lateGraceHours": 2, "missedAfterHours": 24}')
+        cs.OUT, cs.HEARTBEAT = pathlib.Path(tmp) / "status.json", pathlib.Path(tmp) / ".last-check"
+        for d in cs.TRIAGE.glob("*"):
+            for f in d.glob("*"):
+                f.unlink()
+            d.rmdir()
+        hb = at(NOW); hb["Omni-TMDV"] = NOW - dt.timedelta(days=12)
+        cs.fetch = fake_fetch(hb)
+        real_dt, argv = cs.dt, sys.argv
+        class _dt(dt.datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return NOW
+        cs.dt = type("m", (), {"datetime": _dt, "timedelta": dt.timedelta, "timezone": dt.timezone})
+        sys.argv = ["collect_status.py"]
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            cs.main()
+        cs.dt, sys.argv = real_dt, argv
+        s = json.loads(cs.OUT.read_text())["summary"]
+        check("main(): prints 'triage written: triage/…-tmdv-stale/intent.md'", "triage written: triage/261007-tmdv-stale/intent.md" in out.getvalue())
+        check("main(): summary.diagnose lists tmdv, logOnly empty", s["diagnose"] == ["tmdv"] and s["logOnly"] == [])
 
     print(f"{'ALL PASS' if not fails else str(fails) + ' FAILED'}")
     sys.exit(1 if fails else 0)

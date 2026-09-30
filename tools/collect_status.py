@@ -137,7 +137,7 @@ def band(row, ts, st, now, bands):
         return ("diagnose", "stale", f"heartbeat is {row['heartbeatAgeDays']}d old; "
                 f"its watchdog is {row['maxHeartbeatAgeDays']}d")
     pf = next_fire(row["cron"], ts)  # the first scheduled run after the heartbeat
-    if pf and pf <= now - dt.timedelta(hours=bands["lateGraceHours"]):
+    if pf and pf < now - dt.timedelta(hours=bands["lateGraceHours"]):
         hours = (now - pf).total_seconds() / 3600
         if hours > bands["missedAfterHours"]:
             return ("diagnose", "missed-run", f"scheduled run {pf:%Y-%m-%dT%H:%MZ} left no heartbeat "

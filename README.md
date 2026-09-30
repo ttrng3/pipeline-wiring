@@ -9,7 +9,7 @@ One page describing the whole system: every repo, every artifact, every routine,
 of them are copies of each other, and what is currently broken. Since 2026-09-26 it is
 also the **ninth pipeline**: the routine *Pipeline Wiring weekly check* (daily 16:00 UTC since Phase 4 shipped; Sundays only before, which is why the name says weekly)
 runs `tools/collect_status.py` against the nine public repos, checks the nine Cowork
-previews with the Artifact tool, commits `data/status.json` + `data/.last-check`, and
+previews with the Artifact tool, commits `data/status.json` + `data/.last-check` (and any new `triage/` intent), and
 refreshes this page's preview. The page's "Next", "Last heartbeat" and preview cells
 render from that file; the prose in `index.html` is still edited by hand, and
 `learning-matrix.html` is rewritten by the Learning Matrix routine on the 2nd of each month.

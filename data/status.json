@@ -8,7 +8,6 @@
    "cron": "0 11 * * 0",
    "maxHeartbeatAgeDays": 9,
    "preview": {
-    "id": "3hNqXDiwsssZBe34b6mK73",
     "state": "in-sync",
     "note": "",
     "checkedAt": "2026-09-30T10:40:19Z"
@@ -27,7 +26,6 @@
    "cron": "45 15 * * 1",
    "maxHeartbeatAgeDays": 9,
    "preview": {
-    "id": "KR1dnH91u1qdzhoop4Dqkr",
     "state": "in-sync",
     "note": "",
     "checkedAt": "2026-09-30T10:40:19Z"
@@ -46,7 +44,6 @@
    "cron": "0 14 * * 1",
    "maxHeartbeatAgeDays": 9,
    "preview": {
-    "id": "Gxr48hVPm7YGEuE2947eoZ",
     "state": "in-sync",
     "note": "",
     "checkedAt": "2026-09-30T10:40:19Z"
@@ -65,7 +62,6 @@
    "cron": "0 14 * * 0",
    "maxHeartbeatAgeDays": 9,
    "preview": {
-    "id": "22fboAK5NyitZHc4iiVgTx",
     "state": "in-sync",
     "note": "",
     "checkedAt": "2026-09-30T10:40:19Z"
@@ -84,7 +80,6 @@
    "cron": "0 4 * * 2-6",
    "maxHeartbeatAgeDays": 4,
    "preview": {
-    "id": "LgPF5yVUG2J1bfV3M72FQ1",
     "state": "in-sync",
     "note": "",
     "checkedAt": "2026-09-30T10:40:19Z"
@@ -103,7 +98,6 @@
    "cron": "0 1 * * 1",
    "maxHeartbeatAgeDays": 9,
    "preview": {
-    "id": "A5DNPFCcerdjgoBk2c5vVd",
     "state": "in-sync",
     "note": "",
     "checkedAt": "2026-09-30T10:40:19Z"
@@ -122,7 +116,6 @@
    "cron": "0 6 1,15 * *",
    "maxHeartbeatAgeDays": 20,
    "preview": {
-    "id": "Ny2dknmJCxADa95gJn6DMx",
     "state": "in-sync",
     "note": "",
     "checkedAt": "2026-09-30T10:40:19Z"
@@ -141,7 +134,6 @@
    "cron": "0 3 1 * *",
    "maxHeartbeatAgeDays": 35,
    "preview": {
-    "id": "BeTHcWt6A7zKN66j51Jr81",
     "state": "in-sync",
     "note": "",
     "checkedAt": "2026-09-30T10:40:19Z"
@@ -160,7 +152,6 @@
    "cron": "0 16 * * 0",
    "maxHeartbeatAgeDays": 9,
    "preview": {
-    "id": "1jJocxY9ehSu9DJigt9ZmW",
     "state": "in-sync",
     "note": "no manifest, existence only",
     "checkedAt": "2026-09-30T10:40:19Z"

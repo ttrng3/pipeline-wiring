@@ -368,8 +368,7 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
     (st.pipelines||[]).forEach(function(p){
       var n=document.querySelector('[data-next="'+p.key+'"]'); if(n) n.textContent=dm(p.nextFireUtc);
       var h=document.querySelector('[data-hb="'+p.key+'"]');
-      if(h){ h.innerHTML=dm(p.heartbeat)+' '+(p.heartbeat?pill(p.fresh?'p-ok':'p-stop',p.fresh?'fresh':'stale '+Math.round(p.heartbeatAgeDays)+'d'):pill('p-mute','none'));
-             if(p.heartbeatNote) h.title=p.heartbeatNote; }
+      if(h){ h.innerHTML=dm(p.heartbeat)+' '+(p.heartbeat?pill(p.fresh?'p-ok':'p-stop',p.fresh?'fresh':'stale '+Math.round(p.heartbeatAgeDays)+'d'):pill('p-mute','none')); }
       var v=document.querySelector('[data-preview="'+p.key+'"]'); var pr=p.preview||{};
       if(v && pr.state && pr.state!=='not checked'){
         var cls=pr.state==='in-sync'?'p-ok':pr.state==='behind'?'p-warn':pr.state==='unreachable'?'p-stop':'p-mute';

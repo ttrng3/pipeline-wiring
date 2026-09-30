@@ -190,12 +190,11 @@ def collect(now):
             first = lines[0] if lines else ""
             ts = parse_ts(first.split(" ", 1)[0])
             row["heartbeat"] = ts.strftime("%Y-%m-%dT%H:%M:%SZ") if ts else None
-            row["heartbeatNote"] = first.split(" ", 1)[1][:160] if " " in first else ""
             row["heartbeatAgeDays"] = round((now - ts).total_seconds() / 86400, 1) if ts else None
             row["fresh"] = (row["heartbeatAgeDays"] is not None and row["heartbeatAgeDays"] <= max_age)
         else:
             ts = None
-            row.update(heartbeat=None, heartbeatNote=f"no data/.last-check ({st})", heartbeatAgeDays=None, fresh=False)
+            row.update(heartbeat=None, heartbeatAgeDays=None, fresh=False)
         # manifest stamp, if the repo has one (used by the preview comparison)
         body, st = fetch(f"https://raw.githubusercontent.com/{OWNER}/{repo}/main/data/index.json")
         stamp = None

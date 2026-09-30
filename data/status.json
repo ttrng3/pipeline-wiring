@@ -13,7 +13,6 @@
     "checkedAt": "2026-09-30T11:18:28Z"
    },
    "heartbeat": "2026-09-29T17:29:39Z",
-   "heartbeatNote": "newest-source=Database-Vinh-lead-log_2026-09-16T03:39:22Z (ER_Bazaar 2026-09-15T10:04:52Z; ECP_CT1_Tien-do-khach 2026-09-15T03:38:03Z; ECP_CT1_chao-thue 2026-09",
    "heartbeatAgeDays": 0.7,
    "fresh": true,
    "manifestStamp": "2026-09-29T17:34:35Z",
@@ -34,7 +33,6 @@
     "checkedAt": "2026-09-30T11:18:28Z"
    },
    "heartbeat": "2026-09-30T08:44:38Z",
-   "heartbeatNote": "newest-source=2026-09-W04_Sitecheck.xlsx",
    "heartbeatAgeDays": 0.1,
    "fresh": true,
    "manifestStamp": "2026-09-30T08:44:38Z",
@@ -55,7 +53,6 @@
     "checkedAt": "2026-09-30T11:18:28Z"
    },
    "heartbeat": "2026-09-30T08:42:20Z",
-   "heartbeatNote": "newest-source=2026-09-W04",
    "heartbeatAgeDays": 0.1,
    "fresh": true,
    "manifestStamp": "2026-09-30T08:42:20Z",
@@ -76,7 +73,6 @@
     "checkedAt": "2026-09-30T11:18:28Z"
    },
    "heartbeat": "2026-09-30T01:38:29Z",
-   "heartbeatNote": "newest-source=ECP-2026-W39/ELA-2026-W39 (no new week — both sides' newest is still W39, already published as `current`; heartbeat-only run. Folder 1HClu60khhkzQ",
    "heartbeatAgeDays": 0.4,
    "fresh": true,
    "manifestStamp": "2026-09-29T16:36:01Z",
@@ -97,7 +93,6 @@
     "checkedAt": "2026-09-30T11:18:28Z"
    },
    "heartbeat": "2026-09-30T04:12:10Z",
-   "heartbeatNote": "newest-source=Webull_Orders_Records_Options copy 3.csv (53 new fills, last 2026-09-29T13:51:26)",
    "heartbeatAgeDays": 0.3,
    "fresh": true,
    "manifestStamp": "2026-09-30T04:12:10.623Z",
@@ -118,7 +113,6 @@
     "checkedAt": "2026-09-30T11:18:28Z"
    },
    "heartbeat": "2026-09-30T01:35:00Z",
-   "heartbeatNote": "newest-source=08.2026 — không có kỳ mới (đang hiển thị 08/2026, file mới nhất trên Drive là \"260915_SHE_BC KT Tình hình Sử dụng Ngân sách 08.2026 (Ver.4)- Xuân ",
    "heartbeatAgeDays": 0.4,
    "fresh": true,
    "manifestStamp": "2026-09-20T00:00:00Z",
@@ -139,7 +133,6 @@
     "checkedAt": "2026-09-30T11:18:28Z"
    },
    "heartbeat": "2026-09-29T02:50:26Z",
-   "heartbeatNote": "newest-source=drive 09 TCKT \"RE: BC so sánh Ngân sách và Thực tế chi phí kỳ T1-T6/2026.pdf\" lưu 2026-09-25T04:04Z — bản lưu trữ chuỗi thư tháng 8, mọi số liệu đ",
    "heartbeatAgeDays": 1.4,
    "fresh": true,
    "manifestStamp": "2026-09-20T04:00:00Z",
@@ -160,7 +153,6 @@
     "checkedAt": "2026-09-30T11:18:28Z"
    },
    "heartbeat": "2026-09-30T01:42:00Z",
-   "heartbeatNote": "fallback: already published (handoff 2026-09-25T03:54:54Z = repo)",
    "heartbeatAgeDays": 0.4,
    "fresh": true,
    "manifestStamp": "2026-09-25T03:54:54Z",
@@ -181,7 +173,6 @@
     "checkedAt": "2026-09-30T11:18:28Z"
    },
    "heartbeat": "2026-09-30T10:38:10Z",
-   "heartbeatNote": "newest-source=weekly status check, 9/9 heartbeats fresh",
    "heartbeatAgeDays": 0.0,
    "fresh": true,
    "manifestStamp": null,

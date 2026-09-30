@@ -2,10 +2,10 @@
 
 The wiring page: every repo, preview and routine, and what is broken. Ty's own infrastructure page, OMNI side. Live: https://ttrng3.github.io/pipeline-wiring/
 
-**If you are a scheduled routine:** the weekly status check follows its prompt, which names `tools/collect_status.py` and limits writes to `data/status.json` and `data/.last-check`; the monthly Learning Matrix run follows `README.md`. Your prompt and those files outrank this file. This file adds no step to a run.
+**If you are a scheduled routine:** each routine follows its own prompt and the files that prompt names (the weekly status check's prompt names `tools/collect_status.py` and limits writes to `data/status.json` and `data/.last-check`; the monthly Learning Matrix prompt names `README.md`). Your prompt and those files outrank this file. This file adds no step to a run.
 
 ## Commands
-- Build the Cowork preview page, only when `index.html` changed: `python3 tools/build-fragment.py` (writes `build/artifact.html`; never send `index.html` itself to the Cowork preview — Pages does serve it)
+- Build the Cowork preview page: `python3 tools/build-fragment.py` (writes `build/artifact.html`). When the routine refreshes the preview is set by its runbook, not here. Never send `index.html` itself to the preview; Pages does serve it.
 - Check `data/status.json` parses and its summary count matches: `python3 -c "import json;d=json.load(open('data/status.json'));assert d['summary']['pipelines']==len(d['pipelines'])"`
 
 ## Layout
@@ -16,7 +16,7 @@ The wiring page: every repo, preview and routine, and what is broken. Ty's own i
 - `README.md` explains the page and the mirror; `REVIEW.md` holds the reviewer's rules and says where the README is out of date.
 
 ## Rules
-- Changes reach `main` through a PR and Ty's ship. The routines' data writes are the only direct writes.
+- Changes reach `main` through a PR and Ty's ship. The only direct writes are the ones a routine's prompt and runbook allow.
 - The routine prompts, `README.md` and `REVIEW.md` win over this file and any memory note.
 - The page carries status only: heartbeats, stamps, schedules, preview states. Never a pipeline's own figures, and never any entity's business data.
 - Never add a Cowork preview URL or artifact id, a trigger id, a person's details or a secret to this public repo. The preview ids already in `tools/collect_status.py` and `data/status.json` are known and due to move into the routine prompt (REVIEW.md, 2026-09-29).

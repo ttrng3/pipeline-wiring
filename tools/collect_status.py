@@ -21,17 +21,18 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "status.json"
 HEARTBEAT = ROOT / "data" / ".last-check"
 
-# key, name, repo, cron (UTC), max heartbeat age in days before it is stale, preview id
+# key, name, repo, cron (UTC), max heartbeat age in days before it is stale.
+# Preview ids are not kept in this public repo: the routine prompt holds them (Ty, 2026-09-29).
 PIPELINES = [
-    ("tmdv",            "TMDV",            "Omni-TMDV",       "0 11 * * 0",    9,  "3hNqXDiwsssZBe34b6mK73"),
-    ("omni-sitecheck",  "OMNI Sitecheck",  "Omni-sitecheck",  "45 15 * * 1",   9,  "KR1dnH91u1qdzhoop4Dqkr"),
-    ("ecopm-sitecheck", "ECOPM Sitecheck", "Ecopm-Sitecheck", "0 14 * * 1",    9,  "Gxr48hVPm7YGEuE2947eoZ"),
-    ("ecp-ela",         "ECP × ELA",       "ecp-ela-weekly",  "0 14 * * 0",    9,  "22fboAK5NyitZHc4iiVgTx"),
-    ("trade-journal",   "Trade Journal",   "Trade-Journal",   "0 4 * * 2-6",   4,  "LgPF5yVUG2J1bfV3M72FQ1"),
-    ("gdsh",            "GDSH",            "gdsh-report",     "0 1 * * 1",     9,  "A5DNPFCcerdjgoBk2c5vVd"),
-    ("ops-dashboard",   "Ops-Dashboard",   "Ops-Dashboard",   "0 6 1,15 * *",  20, "Ny2dknmJCxADa95gJn6DMx"),
-    ("omni-audit",      "Omni-Audit",      "Omni-Audit",      "0 3 1 * *",     35, "BeTHcWt6A7zKN66j51Jr81"),
-    ("pipeline-wiring", "Pipeline Wiring", "pipeline-wiring", "0 16 * * 0",    9,  "1jJocxY9ehSu9DJigt9ZmW"),
+    ("tmdv",            "TMDV",            "Omni-TMDV",       "0 11 * * 0",    9),
+    ("omni-sitecheck",  "OMNI Sitecheck",  "Omni-sitecheck",  "45 15 * * 1",   9),
+    ("ecopm-sitecheck", "ECOPM Sitecheck", "Ecopm-Sitecheck", "0 14 * * 1",    9),
+    ("ecp-ela",         "ECP × ELA",       "ecp-ela-weekly",  "0 14 * * 0",    9),
+    ("trade-journal",   "Trade Journal",   "Trade-Journal",   "0 4 * * 2-6",   4),
+    ("gdsh",            "GDSH",            "gdsh-report",     "0 1 * * 1",     9),
+    ("ops-dashboard",   "Ops-Dashboard",   "Ops-Dashboard",   "0 6 1,15 * *",  20),
+    ("omni-audit",      "Omni-Audit",      "Omni-Audit",      "0 3 1 * *",     35),
+    ("pipeline-wiring", "Pipeline Wiring", "pipeline-wiring", "0 16 * * 0",    9),
 ]
 OWNER = "ttrng3"
 UA = {"User-Agent": "pipeline-wiring-status/1.0"}
@@ -98,9 +99,9 @@ def parse_ts(s):
 
 def collect(now):
     out = []
-    for key, name, repo, cron, max_age, preview in PIPELINES:
+    for key, name, repo, cron, max_age in PIPELINES:
         row = {"key": key, "name": name, "repo": f"{OWNER}/{repo}", "cron": cron, "maxHeartbeatAgeDays": max_age,
-               "preview": {"id": preview, "state": "not checked"}}
+               "preview": {"state": "not checked"}}
         # heartbeat: first line of data/.last-check, timestamp is the first token
         body, st = fetch(f"https://raw.githubusercontent.com/{OWNER}/{repo}/main/data/.last-check")
         if body:

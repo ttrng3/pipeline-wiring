@@ -17,10 +17,14 @@ NOW = dt.datetime(2026, 10, 7, 16, 0, tzinfo=dt.timezone.utc)  # a Wednesday, th
 
 
 def fake_fetch(heartbeats):
+    """A heartbeat value may also be an int (HTTP status) or a str (network error) to plant a failed fetch."""
     def fetch(url, timeout=20):
         repo = url.split("/")[4]
         if url.endswith("/data/.last-check"):
-            return heartbeats[repo].strftime("%Y-%m-%dT%H:%M:%SZ") + " newest-source=test", 200
+            v = heartbeats[repo]
+            if isinstance(v, (int, str)):
+                return None, v
+            return v.strftime("%Y-%m-%dT%H:%M:%SZ") + " newest-source=test", 200
         return None, 404
     return fetch
 
@@ -108,6 +112,16 @@ def main():
         hb = at(NOW); hb["Trade-Journal"] = NOW - dt.timedelta(days=6)  # watchdog 4d
         _, written = run(hb)
         check("one item per pipeline: stale after missed-run writes none", written == [] and len(list(cs.TRIAGE.glob("*/intent.md"))) == before)
+
+        # A failed fetch: a network error is log only and writes nothing; a 404 is diagnose
+        hb = at(NOW); hb["Omni-Audit"] = "timed out"
+        rows, written = run(hb)
+        by = {r["key"]: r for r in rows}
+        check("network error: omni-audit log/unreadable, no triage", (by["omni-audit"]["band"], by["omni-audit"]["bandKind"]) == ("log", "unreadable") and written == [])
+        hb = at(NOW); hb["Omni-Audit"] = 404
+        rows, written = run(hb)
+        by = {r["key"]: r for r in rows}
+        check("404: omni-audit diagnose/no-heartbeat, one triage", by["omni-audit"]["bandKind"] == "no-heartbeat" and len(written) == 1)
 
     print(f"{'ALL PASS' if not fails else str(fails) + ' FAILED'}")
     sys.exit(1 if fails else 0)

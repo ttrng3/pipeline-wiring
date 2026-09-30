@@ -7,7 +7,8 @@ Status: approved by Ty 30/09 ("Approve the 4 specs but skip Teams", in chat). Bu
 - `tools/collect_status.py`: each pipeline gets a band, written into its `data/status.json` row (`band`, `bandKind`, `bandReason`) and summarised as `summary.logOnly` / `summary.diagnose`.
   - **diagnose / stale:** heartbeat older than the pipeline's watchdog (`maxHeartbeatAgeDays`, already in the script).
   - **diagnose / missed-run:** the first scheduled run after the heartbeat (from the cron table) is more than 24 h in the past.
-  - **log / late:** that run is more than 2 h but at most 24 h in the past. **log / unreadable:** the heartbeat file could not be fetched (a network blip must not open a triage item).
+  - **log / late:** that run is more than 2 h but at most 24 h in the past. **log / unreadable:** a network error fetching the heartbeat (a blip must not open a triage item). **diagnose / no-heartbeat:** an HTTP error such as 404, or a timestamp that does not parse.
+  - This page reads its own heartbeat from yesterday's run, so a daily run that starts more than 2 h after 16:00 shows itself as log/late for that day. That is harmless (log writes no file) and accepted.
   - A diagnose finding writes `triage/<yymmdd>-<key>-<kind>/intent.md`: names, times, cron and thresholds only; never the heartbeat note or any pipeline's data. While any triage folder for the same pipeline is open, nothing more is written for it, so one outage (missed run, then stale) is one item, not one a day. The written paths are printed (`triage written: …`), not stored in the published `data/status.json`. Ty closes one by deleting its folder in a PR.
   - The cron table's own row moves to `0 16 * * *`. `next_fire` and a new `prev_fire` share one cron matcher.
 - `tools/test_bands.py` (new): offline check with planted heartbeats in a temp folder.
@@ -24,6 +25,6 @@ The cron move belongs with the ship, **in the same turn as the merge, right afte
 No Teams, no other routine, no act tier.
 
 ## Promise
-1. `python3 tools/test_bands.py` prints ALL PASS: a clean day gives nine `ok` bands and no triage file; one planted stale heartbeat gives exactly one `triage/*/intent.md`, and a second run adds none; a missed run is diagnose for a weekly and a daily pipeline, the same run inside 24 h is log only; this page's own daily run is `ok` at start delays of 0–40 min and diagnose when a day is missing; a pipeline with an open item gets no second one.
+1. `python3 tools/test_bands.py` prints ALL PASS: a clean day gives nine `ok` bands and no triage file; one planted stale heartbeat gives exactly one `triage/*/intent.md`, and a second run adds none; a missed run is diagnose for a weekly and a daily pipeline, the same run inside 24 h is log only; this page's own daily run is `ok` at start delays of 0–40 min and diagnose when a day is missing; a pipeline with an open item gets no second one; a network error is log with no file, a 404 is diagnose with one.
 2. A live local run against the nine repos (data files restored after) writes no triage file today.
 3. After the ship, the routine's first daily run commits `data/status.json` with a `band` on every row.

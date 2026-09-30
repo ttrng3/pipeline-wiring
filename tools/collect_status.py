@@ -126,10 +126,13 @@ def parse_ts(s):
     return None
 
 
-def band(row, ts, now, bands):
-    """(band, kind, reason) for one pipeline: ok, log (late heartbeat or unreadable) or diagnose."""
+def band(row, ts, st, now, bands):
+    """(band, kind, reason) for one pipeline: ok, log (late heartbeat or a network error) or diagnose.
+    st is the heartbeat fetch's HTTP status (int) or the network error (str)."""
+    if ts is None and isinstance(st, str):
+        return "log", "unreadable", "heartbeat could not be fetched (network error; retried tomorrow)"
     if ts is None:
-        return "log", "unreadable", "heartbeat could not be read (" + row["heartbeatNote"] + ")"
+        return "diagnose", "no-heartbeat", f"no readable heartbeat (HTTP {st}, or a timestamp that does not parse)"
     if row["heartbeatAgeDays"] > row["maxHeartbeatAgeDays"]:
         return ("diagnose", "stale", f"heartbeat is {row['heartbeatAgeDays']}d old; "
                 f"its watchdog is {row['maxHeartbeatAgeDays']}d")
@@ -152,7 +155,7 @@ def write_triage(rows, now):
         if r["band"] != "diagnose":
             continue
         slug = f"{r['key']}-{r['bandKind']}"
-        if any(any(TRIAGE.glob(f"*-{r['key']}-{k}/intent.md")) for k in ("stale", "missed-run")):
+        if any(any(TRIAGE.glob(f"*-{r['key']}-{k}/intent.md")) for k in ("stale", "missed-run", "no-heartbeat")):
             continue
         d = TRIAGE / f"{now:%y%m%d}-{slug}"
         d.mkdir(parents=True, exist_ok=True)
@@ -161,7 +164,7 @@ def write_triage(rows, now):
             f"Status: open. Written by `tools/collect_status.py` at {now:%Y-%m-%dT%H:%M:%SZ}. "
             f"Ty triages: accept (it becomes a work item) or dismiss with a reason, which tunes `bands.yaml`.\n\n"
             f"**{r['name']}** (`{r['repo']}`): {r['bandReason']}.\n\n"
-            f"- Heartbeat: {r['heartbeat']} ({r['heartbeatAgeDays']}d old)\n"
+            f"- Heartbeat: {r['heartbeat'] + ' (' + str(r['heartbeatAgeDays']) + 'd old)' if r['heartbeat'] else 'none readable'}\n"
             f"- Cron (UTC): `{r['cron']}`; watchdog {r['maxHeartbeatAgeDays']}d\n\n"
             f"The check only reports. It changed nothing; the fix, if any, comes as a PR.\n")
         written.append(str(d.relative_to(ROOT) / "intent.md"))
@@ -176,6 +179,7 @@ def collect(now):
                "preview": {"state": "not checked"}}
         # heartbeat: first line of data/.last-check, timestamp is the first token
         body, st = fetch(f"https://raw.githubusercontent.com/{OWNER}/{repo}/main/data/.last-check")
+        hb_st = st
         if body:
             first = body.strip().splitlines()[0]
             ts = parse_ts(first.split(" ", 1)[0])
@@ -198,7 +202,7 @@ def collect(now):
         row["manifestStamp"] = stamp
         nf = next_fire(cron, now)
         row["nextFireUtc"] = nf.strftime("%Y-%m-%dT%H:%M:%SZ") if nf else None
-        row["band"], row["bandKind"], row["bandReason"] = band(row, ts, now, bands)
+        row["band"], row["bandKind"], row["bandReason"] = band(row, ts, hb_st, now, bands)
         out.append(row)
     return out
 

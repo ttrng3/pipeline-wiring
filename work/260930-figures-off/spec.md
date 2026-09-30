@@ -9,4 +9,4 @@ Status: approved by Ty 30/09 ("approve 6", in chat).
 - Whole-page scan (30/09) for other pipeline figures, amounts, business-record counts or people's names found none left in `index.html`. Counts of repos, artifacts, previews, API list rows and the knowledge graph's size are system status, not a pipeline's data, and stay.
 - `starter-story.html` and `learning-matrix.html` are not edited (one writer each, CLAUDE.md); hits there are reported in the PR, not changed.
 - The figures remain in git history; rewriting it is Ty's call (CLAUDE.md).
-- Promise: `git grep -nE '23,577|83 fills|172 rows|175 rows|3,413|5,440' -- index.html` prints nothing at head, and the next Pages run is green and serves the page with the same nine rows.
+- Promise: `git diff c849d87 -- index.html` changes only these three notes, none of the removed figures appears anywhere in the tree (checked with the figures passed at run time, never written to a file), and the next Pages run is green and serves the page with the same nine rows.

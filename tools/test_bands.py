@@ -59,6 +59,8 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         cs.TRIAGE = pathlib.Path(tmp) / "triage"
         cs.ROOT = pathlib.Path(tmp)
+        cs.BANDS = pathlib.Path(tmp) / "bands.yaml"  # fixed 2 h / 24 h, whatever the real file is tuned to
+        cs.BANDS.write_text('{"lateGraceHours": 2, "missedAfterHours": 24}')
 
         rows, written = run(fresh_heartbeats())
         check("clean day: all nine bands ok", [r["band"] for r in rows] == ["ok"] * 9)
@@ -137,11 +139,8 @@ def main():
             check(f"body {raw!r}: ecopm diagnose/no-heartbeat, run completes", len(rows) == 9 and by["ecopm-sitecheck"]["bandKind"] == "no-heartbeat")
 
         # A bad hand edit of bands.yaml falls back to the defaults instead of failing the run
-        real = cs.BANDS
-        cs.BANDS = pathlib.Path(tmp) / "bands.yaml"
         cs.BANDS.write_text("lateGraceHours: 3  # a YAML edit\n")
         rows, _ = run(at(NOW))
-        cs.BANDS = real
         check("bad bands.yaml: run completes, nine rows banded", len(rows) == 9 and all(r["band"] == "ok" for r in rows))
 
     print(f"{'ALL PASS' if not fails else str(fails) + ' FAILED'}")

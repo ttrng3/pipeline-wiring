@@ -1,0 +1,5 @@
+{
+ "_about": "Response tiers for tools/collect_status.py (daily). JSON syntax, which is valid YAML. Plain thresholds, not statistics: a few runs a week is too little data for bands. log = one late heartbeat (printed and kept in data/status.json, no file). diagnose = a missed run, or a heartbeat older than the pipeline's watchdog (maxHeartbeatAgeDays in the script): writes triage/<yymmdd>-<key>-<kind>/intent.md. Ty triages; each dismissal carries a reason and tunes these numbers.",
+ "lateGraceHours": 2,
+ "missedAfterHours": 24
+}

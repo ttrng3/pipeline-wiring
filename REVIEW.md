@@ -39,7 +39,7 @@ When unsure between two levels, pick the higher one and say why.
 ## Repo-specific rules
 Rules specific to pipeline-wiring. **Every standing ruling in the README applies as well, except its description of how Pages serves the repo (see below); a PR that breaks one is at least High, and Critical where a line below says so.** The lines below are the ones most often at risk.
 
-- **Each page has one writer.** The weekly check writes `data/status.json` and `data/.last-check` only, never a page; `learning-matrix.html` is rewritten only by the Learning Matrix routine on the 2nd; the prose in `index.html` is edited by hand (README), and no routine writes `starter-story.html`. A change that gives a page a second writer is High.
+- **Each page has one writer.** The daily check writes `data/status.json`, `data/.last-check` and new `triage/*/intent.md` files only, never a page; `learning-matrix.html` is rewritten only by the Learning Matrix routine on the 2nd; the prose in `index.html` is edited by hand (README), and no routine writes `starter-story.html`. A change that gives a page a second writer is High.
 - **Publishing has changed since the README was written.** Once Pages runs from GitHub Actions, only the paths in `.pages-allow` are served; the README's "a push is the publish" predates the allowlist.
 - **`build/` is generated.** A hand-edited `build/` file in a diff is High (README, "Layout").
 - **The mirror has silent failure modes** (README, "Publishing" and "Layout"): publishing `index.html` itself nests and renders blank; the two iframe files must exist beside the page; and `data/status.json` must be published beside it, or the live cells break. A publish step that misses any of these is High.

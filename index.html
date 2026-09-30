@@ -157,7 +157,7 @@ body{display:flex;flex-direction:column;overflow:hidden}
 <tr><td><strong>GDSH</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01FEgjqUEhG88GtAGFdLE4hE">Mon 01:00</a></td><td class="num" data-next="gdsh">28/09</td><td class="num" data-hb="gdsh">22/09</td><td>Drive budget workbook</td><td><a href="https://github.com/ttrng3/gdsh-report">ttrng3/gdsh-report</a></td><td><a href="https://ttrng3.github.io/gdsh-report/">ttrng3.github.io/gdsh-report/</a></td><td data-preview="gdsh"><span class="pill p-mute">preview</span></td></tr>
 <tr><td><strong>Ops-Dashboard</strong> <span class="cap">KSNB</span></td><td class="num"><a href="https://claude.ai/code/routines/trig_01HqP8u1h6LYYRXmS8aXmSre">1st &amp; 15th 06:00</a></td><td class="num" data-next="ops-dashboard">01/10</td><td class="num" data-hb="ops-dashboard">25/09</td><td>Outlook + Drive <code>08 Omni Service - OMNI/09 TCKT</code></td><td><a href="https://github.com/ttrng3/Ops-Dashboard">ttrng3/Ops-Dashboard</a></td><td><a href="https://ttrng3.github.io/Ops-Dashboard/">ttrng3.github.io/Ops-Dashboard/</a></td><td data-preview="ops-dashboard"><span class="pill p-mute">preview</span></td></tr>
 <tr><td><strong>Omni-Audit</strong></td><td class="num"><a href="https://claude.ai/code/routines/trig_01UrAFG2ZNXtQvv9MHXmjjoB">1st 03:00</a> (monthly system run, Part B)<br><span class="cap">fallback <a href="https://claude.ai/code/routines/trig_01AXUmgrW5pxPFdRcQtYv1Tv">2nd 01:00</a></span></td><td class="num" data-next="omni-audit">01/10</td><td class="num" data-hb="omni-audit">25/09</td><td>Drive audit handoff</td><td><a href="https://github.com/ttrng3/Omni-Audit">ttrng3/Omni-Audit</a></td><td><a href="https://ttrng3.github.io/Omni-Audit/">ttrng3.github.io/Omni-Audit/</a></td><td data-preview="omni-audit"><span class="pill p-mute">preview</span></td></tr>
-<tr><td><strong>Pipeline Wiring</strong> <span class="cap">this page</span></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LBNQNgvDEWZNg8KkuiR3rU">Sun 16:00</a> <span class="cap">23:00 Hanoi, since 26/09</span></td><td class="num" data-next="pipeline-wiring">27/09</td><td class="num" data-hb="pipeline-wiring">&mdash;</td><td>The nine public repos + the nine previews</td><td><a href="https://github.com/ttrng3/pipeline-wiring">ttrng3/pipeline-wiring</a></td><td><a href="https://ttrng3.github.io/pipeline-wiring/">ttrng3.github.io/pipeline-wiring/</a></td><td data-preview="pipeline-wiring"><span class="pill p-mute">preview</span></td></tr>
+<tr><td><strong>Pipeline Wiring</strong> <span class="cap">this page</span></td><td class="num"><a href="https://claude.ai/code/routines/trig_01LBNQNgvDEWZNg8KkuiR3rU">Daily 16:00</a> <span class="cap">23:00 Hanoi; Sundays only from 26/09 until Phase 4</span></td><td class="num" data-next="pipeline-wiring">27/09</td><td class="num" data-hb="pipeline-wiring">&mdash;</td><td>The nine public repos + the nine previews</td><td><a href="https://github.com/ttrng3/pipeline-wiring">ttrng3/pipeline-wiring</a></td><td><a href="https://ttrng3.github.io/pipeline-wiring/">ttrng3.github.io/pipeline-wiring/</a></td><td data-preview="pipeline-wiring"><span class="pill p-mute">preview</span></td></tr>
 </tbody>
 </table>
 </div>
@@ -241,7 +241,7 @@ body{display:flex;flex-direction:column;overflow:hidden}
 
 independent      TMDV &middot; OMNI &middot; ECOPM &middot; ECP&times;ELA &middot; Trade Journal &middot; GDSH &middot; Ops-Dashboard &middot; Signal Desk
                  own source, own repo, own page, no shared state
-Sun, 16:00 UTC   Pipeline Wiring weekly check &mdash;reads&rarr; all nine repos + previews &mdash;writes&rarr; pipeline-wiring/data/status.json (read-only everywhere else)
+Daily, 16:00 UTC Pipeline Wiring check &mdash;reads&rarr; all nine repos + previews &mdash;writes&rarr; pipeline-wiring/data/status.json (read-only everywhere else)
 
 one-shot         Nhật 2026 pre-trip brief 23/11 02:00 &middot; post-trip wrap-up 11/12 03:00
 disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (replaced by Ops-Dashboard 1st &amp; 15th) &middot; 9 one-off test/verify routines</div>
@@ -357,7 +357,7 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
 </div>
 
 <script>
-/* Live cells: filled from data/status.json, written by the Pipeline Wiring weekly check (Sun 16:00 UTC).
+/* Live cells: filled from data/status.json, written by the Pipeline Wiring check (daily 16:00 UTC).
    Relative fetch, so it works on Pages and inside the preview (the file is published beside the page). */
 (function () {
   function dm(iso){ if(!iso) return '\u2014'; var d=new Date(iso); if(isNaN(d)) return '\u2014';

@@ -7,7 +7,7 @@
 # tracked symlink in a watched area, is refused.
 # Pages runs from GitHub Actions (switched 2026-09-29): a run that stages
 # deploys the allowlisted files, even when coverage then turns it red.
-# Writers: the Sunday status routine (data/status.json, data/.last-check) and
+# Writers: the daily status routine (data/status.json, data/.last-check) and
 # the monthly Learning Matrix routine (learning-matrix.html only).
 # Only simple [ ] sets ([abc], [!x], [^x]) are allowed, and no wildcard on an @
 # line; pages.yml's header lists everything that stops a deploy.
@@ -17,4 +17,8 @@ starter-story.html
 # The page's live cells fetch this on every load, so it must be published.
 data/status.json
 !data/.last-check
+# Response tiers for the daily check; not published. triage/ is outside every
+# watched area and has no line, so it is never published (a ! glob would fail
+# the run while the folder is empty).
+!bands.yaml
 @data/

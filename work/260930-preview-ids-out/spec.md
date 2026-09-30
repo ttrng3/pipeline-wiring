@@ -9,6 +9,6 @@ Status: approved by Ty 30/09 ("Approve the 4 specs but skip Teams", in chat).
 - `CLAUDE.md`: its note that the ids are "due to move" now says where they live.
 
 Promise:
-1. `grep -rnE 'claude\.ai/artifact/[A-Za-z0-9]|[A-Za-z0-9]{22}' --exclude-dir=.git .` finds no preview or artifact id (trigger ids, prefixed `trig_`, are out of scope).
+1. `grep -rnoE 'claude\.ai/artifact/[A-Za-z0-9]|(trig_)?[A-Za-z0-9]{22,}' --exclude-dir=.git . | grep -v ':trig_'` prints nothing: no preview or artifact id is left. Trigger ids (`trig_…`, out of scope) are filtered per match, not per line, so an id sharing a line with one is still caught.
 2. The collector runs clean and `data/status.json` has no `id` key; the page's script renders the nine pills from it.
 3. The next routine run records 9/9 previews checked.

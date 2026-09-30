@@ -13,7 +13,7 @@ previews with the Artifact tool, commits `data/status.json` + `data/.last-check`
 refreshes this page's preview. The page's "Next", "Last heartbeat" and preview cells
 render from that file; the prose in `index.html` is still edited by hand, and
 `learning-matrix.html` is rewritten by the Learning Matrix routine on the 2nd of each month.
-The routine writes **only** the two data files — never a page.
+The routine writes **only** the two data files and new `triage/` intent files — never a page.
 
 ## Layout
 
@@ -24,8 +24,8 @@ The routine writes **only** the two data files — never a page.
 | `learning-matrix.html` | Tab 3, loaded in an iframe. The **only** Learning Matrix — see below. |
 | `tools/build-fragment.py` | Builds `build/artifact.html` for the mirror. |
 | `tools/collect_status.py` | Daily: heartbeats, commits, next fire and band per pipeline → `data/status.json`; `--preview key=state` records the artifact checks. |
-| `bands.yaml` | The two response tiers' thresholds: *log* = one late heartbeat; *diagnose* = a missed run or a heartbeat older than its watchdog. Not published. |
-| `triage/` | One `<yymmdd>-<key>-<kind>/intent.md` per diagnose finding, for Ty to triage. Not published. |
+| `bands.yaml` | The two response tiers' thresholds: *log* = one late heartbeat; *diagnose* = a missed run or a heartbeat older than its watchdog. Not served by Pages; visible in the public repo. |
+| `triage/` | One `<yymmdd>-<key>-<kind>/intent.md` per diagnose finding, for Ty to triage. Not served by Pages; visible in the public repo, so status only. |
 | `data/status.json`, `data/.last-check` | Written by the daily check. The mirror needs `data/status.json` beside the page. |
 
 `build/` is generated. Do not edit it and do not commit a hand-edited copy.

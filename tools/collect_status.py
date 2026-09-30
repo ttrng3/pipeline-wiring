@@ -2,7 +2,7 @@
 """Collect the live state of every pipeline into data/status.json, daily.
 
 The page (index.html) renders the "Next" and "Last heartbeat" cells and the
-preview pills from this file, so the weekly routine writes DATA, never the
+preview pills from this file, so the daily routine writes DATA, never the
 page. Two passes:
 
   python3 tools/collect_status.py            # repo side: heartbeats, manifest stamps, next fire
@@ -18,7 +18,8 @@ heartbeat file is the signal anyway.
 Each pipeline also gets a band from bands.yaml (plain thresholds): "log" for one
 late heartbeat, "diagnose" for a missed run or a heartbeat older than its
 watchdog. A diagnose finding writes triage/<yymmdd>-<key>-<kind>/intent.md for
-Ty to triage, once: an open folder for the same key and kind is not rewritten.
+Ty to triage, once: nothing more is written while a folder for that pipeline is open.
+"Late" and "missed" are measured from the first scheduled run after the heartbeat.
 """
 import argparse, datetime as dt, json, pathlib, sys, urllib.request, urllib.error
 
@@ -132,25 +133,26 @@ def band(row, ts, now, bands):
     if row["heartbeatAgeDays"] > row["maxHeartbeatAgeDays"]:
         return ("diagnose", "stale", f"heartbeat is {row['heartbeatAgeDays']}d old; "
                 f"its watchdog is {row['maxHeartbeatAgeDays']}d")
-    pf = prev_fire(row["cron"], now - dt.timedelta(hours=bands["lateGraceHours"]))
-    if pf and ts < pf:
-        hours = round((now - pf).total_seconds() / 3600, 1)
+    pf = next_fire(row["cron"], ts)  # the first scheduled run after the heartbeat
+    if pf and pf <= now - dt.timedelta(hours=bands["lateGraceHours"]):
+        hours = (now - pf).total_seconds() / 3600
         if hours > bands["missedAfterHours"]:
             return ("diagnose", "missed-run", f"scheduled run {pf:%Y-%m-%dT%H:%MZ} left no heartbeat "
-                    f"after {hours}h (limit {bands['missedAfterHours']}h)")
-        return "log", "late", f"scheduled run {pf:%Y-%m-%dT%H:%MZ} has no heartbeat yet ({hours}h)"
+                    f"after {hours:.1f}h (limit {bands['missedAfterHours']}h)")
+        return "log", "late", f"scheduled run {pf:%Y-%m-%dT%H:%MZ} has no heartbeat yet ({hours:.1f}h)"
     return "ok", "", ""
 
 
 def write_triage(rows, now):
-    """One triage/<yymmdd>-<key>-<kind>/intent.md per diagnose finding; an open one is never rewritten.
+    """One triage/<yymmdd>-<key>-<kind>/intent.md per diagnose finding. Nothing is written while any
+    triage folder for the same pipeline is open, so one outage (missed run, then stale) is one item.
     Status only: names, times and thresholds, never a heartbeat note or any pipeline's data."""
     written = []
     for r in rows:
         if r["band"] != "diagnose":
             continue
         slug = f"{r['key']}-{r['bandKind']}"
-        if any(TRIAGE.glob(f"*-{slug}/intent.md")):
+        if any(any(TRIAGE.glob(f"*-{r['key']}-{k}/intent.md")) for k in ("stale", "missed-run")):
             continue
         d = TRIAGE / f"{now:%y%m%d}-{slug}"
         d.mkdir(parents=True, exist_ok=True)
@@ -208,6 +210,7 @@ def main():
     ap.add_argument("--print", action="store_true")
     a = ap.parse_args()
     now = dt.datetime.now(dt.timezone.utc)
+    triage = []
     if a.preview:
         data = json.loads(OUT.read_text()) if OUT.exists() else None
         if not data:
@@ -222,7 +225,7 @@ def main():
         data["previewsCheckedAt"] = now.strftime("%Y-%m-%dT%H:%M:%SZ")
     else:
         data = {"generatedUtc": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "pipelines": collect(now)}
-        data["triageWritten"] = write_triage(data["pipelines"], now)
+        triage = write_triage(data["pipelines"], now)
         HEARTBEAT.write_text(f"{data['generatedUtc']} newest-source=daily status check, "
                              f"{sum(1 for p in data['pipelines'] if p['fresh'])}/{len(data['pipelines'])} heartbeats fresh\n")
     data["summary"] = {
@@ -242,7 +245,7 @@ def main():
                   f"{'fresh' if p.get('fresh') else 'STALE'}  next={str(p.get('nextFireUtc'))[:16]}  preview={p['preview'].get('state')}"
                   f"  band={p.get('band')}{' (' + p['bandReason'] + ')' if p.get('bandReason') else ''}")
         print(json.dumps(data["summary"], ensure_ascii=False))
-        for f in data.get("triageWritten", []):
+        for f in triage:
             print("triage written:", f)
 
 

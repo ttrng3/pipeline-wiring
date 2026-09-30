@@ -378,7 +378,7 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
       }
     });
     var w=document.getElementById('status-when');
-    if(w && st.generatedUtc){ var s=st.summary||{}; w.innerHTML='<strong>Checked '+st.generatedUtc.slice(0,16).replace('T',' ')+' UTC</strong> by the weekly check: '+(s.fresh||0)+'/'+(s.pipelines||0)+' heartbeats fresh'+(st.previewsCheckedAt?', '+(s.previewsInSync||0)+'/'+(s.pipelines||0)+' previews in sync':'')+(s.stale&&s.stale.length?' \u00b7 stale: '+s.stale.join(', '):'')+'.'; }
+    if(w && st.generatedUtc){ var s=st.summary||{}; w.innerHTML='<strong>Checked '+st.generatedUtc.slice(0,16).replace('T',' ')+' UTC</strong> by the daily check: '+(s.fresh||0)+'/'+(s.pipelines||0)+' heartbeats fresh'+(st.previewsCheckedAt?', '+(s.previewsInSync||0)+'/'+(s.pipelines||0)+' previews in sync':'')+(s.stale&&s.stale.length?' \u00b7 stale: '+s.stale.join(', '):'')+'.'; }
   }).catch(function(e){ var w=document.getElementById('status-when'); if(w) w.textContent='Live status not loaded ('+e.message+'); values shown are as of 25/09.'; });
 })();
 </script>

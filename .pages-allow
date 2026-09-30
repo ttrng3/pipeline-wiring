@@ -17,8 +17,4 @@ starter-story.html
 # The page's live cells fetch this on every load, so it must be published.
 data/status.json
 !data/.last-check
-# Response tiers for the daily check; not published. triage/ is outside every
-# watched area and has no line, so it is never published (a ! glob would fail
-# the run while the folder is empty).
-!bands.yaml
 @data/

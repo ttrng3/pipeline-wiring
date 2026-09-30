@@ -122,6 +122,19 @@ def main():
         rows, written = run(hb)
         by = {r["key"]: r for r in rows}
         check("404: omni-audit diagnose/no-heartbeat, one triage", by["omni-audit"]["bandKind"] == "no-heartbeat" and len(written) == 1)
+        for code in (429, 503):
+            hb = at(NOW); hb["gdsh-report"] = code
+            rows, written = run(hb)
+            by = {r["key"]: r for r in rows}
+            check(f"HTTP {code}: gdsh log/unreadable, no triage", by["gdsh"]["bandKind"] == "unreadable" and written == [])
+
+        # A bad hand edit of bands.yaml falls back to the defaults instead of failing the run
+        real = cs.BANDS
+        cs.BANDS = pathlib.Path(tmp) / "bands.yaml"
+        cs.BANDS.write_text("lateGraceHours: 3  # a YAML edit\n")
+        rows, _ = run(at(NOW))
+        cs.BANDS = real
+        check("bad bands.yaml: run completes, nine rows banded", len(rows) == 9 and all(r["band"] == "ok" for r in rows))
 
     print(f"{'ALL PASS' if not fails else str(fails) + ' FAILED'}")
     sys.exit(1 if fails else 0)

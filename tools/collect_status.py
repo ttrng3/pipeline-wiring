@@ -129,8 +129,8 @@ def parse_ts(s):
 def band(row, ts, st, now, bands):
     """(band, kind, reason) for one pipeline: ok, log (late heartbeat or a network error) or diagnose.
     st is the heartbeat fetch's HTTP status (int) or the network error (str)."""
-    if ts is None and isinstance(st, str):
-        return "log", "unreadable", "heartbeat could not be fetched (network error; retried tomorrow)"
+    if ts is None and (isinstance(st, str) or st == 429 or st >= 500):
+        return "log", "unreadable", f"heartbeat could not be fetched ({'network error' if isinstance(st, str) else 'HTTP ' + str(st)}; retried tomorrow)"
     if ts is None:
         return "diagnose", "no-heartbeat", f"no readable heartbeat (HTTP {st}, or a timestamp that does not parse)"
     if row["heartbeatAgeDays"] > row["maxHeartbeatAgeDays"]:
@@ -172,7 +172,12 @@ def write_triage(rows, now):
 
 
 def collect(now):
-    bands = json.loads(BANDS.read_text())
+    try:
+        bands = json.loads(BANDS.read_text())
+        bands["lateGraceHours"], bands["missedAfterHours"]
+    except Exception as e:  # a bad hand edit must not blank the whole status
+        print(f"WARNING bands.yaml unreadable ({e}); using 2 h / 24 h")
+        bands = {"lateGraceHours": 2, "missedAfterHours": 24}
     out = []
     for key, name, repo, cron, max_age in PIPELINES:
         row = {"key": key, "name": name, "repo": f"{OWNER}/{repo}", "cron": cron, "maxHeartbeatAgeDays": max_age,

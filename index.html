@@ -161,7 +161,7 @@ body{display:flex;flex-direction:column;overflow:hidden}
 </tbody>
 </table>
 </div>
-<p class="cap" id="status-line">&ldquo;Last heartbeat&rdquo; is the timestamp in each repo&rsquo;s <code>data/.last-check</code>; &ldquo;Next&rdquo; is computed from each cron. <span id="status-when">Static values as of 25/09 until <code>data/status.json</code> loads.</span> Every schedule above is the live cron read from the routine API on 25/09. Mirror check repeated 25/09: all eight previews in section 3 have exactly one <code>&lt;html&gt;</code> tag on read-back, so none renders blank.</p>
+<p class="cap" id="status-line">&ldquo;Last heartbeat&rdquo; is the timestamp in each repo&rsquo;s <code>data/.last-check</code>; &ldquo;Next&rdquo; is computed from each cron. <span id="status-when">Static values as of 25/09 until <code>data/status.json</code> loads.</span> Every schedule above is the live cron read from the routine API on 25/09, except Pipeline Wiring&rsquo;s: its daily cron is the routine update made in the same turn as the daily-detection merge (<code>work/260930-daily-detection/</code>). Mirror check repeated 25/09: all eight previews in section 3 have exactly one <code>&lt;html&gt;</code> tag on read-back, so none renders blank.</p>
 
 <h2>2 &middot; The other five repos</h2>
 <p class="lede">14 repos in total: the nine above plus these five.</p>

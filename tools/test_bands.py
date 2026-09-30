@@ -22,6 +22,8 @@ def fake_fetch(heartbeats):
         repo = url.split("/")[4]
         if url.endswith("/data/.last-check"):
             v = heartbeats[repo]
+            if isinstance(v, bytes):  # a raw file body, e.g. blank or a bad timestamp
+                return v.decode(), 200
             if isinstance(v, (int, str)):
                 return None, v
             return v.strftime("%Y-%m-%dT%H:%M:%SZ") + " newest-source=test", 200
@@ -127,6 +129,12 @@ def main():
             rows, written = run(hb)
             by = {r["key"]: r for r in rows}
             check(f"HTTP {code}: gdsh log/unreadable, no triage", by["gdsh"]["bandKind"] == "unreadable" and written == [])
+
+        for raw in (b"\n", b"not-a-time newest-source=x\n"):
+            hb = at(NOW); hb["Ecopm-Sitecheck"] = raw
+            rows, _ = run(hb)
+            by = {r["key"]: r for r in rows}
+            check(f"body {raw!r}: ecopm diagnose/no-heartbeat, run completes", len(rows) == 9 and by["ecopm-sitecheck"]["bandKind"] == "no-heartbeat")
 
         # A bad hand edit of bands.yaml falls back to the defaults instead of failing the run
         real = cs.BANDS

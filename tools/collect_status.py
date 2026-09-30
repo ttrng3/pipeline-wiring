@@ -186,7 +186,8 @@ def collect(now):
         body, st = fetch(f"https://raw.githubusercontent.com/{OWNER}/{repo}/main/data/.last-check")
         hb_st = st
         if body:
-            first = body.strip().splitlines()[0]
+            lines = body.strip().splitlines()
+            first = lines[0] if lines else ""
             ts = parse_ts(first.split(" ", 1)[0])
             row["heartbeat"] = ts.strftime("%Y-%m-%dT%H:%M:%SZ") if ts else None
             row["heartbeatNote"] = first.split(" ", 1)[1][:160] if " " in first else ""

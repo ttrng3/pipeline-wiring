@@ -9,6 +9,8 @@
 # every run is a dry run that stages and checks but publishes nothing.
 # Writers: the Sunday status routine (data/status.json, data/.last-check) and
 # the monthly Learning Matrix routine (learning-matrix.html only).
+# Only simple [ ] sets ([abc], [!x], [^x]) are allowed, and no wildcard on an @
+# line; pages.yml's header lists everything that stops a deploy.
 index.html
 learning-matrix.html
 starter-story.html

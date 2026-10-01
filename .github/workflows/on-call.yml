@@ -1,0 +1,51 @@
+# On-call: a red run here is the alert. GitHub emails the account behind a failed
+# run, and the daily status routine pushes as that account, so a failure here
+# reaches Ty by email. (An issue would not: GitHub never emails you about your own.)
+#
+# Two checks, both fail on purpose:
+#   - push: the daily check added a triage/<yymmdd>-<key>-<kind>/intent.md, meaning
+#     a pipeline missed a run or went stale. The run names which.
+#   - schedule: the daily check itself left no heartbeat for 26 hours, so nothing
+#     else here would notice. It runs 4 hours after the check (16:00 UTC).
+name: On-call
+
+on:
+  push:
+    paths: ['triage/**']
+  schedule:
+    - cron: '0 20 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  new-triage:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: A pipeline needs triage
+        shell: bash
+        run: |
+          # Files added by this push. A new branch has no "before", so compare with main.
+          base="${{ github.event.before }}"
+          git cat-file -e "$base^{commit}" 2>/dev/null || base="$(git merge-base origin/main HEAD)"
+          new="$(git diff --name-only --diff-filter=A "$base" HEAD -- 'triage/*/intent.md')"
+          [ -z "$new" ] && { echo "No new triage folder."; exit 0; }
+          while IFS= read -r f; do echo "::error::Needs triage: $(basename "$(dirname "$f")") (${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/$f)"; done <<< "$new"
+          exit 1
+
+  check-heartbeat:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: The daily status check ran
+        shell: bash
+        run: |
+          ts="$(head -n1 data/.last-check | cut -d' ' -f1)"
+          age=$(( ( $(date -u +%s) - $(date -u -d "$ts" +%s) ) / 3600 ))
+          echo "Last heartbeat $ts, ${age}h ago."
+          [ "$age" -lt 26 ] || { echo "::error::The daily status check has not run for ${age}h (last $ts). No pipeline is being watched."; exit 1; }

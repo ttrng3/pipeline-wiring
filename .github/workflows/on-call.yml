@@ -7,6 +7,8 @@
 #     a pipeline missed a run or went stale. The run names which.
 #   - schedule: the daily check itself left no heartbeat for 26 hours, so nothing
 #     else here would notice. It runs 4 hours after the check (16:00 UTC).
+# The 20:00 cron and the 26h limit copy the daily check's schedule: change them in
+# the same PR as the routine's cron and PIPELINES in tools/collect_status.py.
 name: On-call
 
 on:
@@ -46,6 +48,7 @@ jobs:
         shell: bash
         run: |
           ts="$(head -n1 data/.last-check | cut -d' ' -f1)"
+          [ -n "$ts" ] || { echo "::error::data/.last-check has no timestamp, so the daily status check cannot be confirmed."; exit 1; }
           age=$(( ( $(date -u +%s) - $(date -u -d "$ts" +%s) ) / 3600 ))
           echo "Last heartbeat $ts, ${age}h ago."
           [ "$age" -lt 26 ] || { echo "::error::The daily status check has not run for ${age}h (last $ts). No pipeline is being watched."; exit 1; }

@@ -12,6 +12,7 @@ The wiring page: every repo, preview and routine, and what is broken. Ty's own i
 ## Layout
 - `index.html` is the page (three tabs; its prose is edited by hand). `starter-story.html` and `learning-matrix.html` are tabs 2 and 3, loaded in iframes.
 - Each page has one writer: the daily check writes only `data/status.json`, `data/.last-check` and new `triage/<yymmdd>-<key>-<kind>/intent.md` files (never a page); `learning-matrix.html` is rewritten only by the Learning Matrix routine; no routine writes `starter-story.html` (REVIEW.md).
+- `.github/workflows/on-call.yml` is the on-call: a red run is the email to Ty. It fails when a push adds a `triage/*/intent.md`, and at 20:00 UTC when the first field of `data/.last-check` is 26h+ old. Its cron and limit copy the daily check's schedule; change them with it.
 - `build/` is generated and git-ignored. Never hand-edit or commit it.
 - `.pages-allow` lists what Pages publishes; `.github/workflows/pages.yml` deploys only that. Every tracked file under a watched area needs a `.pages-allow` line (published, or `!` for known but not published); a new kind of file needs Ty's say-so and that line in its own PR first.
 - `README.md` explains the page and the mirror; `REVIEW.md` holds the reviewer's rules and says where the README is out of date.

@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-10-01T16:11:00Z",
+ "generatedUtc": "2026-10-02T16:11:24Z",
  "pipelines": [
   {
    "key": "tmdv",
@@ -10,10 +10,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-01T16:12:25Z"
+    "checkedAt": "2026-10-02T16:12:49Z"
    },
    "heartbeat": "2026-09-29T17:29:39Z",
-   "heartbeatAgeDays": 1.9,
+   "heartbeatAgeDays": 2.9,
    "fresh": true,
    "manifestStamp": "2026-09-29T17:34:35Z",
    "nextFireUtc": "2026-10-04T11:00:00Z",
@@ -30,10 +30,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-01T16:12:25Z"
+    "checkedAt": "2026-10-02T16:12:49Z"
    },
    "heartbeat": "2026-09-30T08:44:38Z",
-   "heartbeatAgeDays": 1.3,
+   "heartbeatAgeDays": 2.3,
    "fresh": true,
    "manifestStamp": "2026-09-30T08:44:38Z",
    "nextFireUtc": "2026-10-05T15:45:00Z",
@@ -50,10 +50,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-01T16:12:25Z"
+    "checkedAt": "2026-10-02T16:12:49Z"
    },
    "heartbeat": "2026-09-30T08:42:20Z",
-   "heartbeatAgeDays": 1.3,
+   "heartbeatAgeDays": 2.3,
    "fresh": true,
    "manifestStamp": "2026-09-30T08:42:20Z",
    "nextFireUtc": "2026-10-05T14:00:00Z",
@@ -70,10 +70,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-01T16:12:25Z"
+    "checkedAt": "2026-10-02T16:12:49Z"
    },
    "heartbeat": "2026-09-30T01:38:29Z",
-   "heartbeatAgeDays": 1.6,
+   "heartbeatAgeDays": 2.6,
    "fresh": true,
    "manifestStamp": "2026-09-29T16:36:01Z",
    "nextFireUtc": "2026-10-04T14:00:00Z",
@@ -90,13 +90,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-01T16:12:25Z"
+    "checkedAt": "2026-10-02T16:12:49Z"
    },
-   "heartbeat": "2026-10-01T04:35:27Z",
+   "heartbeat": "2026-10-02T04:21:01Z",
    "heartbeatAgeDays": 0.5,
    "fresh": true,
-   "manifestStamp": "2026-10-01T04:35:27.593Z",
-   "nextFireUtc": "2026-10-02T04:00:00Z",
+   "manifestStamp": "2026-10-02T04:21:01.846Z",
+   "nextFireUtc": "2026-10-03T04:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -110,10 +110,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-01T16:12:25Z"
+    "checkedAt": "2026-10-02T16:12:49Z"
    },
    "heartbeat": "2026-09-30T01:35:00Z",
-   "heartbeatAgeDays": 1.6,
+   "heartbeatAgeDays": 2.6,
    "fresh": true,
    "manifestStamp": "2026-09-20T00:00:00Z",
    "nextFireUtc": "2026-10-05T01:00:00Z",
@@ -130,10 +130,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-01T16:12:25Z"
+    "checkedAt": "2026-10-02T16:12:49Z"
    },
    "heartbeat": "2026-10-01T06:06:34Z",
-   "heartbeatAgeDays": 0.4,
+   "heartbeatAgeDays": 1.4,
    "fresh": true,
    "manifestStamp": "2026-09-20T04:00:00Z",
    "nextFireUtc": "2026-10-15T06:00:00Z",
@@ -148,12 +148,12 @@
    "cron": "0 3 1 * *",
    "maxHeartbeatAgeDays": 35,
    "preview": {
-    "state": "behind",
-    "note": "artifact 2026-09-25T03:54:54Z, repo 2026-10-01T03:45:51Z — 2026-10-01 run not published to the preview",
-    "checkedAt": "2026-10-01T16:12:25Z"
+    "state": "in-sync",
+    "note": "",
+    "checkedAt": "2026-10-02T16:12:49Z"
    },
-   "heartbeat": "2026-10-01T03:50:00Z",
-   "heartbeatAgeDays": 0.5,
+   "heartbeat": "2026-10-02T01:10:00Z",
+   "heartbeatAgeDays": 0.6,
    "fresh": true,
    "manifestStamp": "2026-10-01T03:45:51Z",
    "nextFireUtc": "2026-11-01T03:00:00Z",
@@ -170,13 +170,13 @@
    "preview": {
     "state": "in-sync",
     "note": "no manifest, existence only",
-    "checkedAt": "2026-10-01T16:12:25Z"
+    "checkedAt": "2026-10-02T16:12:49Z"
    },
-   "heartbeat": "2026-09-30T16:09:42Z",
+   "heartbeat": "2026-10-01T16:11:00Z",
    "heartbeatAgeDays": 1.0,
    "fresh": true,
    "manifestStamp": null,
-   "nextFireUtc": "2026-10-02T16:00:00Z",
+   "nextFireUtc": "2026-10-03T16:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -186,12 +186,10 @@
   "pipelines": 9,
   "fresh": 9,
   "stale": [],
-  "previewsInSync": 8,
-  "previewsBehind": [
-   "omni-audit"
-  ],
+  "previewsInSync": 9,
+  "previewsBehind": [],
   "logOnly": [],
   "diagnose": []
  },
- "previewsCheckedAt": "2026-10-01T16:12:25Z"
+ "previewsCheckedAt": "2026-10-02T16:12:49Z"
 }

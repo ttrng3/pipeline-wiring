@@ -18,7 +18,7 @@ LIVE = "https://ttrng3.github.io/pipeline-wiring/"
 SERVED = ["index.html", "starter-story.html", "learning-matrix.html", "data/status.json"]
 # Tracked but never served (.pages-allow); each must exist on main and answer 404 live.
 PRIVATE = ["README.md", "CLAUDE.md", "REVIEW.md", "bands.yaml", "data/.last-check", "tools/collect_status.py",
-           "tools/build-fragment.py", "tools/test_bands.py", "tools/verify_live.py", "verification/wiring.md",
+           "tools/build-fragment.py", "tools/test_bands.py", "tools/verify_live.py", "tools/preview_matches.py", "verification/wiring.md",
            ".pages-allow"]
 # Storage links, full email addresses, bare handles ("name@"), and routine trigger ids.
 TRACES = re.compile(r"/personal/|sharepoint\.com|1drv\.ms|[\w.+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}|\b[a-z][a-z0-9._-]{2,}@(?![\w-])|\btrig_[A-Za-z0-9]{8,}", re.I)

@@ -74,3 +74,11 @@ After merge, from a clean `main`, outside the daily run: `python3 tools/verify_l
 - `learning-matrix.html` content.
 - Any change to the routines, workflows, collector or page.
 - The README "Publishing" drift REVIEW.md mentions.
+
+## Changes during the build
+Found in review rounds on PR #18, after approval. The approved text above stands as Ty approved it; Ty's ship phrase accepts these too.
+1. `page_has_every_cell` also fails on a cell with no row (a dropped pipeline's stale cells).
+2. Step 2 compares each date cell with the date `status.json` holds, so a placeholder can't pass.
+3. `--forbid` words are searched in every served and tracked file, this protocol included; only the script is left out of the trace check.
+4. A failed `git ls-files` or a non-UTF-8 tracked file can't pass silently.
+5. Step 4 names the preview's title, accepts a fragment built from the last routine commit, and posts names and hashes only.

@@ -100,11 +100,11 @@ def main():
                                   r["preview"].get("state") for r in rows))
     try:
         info["collector_keys"] = collector_keys()
-    except (OSError, SyntaxError, ValueError) as e:
-        info["collector_keys"], info["collector_error"] = [], str(e)
+    except (OSError, SyntaxError, ValueError, KeyError, TypeError, IndexError) as e:
+        info["collector_keys"], info["collector_error"] = [], repr(e)
     v["rows_match_collector"] = bool(keys) and keys == info["collector_keys"]
 
-    page = (ROOT / "index.html").read_text(encoding="utf-8")
+    page = (ROOT / "index.html").read_text(encoding="utf-8") if (ROOT / "index.html").exists() else ""
     info["cells_missing"] = [f"{a}:{k}" for k in keys for a in ("data-next", "data-hb", "data-preview")
                              if page.count(f'{a}="{k}"') != 1]
     # And no cell without a row: a dropped pipeline's cells would keep showing a stale row.
@@ -132,11 +132,16 @@ def main():
     info["unreadable"] = [] if ls.returncode == 0 and tracked else ["(git ls-files failed or listed nothing)"]
     for p in tracked:
         try:
-            texts[f"main:{p}"] = (ROOT / p).read_text(encoding="utf-8")
-        except UnicodeDecodeError:
-            pass  # binary file
+            raw = (ROOT / p).read_bytes()
         except OSError:
             info["unreadable"].append(p)
+            continue
+        try:
+            texts[f"main:{p}"] = raw.decode("utf-8")
+        except UnicodeDecodeError:
+            # Not UTF-8: still scanned (a non-UTF-8 text file could hide an id), and listed.
+            texts[f"main:{p}"] = raw.decode("utf-8", "replace")
+            info.setdefault("not_utf8", []).append(p)
     v["all_tracked_read"] = not info["unreadable"]
     hits = {p: len(TRACES.findall(t)) for p, t in texts.items() if p != "main:tools/verify_live.py"}
     info["traces"] = {p: n for p, n in hits.items() if n}

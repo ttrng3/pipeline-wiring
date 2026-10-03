@@ -247,7 +247,7 @@ one-shot         Nhật 2026 pre-trip brief 23/11 02:00 &middot; post-trip wrap-
 disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (replaced by Ops-Dashboard 1st &amp; 15th) &middot; 9 one-off test/verify routines</div>
 <p class="cap">The last monthly system run (fired 25/09 02:57&nbsp;UTC) reports <code>SUCCEEDED</code>.</p>
 
-<h2>5 &middot; Mac dependency &mdash; two routines still carry it</h2>
+<h2>5 &middot; Mac dependency &mdash; two routines and two Mac-only jobs</h2>
 <div class="card">
   <p style="margin-bottom:10px"><span class="pill p-warn">Found 25/09</span> Two <strong>enabled</strong> one-shot routines hold the full remote-devices tool set (<code>device_bash</code>, <code>device_list_dir</code>, <code>device_stage_files</code>, <code>device_commit_files</code>, credential autofill and more):</p>
   <ul>
@@ -256,7 +256,7 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
   </ul>
   <p>Both were created from a Cowork project on 05/09. Neither appears in the routine list call (see Caution in section 7); they were found only by fetching their ids one by one. Neither has a file mount.</p>
   <p><span class="pill p-info">Added 28/09</span> <strong>The knowledge graph is Mac-bound too, by design, and is not a routine.</strong> It is the graphify index over <code>93 Knowledge Base/</code> (Markdown only), at <code>graphify-out/</code> on Drive. A cloud routine cannot run it, because extraction dispatches subagents from a live Claude Code session. Rebuilt by hand with <code>/graphify . --update</code>. Last built <strong>28/09/2026</strong>: 2,498 nodes, 4,304 edges, health check clean (0 dangling). Next due <strong>about 28/10/2026</strong>. Nothing from the graph is published here: its content is internal.</p>
-  <p><span class="pill p-info">Added 03/10</span> <strong>Trade Journal&rsquo;s monthly Drive backup is a Mac job, by Ty&rsquo;s choice, and is not a routine.</strong> A launchd job runs daily at 14:00 Hanoi and acts once a month. It copies the month&rsquo;s master backup from the GitHub release into Drive <code>09 Trading/Trade Journal/Backups/</code>, then moves the CSVs already in the journal out of <code>Raw Records/</code>. If the Mac is asleep it catches up on the next wake. Ty chose it over a Google credential in GitHub (Trade-Journal #13, merge <code>502ae8e</code>). First real run <strong>01/11/2026</strong>. Runbook: Trade-Journal <code>docs/backup.md</code>.</p>
+  <p><span class="pill p-info">Added 03/10</span> <strong>Trade Journal&rsquo;s monthly Drive backup is a Mac job, by Ty&rsquo;s choice, and is not a routine.</strong> A launchd job runs daily at 14:00 Mac local time (Hanoi while the Mac is in Vietnam) and acts once a month. It copies the month&rsquo;s master backup from the GitHub release into Drive <code>09 Trading/Trade Journal/Backups/</code>, then moves the CSVs already in the journal out of <code>Raw Records/</code>. If the Mac is asleep it catches up on the next wake; if it is switched off for the day, the next daily run picks it up. Nothing watches the job itself: a missed month shows only as a missing master in <code>Backups/</code>. Ty chose it over a Google credential in GitHub (Trade-Journal #13, merge <code>502ae8e</code>). First real run <strong>01/11/2026</strong>. Runbook: Trade-Journal <code>docs/backup.md</code>.</p>
   <p style="margin-bottom:0"><strong>The ten enabled routines in the list</strong>, and TMDV (fetched by id), hold no remote-devices tool and have <code>file_mounts: []</code>. The 24/09 claim that every routine reports <code>bound = false</code> cannot be re-checked: the API response has no <code>bound</code> field.</p>
 </div>
 
@@ -284,9 +284,9 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
 <h2>7 &middot; Open &mdash; needs you</h2>
 
 <details open>
-<summary><span class="pill p-info">Changed 03/10</span> Trade Journal: monthly Drive backup on the Mac</summary>
+<summary><span class="pill p-ok">Changed 03/10</span> Trade Journal: monthly Drive backup on the Mac</summary>
 <ul>
-  <li><strong>The master backup now reaches Drive</strong> (Trade-Journal #13, merge <code>502ae8e</code>). Until 03/10 it lived only as a GitHub release. A Mac job now copies it to <code>Backups/</code> each month and moves synced CSVs out of <code>Raw Records/</code>. October&rsquo;s copy and the first move were done by hand the same day. It is a new Mac dependency; see section 5.</li>
+  <li><strong>The master backup now reaches Drive</strong> (Trade-Journal #13, merge <code>502ae8e</code>). Until 03/10 it lived only as a GitHub release. A Mac job now copies it to <code>Backups/</code> each month and moves synced CSVs out of <code>Raw Records/</code>. October&rsquo;s copy and the first move were done by hand the same day (recorded in the Trade-Journal PR #13 description). It is a new Mac dependency; see section 5.</li>
 </ul>
 </details>
 

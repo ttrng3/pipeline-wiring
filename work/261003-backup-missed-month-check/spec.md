@@ -75,7 +75,7 @@ Verdict: safe to ship
 
 1. **Offline tests.** `python3 tools/test_bands.py` prints ALL PASS, including the four new backup cases.
 2. **Privacy.** `git grep -n -i -E 'gmail\.com|GoogleDrive-[a-z]'` gives no output. The status file carries no Drive id.
-3. **Live.** After the merge and the routine update, the next daily run (16:00 UTC) reports `backup: ok` for October, since the master is in `Backups/`. `data/status.json` at that commit has `"backup": {"state": "ok", "month": "2026-10", …}`. Measured on the first run after the merge.
+3. **Live.** After the merge and the routine update, the run on 03/10 (day 3) reports `backup: not-due`, and the first run on or after 04/10 (16:00 UTC) reports `backup: ok` for October, since the master is in `Backups/`. *(Dates made exact after approval; the behaviour is unchanged.)* `data/status.json` at that commit has `"backup": {"state": "ok", "month": "2026-10", …}`. Measured on the first run after the merge.
 
 ## Out of scope
 

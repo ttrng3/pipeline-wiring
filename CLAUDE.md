@@ -6,6 +6,7 @@ The wiring page: every repo, preview and routine, and what is broken. Ty's own i
 
 ## Commands
 - Build the Cowork preview page: `python3 tools/build-fragment.py` (writes `build/artifact.html`). When the routine refreshes the preview is set by its runbook, not here. Never send `index.html` itself to the preview; Pages does serve it.
+- Publish the preview as `build/artifact.html` together with `starter-story.html`, `learning-matrix.html` and `data/status.json`, never the page alone: the tabs and live cells load those by relative path and come up blank, with no error, without them. Every PR's post-merge step says so (review of #13, 2026-10-03).
 - Test the bands and the triage folder offline (no network, writes nothing in the repo): `python3 tools/test_bands.py` (must print ALL PASS)
 - Check `data/status.json` parses and its summary count matches: `python3 -c "import json;d=json.load(open('data/status.json'));assert d['summary']['pipelines']==len(d['pipelines'])"`
 

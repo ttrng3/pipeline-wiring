@@ -6,6 +6,7 @@ The wiring page: every repo, preview and routine, and what is broken. Ty's own i
 
 ## Commands
 - Build the Cowork preview page: `python3 tools/build-fragment.py` (writes `build/artifact.html`). When the routine refreshes the preview is set by its runbook, not here. Never send `index.html` itself to the preview; Pages does serve it.
+- Publish `build/artifact.html` as the artifact's `index.html`, together with `starter-story.html`, `learning-matrix.html` and `data/status.json`, never the page alone: the tabs and live cells load those by relative path and come up blank, with no error, without them (README "Publishing"). A PR that changes anything the preview shows says this in its post-merge step (review of #13, 2026-10-03).
 - Test the bands and the triage folder offline (no network, writes nothing in the repo): `python3 tools/test_bands.py` (must print ALL PASS)
 - Check `data/status.json` parses and its summary count matches: `python3 -c "import json;d=json.load(open('data/status.json'));assert d['summary']['pipelines']==len(d['pipelines'])"`
 
@@ -27,7 +28,7 @@ The wiring page: every repo, preview and routine, and what is broken. Ty's own i
 - The cron table in `PIPELINES` (`tools/collect_status.py`) is a second copy of every schedule; when a routine's cron changed without it, the "Next" column was wrong (2026-09-26).
 - `api.github.com` inside a routine answers 403 for every repo except the attached one; it is not a rate limit, and the collector reads only raw.githubusercontent.com (script docstring, 2026-09-26).
 - This page's own heartbeat is read from the remote repo, so it shows the previous run's stamp (2026-09-26).
-- Publishing `index.html` itself to the preview nests it and renders blank; the tabs and live cells also need the two iframe files and `data/status.json` beside the page (README "Publishing" 2026-09-25, "Layout" 2026-09-26).
+- Publishing `index.html` itself to the preview nests it and renders blank; the page also needs its three companion files (see Commands, the publish line) (README "Publishing" 2026-09-25, "Layout" 2026-09-26).
 - This repo's builder strips document wrappers; other repos' builders cut at `<title>`. They are not interchangeable, and a naive `</?head` regex also eats `<header>` (`tools/build-fragment.py`, 2026-09-25).
 - A dead artifact id means "retired", not "missing". The Learning Matrix and Starter Story live only here; a standalone copy was rebuilt by mistake and deleted the same day (README, 2026-09-25).
 - The page once said "nothing here is from memory" while carrying stale claims from earlier sessions (2026-09-25).

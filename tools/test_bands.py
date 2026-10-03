@@ -167,6 +167,29 @@ def main():
         check("main(): prints 'triage written: triage/…-tmdv-stale/intent.md'", "triage written: triage/261007-tmdv-stale/intent.md" in out.getvalue())
         check("main(): summary.diagnose lists tmdv, logOnly empty", s["diagnose"] == ["tmdv"] and s["logOnly"] == [])
 
+        # Trade Journal Drive backup (work/261003-backup-missed-month-check): --backup on the status.json above
+        def backup(spec):
+            cs.dt = type("m", (), {"datetime": _dt, "timedelta": dt.timedelta, "timezone": dt.timezone})
+            sys.argv = ["collect_status.py", "--backup", spec]
+            o = io.StringIO()
+            with contextlib.redirect_stdout(o):
+                cs.main()
+            cs.dt, sys.argv = real_dt, argv
+            return o.getvalue(), json.loads(cs.OUT.read_text())
+        bk = lambda: sorted(cs.TRIAGE.glob("*-trade-journal-backup-missing/intent.md"))
+        printed, d = backup("ok")
+        check("backup ok: recorded, no triage file", d["backup"]["state"] == "ok" and d["backup"]["month"] == "2026-10"
+              and d["summary"]["backup"] == "ok" and bk() == [] and "triage written" not in printed)
+        printed, d = backup("not-checked:connector error")
+        check("backup not-checked: recorded, no triage file, not missing", d["summary"]["backup"] == "not-checked" and bk() == [])
+        printed, d = backup("missing:none in Backups on 2026-10-07")
+        check("backup missing: one triage file, printed for the routine to commit",
+              len(bk()) == 1 and "triage written: triage/261007-trade-journal-backup-missing/intent.md" in printed
+              and "trade-journal-backup-2026-10-01.json.gz" in bk()[0].read_text())
+        printed, d = backup("missing")
+        check("backup missing again the same month: no second file", len(bk()) == 1 and "triage written" not in printed)
+        check("backup record carries no Drive id or path", set(d["backup"]) == {"name", "month", "state", "note", "checkedAt"})
+
     print(f"{'ALL PASS' if not fails else str(fails) + ' FAILED'}")
     sys.exit(1 if fails else 0)
 

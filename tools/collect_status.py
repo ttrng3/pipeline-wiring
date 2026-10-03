@@ -171,6 +171,29 @@ def write_triage(rows, now):
     return written
 
 
+BACKUP_STATES = ("ok", "missing", "not-due", "not-checked")
+BACKUP_KIND = "trade-journal-backup-missing"
+
+
+def write_backup_triage(month, note, now):
+    """One triage/<yymmdd>-trade-journal-backup-missing/intent.md per month the Drive master is missing.
+    Status only: the month, the file name and the folder name, never a size or any journal data."""
+    if any(TRIAGE.glob(f"{now:%y%m}??-{BACKUP_KIND}/intent.md")):
+        return []
+    d = TRIAGE / f"{now:%y%m%d}-{BACKUP_KIND}"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "intent.md").write_text(
+        f"# Intent (open, from the daily check)\n\n"
+        f"Status: open. Written by `tools/collect_status.py` at {now:%Y-%m-%dT%H:%M:%SZ}. "
+        f"Ty triages: accept (it becomes a work item) or dismiss with a reason.\n\n"
+        f"**Trade Journal Drive backup** (Mac job, Trade-Journal `docs/backup.md`): "
+        f"`trade-journal-backup-{month}-01.json.gz` is not in Drive `09 Trading/Trade Journal/Backups/`"
+        f"{' (' + note + ')' if note else ''}.\n\n"
+        f"Likely causes: the Mac was off since the 1st, the launchd job is unloaded, or the backup Action failed. "
+        f"The check only reports. It changed nothing.\n")
+    return [str(d.relative_to(ROOT) / "intent.md")]
+
+
 def collect(now):
     try:
         bands = json.loads(BANDS.read_text())
@@ -216,14 +239,16 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--preview", action="append", default=[], metavar="KEY=STATE[:note]",
                     help="record the artifact-side check for a pipeline (in-sync | behind | unreachable | not-checked)")
+    ap.add_argument("--backup", metavar="STATE[:note]",
+                    help="record the Trade Journal Drive-backup check (ok | missing | not-due | not-checked)")
     ap.add_argument("--print", action="store_true")
     a = ap.parse_args()
     now = dt.datetime.now(dt.timezone.utc)
     triage = []
-    if a.preview:
+    if a.preview or a.backup:
         data = json.loads(OUT.read_text()) if OUT.exists() else None
         if not data:
-            sys.exit("run the collector first, then record previews")
+            sys.exit("run the collector first, then record previews or the backup check")
         by = {p["key"]: p for p in data["pipelines"]}
         for spec in a.preview:
             key, _, rest = spec.partition("=")
@@ -231,7 +256,18 @@ def main():
             if key not in by:
                 sys.exit(f"unknown pipeline key {key!r}; known: {', '.join(by)}")
             by[key]["preview"].update(state=state.strip(), note=note.strip(), checkedAt=now.strftime("%Y-%m-%dT%H:%M:%SZ"))
-        data["previewsCheckedAt"] = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        if a.preview:
+            data["previewsCheckedAt"] = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        if a.backup:
+            state, _, note = a.backup.partition(":")
+            state, note = state.strip(), note.strip()
+            if state not in BACKUP_STATES:
+                sys.exit(f"unknown backup state {state!r}; known: {', '.join(BACKUP_STATES)}")
+            month = f"{now:%Y-%m}"
+            data["backup"] = {"name": "Trade Journal Drive backup", "month": month, "state": state,
+                              "note": note, "checkedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ")}
+            if state == "missing":
+                triage = write_backup_triage(month, note, now)
     else:
         data = {"generatedUtc": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "pipelines": collect(now)}
         triage = write_triage(data["pipelines"], now)
@@ -246,16 +282,18 @@ def main():
         "logOnly": [p["key"] for p in data["pipelines"] if p.get("band") == "log"],
         "diagnose": [p["key"] for p in data["pipelines"] if p.get("band") == "diagnose"],
     }
+    if data.get("backup"):
+        data["summary"]["backup"] = data["backup"]["state"]
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n")
-    if a.print or not a.preview:
+    if a.print or not (a.preview or a.backup):
         for p in data["pipelines"]:
             print(f"{p['name']:<16} hb={str(p.get('heartbeat'))[:10]} age={p.get('heartbeatAgeDays')}d "
                   f"{'fresh' if p.get('fresh') else 'STALE'}  next={str(p.get('nextFireUtc'))[:16]}  preview={p['preview'].get('state')}"
                   f"  band={p.get('band')}{' (' + p['bandReason'] + ')' if p.get('bandReason') else ''}")
         print(json.dumps(data["summary"], ensure_ascii=False))
-        for f in triage:
-            print("triage written:", f)
+    for f in triage:
+        print("triage written:", f)
 
 
 if __name__ == "__main__":

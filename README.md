@@ -23,7 +23,7 @@ The routine writes **only** the two data files and new `triage/` intent files �
 | `starter-story.html` | Tab 2, loaded in an iframe. |
 | `learning-matrix.html` | Tab 3, loaded in an iframe. The **only** Learning Matrix — see below. |
 | `tools/build-fragment.py` | Builds `build/artifact.html` for the mirror. |
-| `tools/collect_status.py` | Daily: heartbeats, commits, next fire and band per pipeline → `data/status.json`; `--preview key=state` records the artifact checks. |
+| `tools/collect_status.py` | Daily: heartbeats, commits, next fire and band per pipeline → `data/status.json`; `--preview key=state` records the artifact checks; `--backup STATE` records whether Trade Journal's monthly Drive master is in `Backups/` (state only; `missing` files a `trade-journal-backup-missing` triage note). |
 | `bands.yaml` | The two response tiers' thresholds: *log* = one late heartbeat; *diagnose* = a missed run or a heartbeat older than its watchdog. Not served by Pages; visible in the public repo. |
 | `triage/` | One `<yymmdd>-<key>-<kind>/intent.md` per diagnose finding, for Ty to triage. Not served by Pages; visible in the public repo, so status only. |
 | `data/status.json`, `data/.last-check` | Written by the daily check. The mirror needs `data/status.json` beside the page. |

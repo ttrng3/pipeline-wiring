@@ -22,8 +22,14 @@ TAIL = b"\n</body></html>"
 def main():
     if len(sys.argv) not in (2, 3):
         sys.exit(__doc__)
-    preview = pathlib.Path(sys.argv[1]).read_bytes()
-    build = pathlib.Path(sys.argv[2] if len(sys.argv) == 3 else ROOT / "build/artifact.html").read_bytes()
+    paths = {"preview": pathlib.Path(sys.argv[1]),
+             "build": pathlib.Path(sys.argv[2] if len(sys.argv) == 3 else ROOT / "build/artifact.html")}
+    try:
+        preview, build = paths["preview"].read_bytes(), paths["build"].read_bytes()
+    except OSError as e:
+        # Still one JSON object, so the step's evidence is a verdict, not a traceback.
+        print(json.dumps({"match": False, "error": f"unreadable: {e.filename}"}, indent=1))
+        sys.exit(1)
     cut = preview.find(HEAD_END)
     head = preview[:cut + len(HEAD_END)] if cut >= 0 else b""
     known = KNOWN_HEADS.get(hashlib.sha256(head).hexdigest()) if head else None

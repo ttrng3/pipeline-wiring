@@ -283,6 +283,13 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
 <h2>7 &middot; Open &mdash; needs you</h2>
 
 <details open>
+<summary><span class="pill p-ok">Changed 03/10</span> Trade Journal: rules check on the page</summary>
+<ul>
+  <li><strong>The journal page flags rule breaks</strong> (Trade-Journal #12, merged 03/10). The trade log carries a badge per broken rule and a &ldquo;Rule breaks only&rdquo; filter; Reports has a Rules card; Settings has an R field that stays in the browser and never reaches the repo. Page behaviour only: the schedule, routine, data and preview id are unchanged, and the preview was rebuilt from the merged page the same day.</li>
+</ul>
+</details>
+
+<details open>
 <summary><span class="pill p-ok">Changed 26/09</span> Trade Journal: schedule, preview, page &middot; Omni-Audit: preview rebuilt</summary>
 <ul>
   <li><strong>Schedule moved 01:07 &rarr; 04:00 UTC (11:00 Hanoi), Tue&ndash;Sat.</strong> The Webull export lands in <code>Raw Records/</code> around 08:30&ndash;10:00 Hanoi; the 08:07 fire found nothing on 25/09 and again on 26/09, and a manual run on 26/09 brought the new fills in. &ldquo;The page did not update&rdquo; in this pipeline means: check the CSV&rsquo;s modified time against the run&rsquo;s fire time before anything else.</li>

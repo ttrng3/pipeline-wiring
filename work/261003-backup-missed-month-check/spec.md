@@ -1,6 +1,6 @@
 # Spec: backup-missed-month-check
 
-**Approved:** 2026-10-03 · after review #16: free-text notes removed, six tests, and the served `status.json` gains a `backup` record, awaiting Ty's confirmation
+**Approved:** 2026-10-03 · after review #16: free-text notes removed, six tests, and the served `status.json` gains a `backup` record (a fixed label, state, month, check time). Ty delegated the ruling on 2026-10-03 ("use your best judgment for my best interest and proceed"); ruled: keep it public, because it is status only, and the journal itself is public on purpose.
 
 **Intent:** accepted 2026-10-03 · **Status:** approved
 

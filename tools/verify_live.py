@@ -90,6 +90,7 @@ def main():
     except (OSError, ValueError) as e:
         st = {}
         info["status_error"] = str(e)
+    st = st if isinstance(st, dict) else {}
     rows = st.get("pipelines") if isinstance(st.get("pipelines"), list) else []
     summ = st.get("summary") if isinstance(st.get("summary"), dict) else {}
     keys = [r.get("key") for r in rows if isinstance(r, dict)]
@@ -118,14 +119,13 @@ def main():
     v["bands_tests_pass"] = r.returncode == 0 and "ALL PASS" in r.stdout
     info["bands_tail"] = (r.stdout + r.stderr).strip().splitlines()[-2:]
 
-    # Every served path, live and on main, plus every other tracked text file on main, except the
-    # two files that spell out these patterns.
+    # Every served path, live and on main, plus every other tracked text file on main. Only this script
+    # is left out of the trace check, because it spells out the patterns; the forbidden words are
+    # checked everywhere.
     texts = {f"live:{p}": b.decode("utf-8", "replace") for p, b in live.items()}
     tracked = [p for p in subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, text=True).stdout.split("\0") if p]
     info["unreadable"] = []
     for p in tracked:
-        if p in ("tools/verify_live.py", "verification/wiring.md"):
-            continue
         try:
             texts[f"main:{p}"] = (ROOT / p).read_text(encoding="utf-8")
         except UnicodeDecodeError:
@@ -133,7 +133,7 @@ def main():
         except OSError:
             info["unreadable"].append(p)
     v["all_tracked_read"] = not info["unreadable"]
-    hits = {p: len(TRACES.findall(t)) for p, t in texts.items()}
+    hits = {p: len(TRACES.findall(t)) for p, t in texts.items() if p != "main:tools/verify_live.py"}
     info["traces"] = {p: n for p, n in hits.items() if n}
     v["no_personal_traces"] = not info["traces"]
     info["forbid_checked"] = len(forbid)

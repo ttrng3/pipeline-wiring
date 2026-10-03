@@ -25,7 +25,7 @@
 
 - **`tools/collect_status.py`:** about 30 lines.
   - an `--backup` argparse option;
-  - the record, the summary key, and a `write_backup_triage(month, note, now)` beside `write_triage`;
+  - the record, the summary key, and a `write_backup_triage(month, now)` beside `write_triage`;
   - the `--backup` branch shares the "load existing `status.json`" path with `--preview`, so a single call can carry both.
 - **`tools/test_bands.py`:** six new offline cases:
   - `ok` writes no file;
@@ -68,7 +68,7 @@ The apple-design skill doesn't apply: the only page change is one prose sentence
 ```
 1 Secrets ........ PASS (run on the branch before the PR)
 2 Visibility ..... PUBLIC — PASS, with one widening for Ty: the served data/status.json gains a
-                   `backup` record (state, month, file name, check time), the state of a Drive
+                   `backup` record (a fixed label, state, month, check time), the state of a Drive
                    folder rather than a pipeline heartbeat. No free text, id or path.
 3 Pages .......... PASS — .pages-allow unchanged; data/status.json already served
 4 Supabase ....... N/A
@@ -79,7 +79,7 @@ Verdict: safe to ship
 
 1. **Offline tests.** `python3 tools/test_bands.py` prints ALL PASS, including the six new backup cases.
 2. **Privacy.** `git grep -n -i -E 'gmail\.com|GoogleDrive-[a-z]'` gives no output. The status file carries no Drive id.
-3. **Live.** After the merge and the routine update, the run on 03/10 (day 3) reports `backup: not-due`, and the first run on or after 04/10 (16:00 UTC) reports `backup: ok` for October, since the master is in `Backups/`. *(Dates made exact after approval; the behaviour is unchanged.)* `data/status.json` at that commit has `"backup": {"state": "ok", "month": "2026-10", …}`. Measured on the first run after the merge.
+3. **Live.** After the merge and the routine update, the run on 03/10 (day 3) reports `backup: not-due`, and the first run on or after 04/10 (16:00 UTC) reports `backup: ok` for October, since the master is in `Backups/`: it was copied there by hand on 2026-10-03 and its SHA-256 matched the release asset (Trade-Journal PR #13 description; listing `Backups/` shows `trade-journal-backup-2026-10-01.json.gz`). *(Dates made exact after approval; the behaviour is unchanged.)* `data/status.json` at that commit has `"backup": {"state": "ok", "month": "2026-10", …}`. Measured on the first run after the merge.
 
 ## Out of scope
 

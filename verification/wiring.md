@@ -16,7 +16,7 @@ Run any time except during the daily check (16:00 UTC = 23:00 Hanoi, `0 16 * * *
 1. **Repo and live site.** `python3 tools/verify_live.py --forbid <words>` → exit 0 and `"pass": true`. The words are the nine preview ids, read at run time from the status routine's prompt (`RemoteTrigger get` on the daily check's routine), plus any person's handle the runner knows has leaked anywhere before. Never write them here. Without `--forbid`, `no_forbidden_words` fails on purpose.
 2. **Live page in Chrome.** Open https://ttrng3.github.io/pipeline-wiring/ and run the script under Invariants. Expected: all values true.
 3. **Console.** Reload, then read errors for `TypeError|ReferenceError|Uncaught|SyntaxError`. Expected: none.
-4. **Preview.** Find the preview by its title with `Artifact list` (the runner may not have `RemoteTrigger get`; never write its id here). `Artifact list` its files, and `Artifact read` `index.html` and `data/status.json`. Expected: exactly `index.html`, `starter-story.html`, `learning-matrix.html` and `data/status.json` (CLAUDE.md: never the page alone). `index.html` has the sha256 of a fresh `python3 tools/build-fragment.py` output (`build/artifact.html`), built from `main` or from `$c` (below; `d=$(mktemp -d); git archive $c | tar -x -C $d; (cd $d && python3 tools/build-fragment.py)`, then hash `$d/build/artifact.html`). Each other file read has the sha256 of `main`'s copy, or of the last routine commit's copy: `c=$(git log --first-parent --format='%h %s' -- data/status.json | /usr/bin/grep -v ' (#[0-9]*)$' | head -1 | cut -d' ' -f1)`, then `git show $c:<path> | shasum -a 256`. Matching `$c` and not `main` means PRs changed the file since the run: behind by design until the next run.
+4. **Preview.** Find the preview by its title with `Artifact list` (the runner may not have `RemoteTrigger get`; never write its id here). `Artifact list` its files, and `Artifact read` `index.html` and `data/status.json`. Expected: exactly `index.html`, `starter-story.html`, `learning-matrix.html` and `data/status.json` (CLAUDE.md: never the page alone). `index.html` has the sha256 of a fresh `python3 tools/build-fragment.py` output (`build/artifact.html`), built from `main` or from `$c` (below; `d=$(mktemp -d); git archive $c | tar -x -C $d; (cd $d && python3 tools/build-fragment.py)`, then hash `$d/build/artifact.html`). Each other file read has the sha256 of `main`'s copy, or of the last routine commit's copy: `c=$(git log --first-parent --format='%h %s' -- data/status.json | /usr/bin/grep -v ' (#[0-9]*)$' | head -1 | cut -d' ' -f1)`, then `git show $c:<path> | shasum -a 256`. If `$c` is empty (`[ -n "$c" ] || echo "no routine commit found"`), stop the step and report it; an empty `$c` would hash the index copy instead. Matching `$c` and not `main` means PRs changed the file since the run: behind by design until the next run.
 
 ## Invariants
 
@@ -54,7 +54,7 @@ JSON.stringify({three_tabs:document.querySelectorAll('[role=tab]').length===3,
 
 ## Adversary
 
-- **A stranger on the public page.** `private_not_served`: README, CLAUDE.md, REVIEW.md, `bands.yaml`, the heartbeat, the four `tools/` scripts, this protocol, one `work/` file and one `triage/` file (when any exist), found at run time, all exist on `main` and answer 404. ``no_personal_traces` and `no_forbidden_words` keep preview ids, trigger ids and people off every served and tracked file, this protocol included (only the script is left out of the trace check, because it spells out the patterns). The ids left the current files on 30/09 (#7); this catches one creeping back.
+- **A stranger on the public page.** `private_not_served`: README, CLAUDE.md, REVIEW.md, `bands.yaml`, the heartbeat, the four `tools/` scripts, this protocol, one `work/` file and one `triage/` file (when any exist), found at run time, all exist on `main` and answer 404. `no_personal_traces` and `no_forbidden_words` keep preview ids, trigger ids and people off every served and tracked file, this protocol included (only the script is left out of the trace check, because it spells out the patterns). The ids left the current files on 30/09 (#7); this catches one creeping back.
 - **A daily check that stopped.** `heartbeat_fresh`, `status_fresh`. The on-call emails at 26 h; this protocol fails at the same line.
 - **A schedule changed in one copy only** (26/09: the "Next" column was wrong). `rows_match_collector` catches a pipeline added or dropped in `PIPELINES` but not in the data. A changed cron alone is not caught (Not covered).
 - **A row with no cell, or a cell with no row.** `page_has_every_cell`, and `next_filled` / `hb_filled` / `preview_filled` in the browser.
@@ -71,7 +71,7 @@ JSON.stringify({three_tabs:document.querySelectorAll('[role=tab]').length===3,
 
 - The JSON from step 1 and the JSON from step 2.
 - Screenshots (`save_to_disk: true`): each of the three tabs.
-- For step 4: the preview's file list and the hashes read.
+- For step 4: file names and hashes only; never the preview's id, URL or raw `Artifact list` output (the PR is public).
 
 ## Not covered
 

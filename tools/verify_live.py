@@ -107,7 +107,10 @@ def main():
     page = (ROOT / "index.html").read_text(encoding="utf-8")
     info["cells_missing"] = [f"{a}:{k}" for k in keys for a in ("data-next", "data-hb", "data-preview")
                              if page.count(f'{a}="{k}"') != 1]
-    v["page_has_every_cell"] = bool(keys) and not info["cells_missing"]
+    # And no cell without a row: a dropped pipeline's cells would keep showing a stale row.
+    info["cells_without_row"] = sorted({m for a in ("data-next", "data-hb", "data-preview")
+                                        for m in re.findall(f'{a}="([a-z0-9-]+)"', page)} - set(keys))
+    v["page_has_every_cell"] = bool(keys) and not info["cells_missing"] and not info["cells_without_row"]
 
     beat = ((ROOT / "data/.last-check").read_text(encoding="utf-8").split() or [""])[0] if (ROOT / "data/.last-check").exists() else ""
     info["heartbeat_age_hours"], info["status_age_hours"] = age_hours(beat), age_hours(str(st.get("generatedUtc", "")))
@@ -123,8 +126,10 @@ def main():
     # is left out of the trace check, because it spells out the patterns; the forbidden words are
     # checked everywhere.
     texts = {f"live:{p}": b.decode("utf-8", "replace") for p, b in live.items()}
-    tracked = [p for p in subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, text=True).stdout.split("\0") if p]
-    info["unreadable"] = []
+    ls = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, text=True)
+    tracked = [p for p in ls.stdout.split("\0") if p]
+    # A failed or empty listing must not read as "nothing to scan".
+    info["unreadable"] = [] if ls.returncode == 0 and tracked else ["(git ls-files failed or listed nothing)"]
     for p in tracked:
         try:
             texts[f"main:{p}"] = (ROOT / p).read_text(encoding="utf-8")

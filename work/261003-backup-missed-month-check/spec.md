@@ -1,6 +1,8 @@
 # Spec: backup-missed-month-check
 
-**Intent:** accepted 2026-10-03 · **Status:** draft
+**Approved:** 2026-10-03
+
+**Intent:** accepted 2026-10-03 · **Status:** approved
 
 ## Requirements
 

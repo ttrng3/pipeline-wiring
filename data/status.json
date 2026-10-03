@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-10-02T16:11:24Z",
+ "generatedUtc": "2026-10-03T16:12:07Z",
  "pipelines": [
   {
    "key": "tmdv",
@@ -10,10 +10,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-02T16:12:49Z"
+    "checkedAt": "2026-10-03T16:12:27Z"
    },
    "heartbeat": "2026-09-29T17:29:39Z",
-   "heartbeatAgeDays": 2.9,
+   "heartbeatAgeDays": 3.9,
    "fresh": true,
    "manifestStamp": "2026-09-29T17:34:35Z",
    "nextFireUtc": "2026-10-04T11:00:00Z",
@@ -30,10 +30,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-02T16:12:49Z"
+    "checkedAt": "2026-10-03T16:12:27Z"
    },
    "heartbeat": "2026-09-30T08:44:38Z",
-   "heartbeatAgeDays": 2.3,
+   "heartbeatAgeDays": 3.3,
    "fresh": true,
    "manifestStamp": "2026-09-30T08:44:38Z",
    "nextFireUtc": "2026-10-05T15:45:00Z",
@@ -50,10 +50,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-02T16:12:49Z"
+    "checkedAt": "2026-10-03T16:12:27Z"
    },
    "heartbeat": "2026-09-30T08:42:20Z",
-   "heartbeatAgeDays": 2.3,
+   "heartbeatAgeDays": 3.3,
    "fresh": true,
    "manifestStamp": "2026-09-30T08:42:20Z",
    "nextFireUtc": "2026-10-05T14:00:00Z",
@@ -70,10 +70,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-02T16:12:49Z"
+    "checkedAt": "2026-10-03T16:12:27Z"
    },
    "heartbeat": "2026-09-30T01:38:29Z",
-   "heartbeatAgeDays": 2.6,
+   "heartbeatAgeDays": 3.6,
    "fresh": true,
    "manifestStamp": "2026-09-29T16:36:01Z",
    "nextFireUtc": "2026-10-04T14:00:00Z",
@@ -90,13 +90,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-02T16:12:49Z"
+    "checkedAt": "2026-10-03T16:12:27Z"
    },
-   "heartbeat": "2026-10-02T04:21:01Z",
+   "heartbeat": "2026-10-03T04:46:08Z",
    "heartbeatAgeDays": 0.5,
    "fresh": true,
-   "manifestStamp": "2026-10-02T04:21:01.846Z",
-   "nextFireUtc": "2026-10-03T04:00:00Z",
+   "manifestStamp": "2026-10-02T17:56:04.604Z",
+   "nextFireUtc": "2026-10-06T04:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -110,10 +110,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-02T16:12:49Z"
+    "checkedAt": "2026-10-03T16:12:27Z"
    },
    "heartbeat": "2026-09-30T01:35:00Z",
-   "heartbeatAgeDays": 2.6,
+   "heartbeatAgeDays": 3.6,
    "fresh": true,
    "manifestStamp": "2026-09-20T00:00:00Z",
    "nextFireUtc": "2026-10-05T01:00:00Z",
@@ -130,10 +130,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-02T16:12:49Z"
+    "checkedAt": "2026-10-03T16:12:27Z"
    },
    "heartbeat": "2026-10-01T06:06:34Z",
-   "heartbeatAgeDays": 1.4,
+   "heartbeatAgeDays": 2.4,
    "fresh": true,
    "manifestStamp": "2026-09-20T04:00:00Z",
    "nextFireUtc": "2026-10-15T06:00:00Z",
@@ -150,10 +150,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-02T16:12:49Z"
+    "checkedAt": "2026-10-03T16:12:27Z"
    },
    "heartbeat": "2026-10-02T01:10:00Z",
-   "heartbeatAgeDays": 0.6,
+   "heartbeatAgeDays": 1.6,
    "fresh": true,
    "manifestStamp": "2026-10-01T03:45:51Z",
    "nextFireUtc": "2026-11-01T03:00:00Z",
@@ -170,13 +170,13 @@
    "preview": {
     "state": "in-sync",
     "note": "no manifest, existence only",
-    "checkedAt": "2026-10-02T16:12:49Z"
+    "checkedAt": "2026-10-03T16:12:27Z"
    },
-   "heartbeat": "2026-10-01T16:11:00Z",
+   "heartbeat": "2026-10-02T16:11:24Z",
    "heartbeatAgeDays": 1.0,
    "fresh": true,
    "manifestStamp": null,
-   "nextFireUtc": "2026-10-03T16:00:00Z",
+   "nextFireUtc": "2026-10-04T16:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -191,5 +191,5 @@
   "logOnly": [],
   "diagnose": []
  },
- "previewsCheckedAt": "2026-10-02T16:12:49Z"
+ "previewsCheckedAt": "2026-10-03T16:12:27Z"
 }

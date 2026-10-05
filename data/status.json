@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-10-04T16:11:19Z",
+ "generatedUtc": "2026-10-05T16:11:15Z",
  "pipelines": [
   {
    "key": "tmdv",
@@ -10,10 +10,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-04T16:12:44Z"
+    "checkedAt": "2026-10-05T16:12:42Z"
    },
    "heartbeat": "2026-10-04T11:14:02Z",
-   "heartbeatAgeDays": 0.2,
+   "heartbeatAgeDays": 1.2,
    "fresh": true,
    "manifestStamp": "2026-10-04T11:22:00Z",
    "nextFireUtc": "2026-10-11T11:00:00Z",
@@ -30,13 +30,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-04T16:12:44Z"
+    "checkedAt": "2026-10-05T16:12:42Z"
    },
-   "heartbeat": "2026-09-30T08:44:38Z",
-   "heartbeatAgeDays": 4.3,
+   "heartbeat": "2026-10-05T15:47:00Z",
+   "heartbeatAgeDays": 0.0,
    "fresh": true,
-   "manifestStamp": "2026-09-30T08:44:38Z",
-   "nextFireUtc": "2026-10-05T15:45:00Z",
+   "manifestStamp": "2026-10-05T15:48:00Z",
+   "nextFireUtc": "2026-10-12T15:45:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -50,13 +50,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-04T16:12:44Z"
+    "checkedAt": "2026-10-05T16:12:42Z"
    },
-   "heartbeat": "2026-09-30T08:42:20Z",
-   "heartbeatAgeDays": 4.3,
+   "heartbeat": "2026-10-05T14:08:05Z",
+   "heartbeatAgeDays": 0.1,
    "fresh": true,
-   "manifestStamp": "2026-09-30T08:42:20Z",
-   "nextFireUtc": "2026-10-05T14:00:00Z",
+   "manifestStamp": "2026-10-05T14:08:05Z",
+   "nextFireUtc": "2026-10-12T14:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -70,10 +70,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-04T16:12:44Z"
+    "checkedAt": "2026-10-05T16:12:42Z"
    },
    "heartbeat": "2026-10-04T14:12:08Z",
-   "heartbeatAgeDays": 0.1,
+   "heartbeatAgeDays": 1.1,
    "fresh": true,
    "manifestStamp": "2026-10-04T14:20:31Z",
    "nextFireUtc": "2026-10-11T14:00:00Z",
@@ -90,10 +90,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-04T16:12:44Z"
+    "checkedAt": "2026-10-05T16:12:42Z"
    },
    "heartbeat": "2026-10-03T04:46:08Z",
-   "heartbeatAgeDays": 1.5,
+   "heartbeatAgeDays": 2.5,
    "fresh": true,
    "manifestStamp": "2026-10-02T17:56:04.604Z",
    "nextFireUtc": "2026-10-06T04:00:00Z",
@@ -110,13 +110,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-04T16:12:44Z"
+    "checkedAt": "2026-10-05T16:12:42Z"
    },
-   "heartbeat": "2026-09-30T01:35:00Z",
-   "heartbeatAgeDays": 4.6,
+   "heartbeat": "2026-10-05T01:14:12Z",
+   "heartbeatAgeDays": 0.6,
    "fresh": true,
    "manifestStamp": "2026-09-20T00:00:00Z",
-   "nextFireUtc": "2026-10-05T01:00:00Z",
+   "nextFireUtc": "2026-10-12T01:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -130,10 +130,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-04T16:12:44Z"
+    "checkedAt": "2026-10-05T16:12:42Z"
    },
    "heartbeat": "2026-10-01T06:06:34Z",
-   "heartbeatAgeDays": 3.4,
+   "heartbeatAgeDays": 4.4,
    "fresh": true,
    "manifestStamp": "2026-09-20T04:00:00Z",
    "nextFireUtc": "2026-10-15T06:00:00Z",
@@ -150,10 +150,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-04T16:12:44Z"
+    "checkedAt": "2026-10-05T16:12:42Z"
    },
    "heartbeat": "2026-10-02T01:10:00Z",
-   "heartbeatAgeDays": 2.6,
+   "heartbeatAgeDays": 3.6,
    "fresh": true,
    "manifestStamp": "2026-10-01T03:45:51Z",
    "nextFireUtc": "2026-11-01T03:00:00Z",
@@ -170,13 +170,13 @@
    "preview": {
     "state": "in-sync",
     "note": "no manifest, existence only",
-    "checkedAt": "2026-10-04T16:12:44Z"
+    "checkedAt": "2026-10-05T16:12:42Z"
    },
-   "heartbeat": "2026-10-03T16:12:07Z",
+   "heartbeat": "2026-10-04T16:11:19Z",
    "heartbeatAgeDays": 1.0,
    "fresh": true,
    "manifestStamp": null,
-   "nextFireUtc": "2026-10-05T16:00:00Z",
+   "nextFireUtc": "2026-10-06T16:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -192,11 +192,11 @@
   "diagnose": [],
   "backup": "ok"
  },
- "previewsCheckedAt": "2026-10-04T16:12:44Z",
+ "previewsCheckedAt": "2026-10-05T16:12:42Z",
  "backup": {
   "name": "Trade Journal Drive backup",
   "month": "2026-10",
   "state": "ok",
-  "checkedAt": "2026-10-04T16:12:44Z"
+  "checkedAt": "2026-10-05T16:12:42Z"
  }
 }

@@ -247,7 +247,7 @@ one-shot         Nhật 2026 pre-trip brief 23/11 02:00 &middot; post-trip wrap-
 disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (replaced by Ops-Dashboard 1st &amp; 15th) &middot; 9 one-off test/verify routines</div>
 <p class="cap">The last monthly system run (fired 25/09 02:57&nbsp;UTC) reports <code>SUCCEEDED</code>.</p>
 
-<h2>5 &middot; Mac dependency &mdash; two routines and two Mac-only jobs</h2>
+<h2>5 &middot; Mac dependency &mdash; two routines and three Mac-only jobs</h2>
 <div class="card">
   <p style="margin-bottom:10px"><span class="pill p-warn">Found 25/09</span> Two <strong>enabled</strong> one-shot routines hold the full remote-devices tool set (<code>device_bash</code>, <code>device_list_dir</code>, <code>device_stage_files</code>, <code>device_commit_files</code>, credential autofill and more):</p>
   <ul>
@@ -257,6 +257,7 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
   <p>Both were created from a Cowork project on 05/09. Neither appears in the routine list call (see Caution in section 7); they were found only by fetching their ids one by one. Neither has a file mount.</p>
   <p><span class="pill p-info">Added 28/09</span> <strong>The knowledge graph is Mac-bound too, by design, and is not a routine.</strong> It is the graphify index over <code>93 Knowledge Base/</code> (Markdown only), at <code>graphify-out/</code> on Drive. A cloud routine cannot run it, because extraction dispatches subagents from a live Claude Code session. Rebuilt by hand with <code>/graphify . --update</code>. Last built <strong>28/09/2026</strong>: 2,498 nodes, 4,304 edges, health check clean (0 dangling). Next due <strong>about 28/10/2026</strong>. Nothing from the graph is published here: its content is internal.</p>
   <p><span class="pill p-info">Added 03/10</span> <strong>Trade Journal&rsquo;s monthly Drive backup is a Mac job, by Ty&rsquo;s choice, and is not a routine.</strong> A launchd job runs daily at 14:00 Mac local time (Hanoi while the Mac is in Vietnam) and acts once a month. It copies the month&rsquo;s master backup from the GitHub release into Drive <code>09 Trading/Trade Journal/Backups/</code>, then moves the CSVs already in the journal out of <code>Raw Records/</code>. If the Mac is asleep it catches up on the next wake; if it is switched off for the day, the next daily run picks it up. From the 4th of each month the daily check looks for that month&rsquo;s master in <code>Backups/</code>; if it is missing, the check files a triage note, which emails Ty. Ty chose it over a Google credential in GitHub (Trade-Journal #13, merge <code>502ae8e</code>). First real run <strong>01/11/2026</strong>. Runbook: Trade-Journal <code>docs/backup.md</code>.</p>
+  <p><span class="pill p-info">Added 08/10</span> <strong>Trade Journal&rsquo;s bot collector is a Mac job too.</strong> The trading bots run on the Mac and write their day files there, so only the Mac can collect them. A launchd job runs at 10:30 Mac local time (Hanoi while the Mac is in Vietnam), Tue&ndash;Sat, and copies the last session&rsquo;s bot rows (an allowlist of fields; no broker ids) plus 1-minute bars to Drive <code>Raw Records/Bots/</code> with rclone, which reaches Drive by path because launchd cannot read the Drive mount. The 11:00 routine reads that folder; its wiki step runs every night, quiet nights included, and a wiki failure never blocks or undoes the journal&rsquo;s own data push (Trade-Journal <code>docs/nightly-sync.md</code>). Trade-Journal #15 and #16 (<code>5864b32</code>, <code>1aa87e9</code>).</p>
   <p style="margin-bottom:0"><strong>The ten enabled routines in the list</strong>, and TMDV (fetched by id), hold no remote-devices tool and have <code>file_mounts: []</code>. The 24/09 claim that every routine reports <code>bound = false</code> cannot be re-checked: the API response has no <code>bound</code> field.</p>
 </div>
 
@@ -282,6 +283,15 @@ disabled         KB Monthly Update (folded into Part C) &middot; KSNB weekly (re
 </details>
 
 <h2>7 &middot; Open &mdash; needs you</h2>
+
+<details open>
+<summary><span class="pill p-ok">Changed 08/10</span> Trade Journal: the bot trading wiki</summary>
+<ul>
+  <li><strong>The journal has a wiki page</strong>, <a href="https://ttrng3.github.io/Trade-Journal/wiki.html">ttrng3.github.io/Trade-Journal/wiki.html</a> (Wiki button in the journal header). Each trading day&rsquo;s bot and manual trades are compiled into linked pages (days, mistakes, setups, what-ifs, rules); a one-page weekly report follows on Saturdays. First compiled day 07/10.</li>
+  <li><strong>How it runs:</strong> a Mac job collects the bots&rsquo; day files to Drive <code>09 Trading/Trade Journal/Raw Records/Bots/</code> at 10:30 Hanoi, Tue&ndash;Sat (section 5); the existing Trade Journal routine at 11:00 Hanoi then adds a wiki step after the Webull sync. No new routine and no schedule change.</li>
+  <li>Trade-Journal #14 <code>1a9a42e</code>, #15 <code>5864b32</code>, #16 <code>1aa87e9</code>, #17 <code>7092f70</code>. Runbook: Trade-Journal <code>docs/nightly-sync.md</code>, &ldquo;The wiki step&rdquo;.</li>
+</ul>
+</details>
 
 <details open>
 <summary><span class="pill p-ok">Changed 03/10</span> Trade Journal: monthly Drive backup on the Mac</summary>

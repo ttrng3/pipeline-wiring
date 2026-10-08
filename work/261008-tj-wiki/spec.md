@@ -5,8 +5,8 @@
 **Intent:** accepted 2026-10-08 · **Status:** approved
 
 ## Requirements
-1. Section 5's heading counts three Mac-only jobs; an "Added 08/10" paragraph describes the collector: launchd, 10:30 Mac local time Tue–Sat, an allowlist of fields with no broker ids, rclone to Drive `Raw Records/Bots/` by path, read by the 11:00 routine (Trade-Journal #15, #16).
-2. Section 7 gets a "Changed 08/10" entry: the wiki page address, how it runs, and Trade-Journal #14–#17 with merge commits.
+1. Section 5's heading counts three Mac-only jobs; an "Added 08/10" paragraph describes the collector: launchd, 10:30 Mac local time Tue–Sat, an allowlist of fields with no broker ids, rclone to Drive `Raw Records/Bots/` by path, read by the 11:00 routine; it lands first only while the Mac is UTC+6:30 or east; a late or missed collection compiles the day without bot rows ("bot bundle missing") and is not flagged here (Trade-Journal #15, #16, `docs/wiki.md`).
+2. Section 7 gets a "Changed 08/10" entry: the wiki page address, how it runs (including that the wiki step runs every routine run and never blocks the data push), and Trade-Journal #14–#17 with merge commits.
 
 ## Design
 `index.html` only: one heading word, one paragraph, one `<details>` block in the page's existing style.

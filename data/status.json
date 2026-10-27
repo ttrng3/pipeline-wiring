@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-10-26T16:02:51Z",
+ "generatedUtc": "2026-10-27T16:03:10Z",
  "pipelines": [
   {
    "key": "tmdv",
@@ -10,10 +10,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-26T16:04:50Z"
+    "checkedAt": "2026-10-27T16:05:12Z"
    },
    "heartbeat": "2026-10-25T11:13:47Z",
-   "heartbeatAgeDays": 1.2,
+   "heartbeatAgeDays": 2.2,
    "fresh": true,
    "manifestStamp": "2026-10-25T11:20:00Z",
    "nextFireUtc": "2026-11-01T11:00:00Z",
@@ -30,10 +30,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-26T16:04:50Z"
+    "checkedAt": "2026-10-27T16:05:12Z"
    },
    "heartbeat": "2026-10-26T15:47:04Z",
-   "heartbeatAgeDays": 0.0,
+   "heartbeatAgeDays": 1.0,
    "fresh": true,
    "manifestStamp": "2026-10-26T15:47:04Z",
    "nextFireUtc": "2026-11-02T15:45:00Z",
@@ -50,10 +50,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-26T16:04:50Z"
+    "checkedAt": "2026-10-27T16:05:12Z"
    },
    "heartbeat": "2026-10-26T14:21:28Z",
-   "heartbeatAgeDays": 0.1,
+   "heartbeatAgeDays": 1.1,
    "fresh": true,
    "manifestStamp": "2026-10-26T14:21:28Z",
    "nextFireUtc": "2026-11-02T14:00:00Z",
@@ -70,10 +70,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-26T16:04:50Z"
+    "checkedAt": "2026-10-27T16:05:12Z"
    },
    "heartbeat": "2026-10-25T14:04:50Z",
-   "heartbeatAgeDays": 1.1,
+   "heartbeatAgeDays": 2.1,
    "fresh": true,
    "manifestStamp": "2026-10-18T14:23:29Z",
    "nextFireUtc": "2026-11-01T14:00:00Z",
@@ -90,13 +90,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-26T16:04:50Z"
+    "checkedAt": "2026-10-27T16:05:12Z"
    },
-   "heartbeat": "2026-10-24T04:17:58Z",
-   "heartbeatAgeDays": 2.5,
+   "heartbeat": "2026-10-27T04:11:32Z",
+   "heartbeatAgeDays": 0.5,
    "fresh": true,
-   "manifestStamp": "2026-10-24T02:12:21.258Z",
-   "nextFireUtc": "2026-10-27T04:00:00Z",
+   "manifestStamp": "2026-10-27T04:11:32.425Z",
+   "nextFireUtc": "2026-10-28T04:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -110,10 +110,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-26T16:04:50Z"
+    "checkedAt": "2026-10-27T16:05:12Z"
    },
    "heartbeat": "2026-10-26T01:02:23Z",
-   "heartbeatAgeDays": 0.6,
+   "heartbeatAgeDays": 1.6,
    "fresh": true,
    "manifestStamp": "2026-09-20T00:00:00Z",
    "nextFireUtc": "2026-11-02T01:00:00Z",
@@ -130,10 +130,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-26T16:04:50Z"
+    "checkedAt": "2026-10-27T16:05:12Z"
    },
    "heartbeat": "2026-10-15T06:11:45Z",
-   "heartbeatAgeDays": 11.4,
+   "heartbeatAgeDays": 12.4,
    "fresh": true,
    "manifestStamp": "2026-09-20T04:00:00Z",
    "nextFireUtc": "2026-11-01T06:00:00Z",
@@ -150,10 +150,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-26T16:04:50Z"
+    "checkedAt": "2026-10-27T16:05:12Z"
    },
    "heartbeat": "2026-10-02T01:10:00Z",
-   "heartbeatAgeDays": 24.6,
+   "heartbeatAgeDays": 25.6,
    "fresh": true,
    "manifestStamp": "2026-10-01T03:45:51Z",
    "nextFireUtc": "2026-11-01T03:00:00Z",
@@ -170,13 +170,13 @@
    "preview": {
     "state": "in-sync",
     "note": "no manifest, existence only",
-    "checkedAt": "2026-10-26T16:04:50Z"
+    "checkedAt": "2026-10-27T16:05:12Z"
    },
-   "heartbeat": "2026-10-25T16:02:29Z",
+   "heartbeat": "2026-10-26T16:02:51Z",
    "heartbeatAgeDays": 1.0,
    "fresh": true,
    "manifestStamp": null,
-   "nextFireUtc": "2026-10-27T16:00:00Z",
+   "nextFireUtc": "2026-10-28T16:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -192,11 +192,11 @@
   "diagnose": [],
   "backup": "ok"
  },
- "previewsCheckedAt": "2026-10-26T16:04:50Z",
+ "previewsCheckedAt": "2026-10-27T16:05:12Z",
  "backup": {
   "name": "Trade Journal Drive backup",
   "month": "2026-10",
   "state": "ok",
-  "checkedAt": "2026-10-26T16:04:50Z"
+  "checkedAt": "2026-10-27T16:05:12Z"
  }
 }

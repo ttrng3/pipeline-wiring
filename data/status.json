@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-10-31T16:02:38Z",
+ "generatedUtc": "2026-11-01T16:03:52Z",
  "pipelines": [
   {
    "key": "tmdv",
@@ -10,13 +10,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-31T16:03:48Z"
+    "checkedAt": "2026-11-01T16:04:09Z"
    },
-   "heartbeat": "2026-10-25T11:13:47Z",
-   "heartbeatAgeDays": 6.2,
+   "heartbeat": "2026-11-01T11:11:27Z",
+   "heartbeatAgeDays": 0.2,
    "fresh": true,
-   "manifestStamp": "2026-10-25T11:20:00Z",
-   "nextFireUtc": "2026-11-01T11:00:00Z",
+   "manifestStamp": "2026-11-01T11:25:31Z",
+   "nextFireUtc": "2026-11-08T11:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -30,10 +30,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-31T16:03:48Z"
+    "checkedAt": "2026-11-01T16:04:09Z"
    },
    "heartbeat": "2026-10-26T15:47:04Z",
-   "heartbeatAgeDays": 5.0,
+   "heartbeatAgeDays": 6.0,
    "fresh": true,
    "manifestStamp": "2026-10-26T15:47:04Z",
    "nextFireUtc": "2026-11-02T15:45:00Z",
@@ -50,10 +50,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-31T16:03:48Z"
+    "checkedAt": "2026-11-01T16:04:09Z"
    },
    "heartbeat": "2026-10-26T14:21:28Z",
-   "heartbeatAgeDays": 5.1,
+   "heartbeatAgeDays": 6.1,
    "fresh": true,
    "manifestStamp": "2026-10-26T14:21:28Z",
    "nextFireUtc": "2026-11-02T14:00:00Z",
@@ -70,13 +70,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-31T16:03:48Z"
+    "checkedAt": "2026-11-01T16:04:09Z"
    },
-   "heartbeat": "2026-10-25T14:04:50Z",
-   "heartbeatAgeDays": 6.1,
+   "heartbeat": "2026-11-01T14:04:26Z",
+   "heartbeatAgeDays": 0.1,
    "fresh": true,
-   "manifestStamp": "2026-10-18T14:23:29Z",
-   "nextFireUtc": "2026-11-01T14:00:00Z",
+   "manifestStamp": "2026-11-01T14:15:37Z",
+   "nextFireUtc": "2026-11-08T14:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -90,10 +90,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-31T16:03:48Z"
+    "checkedAt": "2026-11-01T16:04:09Z"
    },
    "heartbeat": "2026-10-31T04:11:19Z",
-   "heartbeatAgeDays": 0.5,
+   "heartbeatAgeDays": 1.5,
    "fresh": true,
    "manifestStamp": "2026-10-31T04:11:19.779Z",
    "nextFireUtc": "2026-11-03T04:00:00Z",
@@ -110,10 +110,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-31T16:03:48Z"
+    "checkedAt": "2026-11-01T16:04:09Z"
    },
    "heartbeat": "2026-10-26T01:02:23Z",
-   "heartbeatAgeDays": 5.6,
+   "heartbeatAgeDays": 6.6,
    "fresh": true,
    "manifestStamp": "2026-09-20T00:00:00Z",
    "nextFireUtc": "2026-11-02T01:00:00Z",
@@ -130,13 +130,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-10-31T16:03:48Z"
+    "checkedAt": "2026-11-01T16:04:09Z"
    },
-   "heartbeat": "2026-10-15T06:11:45Z",
-   "heartbeatAgeDays": 16.4,
+   "heartbeat": "2026-11-01T06:12:53Z",
+   "heartbeatAgeDays": 0.4,
    "fresh": true,
-   "manifestStamp": "2026-09-20T04:00:00Z",
-   "nextFireUtc": "2026-11-01T06:00:00Z",
+   "manifestStamp": "2026-11-01T06:12:53Z",
+   "nextFireUtc": "2026-11-15T06:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -148,15 +148,15 @@
    "cron": "0 3 1 * *",
    "maxHeartbeatAgeDays": 35,
    "preview": {
-    "state": "in-sync",
-    "note": "",
-    "checkedAt": "2026-10-31T16:03:48Z"
+    "state": "behind",
+    "note": "artifact 2026-10-01T03:45:51Z, repo 2026-11-01T04:12:00Z",
+    "checkedAt": "2026-11-01T16:04:09Z"
    },
-   "heartbeat": "2026-10-02T01:10:00Z",
-   "heartbeatAgeDays": 29.6,
+   "heartbeat": "2026-11-01T04:12:00Z",
+   "heartbeatAgeDays": 0.5,
    "fresh": true,
-   "manifestStamp": "2026-10-01T03:45:51Z",
-   "nextFireUtc": "2026-11-01T03:00:00Z",
+   "manifestStamp": "2026-11-01T04:12:00Z",
+   "nextFireUtc": "2026-12-01T03:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -170,13 +170,13 @@
    "preview": {
     "state": "in-sync",
     "note": "no manifest, existence only",
-    "checkedAt": "2026-10-31T16:03:48Z"
+    "checkedAt": "2026-11-01T16:04:09Z"
    },
-   "heartbeat": "2026-10-30T16:02:50Z",
+   "heartbeat": "2026-10-31T16:02:38Z",
    "heartbeatAgeDays": 1.0,
    "fresh": true,
    "manifestStamp": null,
-   "nextFireUtc": "2026-11-01T16:00:00Z",
+   "nextFireUtc": "2026-11-02T16:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -186,17 +186,19 @@
   "pipelines": 9,
   "fresh": 9,
   "stale": [],
-  "previewsInSync": 9,
-  "previewsBehind": [],
+  "previewsInSync": 8,
+  "previewsBehind": [
+   "omni-audit"
+  ],
   "logOnly": [],
   "diagnose": [],
-  "backup": "ok"
+  "backup": "not-due"
  },
- "previewsCheckedAt": "2026-10-31T16:03:48Z",
+ "previewsCheckedAt": "2026-11-01T16:04:09Z",
  "backup": {
   "name": "Trade Journal Drive backup",
-  "month": "2026-10",
-  "state": "ok",
-  "checkedAt": "2026-10-31T16:03:48Z"
+  "month": "2026-11",
+  "state": "not-due",
+  "checkedAt": "2026-11-01T16:04:09Z"
  }
 }

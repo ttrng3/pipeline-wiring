@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-11-12T16:04:04Z",
+ "generatedUtc": "2026-11-13T16:02:23Z",
  "pipelines": [
   {
    "key": "tmdv",
@@ -10,10 +10,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-12T16:04:36Z"
+    "checkedAt": "2026-11-13T16:03:49Z"
    },
    "heartbeat": "2026-11-08T11:11:38Z",
-   "heartbeatAgeDays": 4.2,
+   "heartbeatAgeDays": 5.2,
    "fresh": true,
    "manifestStamp": "2026-11-08T11:11:38Z",
    "nextFireUtc": "2026-11-15T11:00:00Z",
@@ -30,10 +30,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-12T16:04:36Z"
+    "checkedAt": "2026-11-13T16:03:49Z"
    },
    "heartbeat": "2026-11-09T15:46:17Z",
-   "heartbeatAgeDays": 3.0,
+   "heartbeatAgeDays": 4.0,
    "fresh": true,
    "manifestStamp": "2026-11-02T15:50:38Z",
    "nextFireUtc": "2026-11-16T15:45:00Z",
@@ -50,10 +50,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-12T16:04:36Z"
+    "checkedAt": "2026-11-13T16:03:49Z"
    },
    "heartbeat": "2026-11-09T14:03:23Z",
-   "heartbeatAgeDays": 3.1,
+   "heartbeatAgeDays": 4.1,
    "fresh": true,
    "manifestStamp": "2026-11-02T14:33:20Z",
    "nextFireUtc": "2026-11-16T14:00:00Z",
@@ -70,10 +70,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-12T16:04:36Z"
+    "checkedAt": "2026-11-13T16:03:49Z"
    },
    "heartbeat": "2026-11-08T14:05:00Z",
-   "heartbeatAgeDays": 4.1,
+   "heartbeatAgeDays": 5.1,
    "fresh": true,
    "manifestStamp": "2026-11-08T14:19:03Z",
    "nextFireUtc": "2026-11-15T14:00:00Z",
@@ -90,13 +90,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-12T16:04:36Z"
+    "checkedAt": "2026-11-13T16:03:49Z"
    },
-   "heartbeat": "2026-11-12T04:08:12Z",
+   "heartbeat": "2026-11-13T04:09:30Z",
    "heartbeatAgeDays": 0.5,
    "fresh": true,
    "manifestStamp": "2026-11-03T04:15:16.879Z",
-   "nextFireUtc": "2026-11-13T04:00:00Z",
+   "nextFireUtc": "2026-11-14T04:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -110,10 +110,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-12T16:04:36Z"
+    "checkedAt": "2026-11-13T16:03:49Z"
    },
    "heartbeat": "2026-11-09T01:01:53Z",
-   "heartbeatAgeDays": 3.6,
+   "heartbeatAgeDays": 4.6,
    "fresh": true,
    "manifestStamp": "2026-09-20T00:00:00Z",
    "nextFireUtc": "2026-11-16T01:00:00Z",
@@ -130,10 +130,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-12T16:04:36Z"
+    "checkedAt": "2026-11-13T16:03:49Z"
    },
    "heartbeat": "2026-11-01T06:12:53Z",
-   "heartbeatAgeDays": 11.4,
+   "heartbeatAgeDays": 12.4,
    "fresh": true,
    "manifestStamp": "2026-11-01T06:12:53Z",
    "nextFireUtc": "2026-11-15T06:00:00Z",
@@ -150,10 +150,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-12T16:04:36Z"
+    "checkedAt": "2026-11-13T16:03:49Z"
    },
    "heartbeat": "2026-11-02T01:04:10Z",
-   "heartbeatAgeDays": 10.6,
+   "heartbeatAgeDays": 11.6,
    "fresh": true,
    "manifestStamp": "2026-11-01T04:12:00Z",
    "nextFireUtc": "2026-12-01T03:00:00Z",
@@ -170,13 +170,13 @@
    "preview": {
     "state": "in-sync",
     "note": "no manifest, existence only",
-    "checkedAt": "2026-11-12T16:04:36Z"
+    "checkedAt": "2026-11-13T16:03:49Z"
    },
-   "heartbeat": "2026-11-11T16:02:32Z",
+   "heartbeat": "2026-11-12T16:04:04Z",
    "heartbeatAgeDays": 1.0,
    "fresh": true,
    "manifestStamp": null,
-   "nextFireUtc": "2026-11-13T16:00:00Z",
+   "nextFireUtc": "2026-11-14T16:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -192,11 +192,11 @@
   "diagnose": [],
   "backup": "ok"
  },
- "previewsCheckedAt": "2026-11-12T16:04:36Z",
+ "previewsCheckedAt": "2026-11-13T16:03:49Z",
  "backup": {
   "name": "Trade Journal Drive backup",
   "month": "2026-11",
   "state": "ok",
-  "checkedAt": "2026-11-12T16:04:36Z"
+  "checkedAt": "2026-11-13T16:03:49Z"
  }
 }

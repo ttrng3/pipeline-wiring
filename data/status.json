@@ -1,5 +1,5 @@
 {
- "generatedUtc": "2026-11-24T16:02:47Z",
+ "generatedUtc": "2026-11-25T16:02:32Z",
  "pipelines": [
   {
    "key": "tmdv",
@@ -10,10 +10,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-24T16:04:33Z"
+    "checkedAt": "2026-11-25T16:04:09Z"
    },
    "heartbeat": "2026-11-22T11:11:57Z",
-   "heartbeatAgeDays": 2.2,
+   "heartbeatAgeDays": 3.2,
    "fresh": true,
    "manifestStamp": "2026-11-22T11:33:00Z",
    "nextFireUtc": "2026-11-29T11:00:00Z",
@@ -30,10 +30,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-24T16:04:33Z"
+    "checkedAt": "2026-11-25T16:04:09Z"
    },
    "heartbeat": "2026-11-23T15:47:30Z",
-   "heartbeatAgeDays": 1.0,
+   "heartbeatAgeDays": 2.0,
    "fresh": true,
    "manifestStamp": "2026-11-23T15:56:56Z",
    "nextFireUtc": "2026-11-30T15:45:00Z",
@@ -50,10 +50,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-24T16:04:33Z"
+    "checkedAt": "2026-11-25T16:04:09Z"
    },
    "heartbeat": "2026-11-23T14:05:00Z",
-   "heartbeatAgeDays": 1.1,
+   "heartbeatAgeDays": 2.1,
    "fresh": true,
    "manifestStamp": "2026-11-23T14:20:00Z",
    "nextFireUtc": "2026-11-30T14:00:00Z",
@@ -70,10 +70,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-24T16:04:33Z"
+    "checkedAt": "2026-11-25T16:04:09Z"
    },
    "heartbeat": "2026-11-22T14:03:28Z",
-   "heartbeatAgeDays": 2.1,
+   "heartbeatAgeDays": 3.1,
    "fresh": true,
    "manifestStamp": "2026-11-08T14:19:03Z",
    "nextFireUtc": "2026-11-29T14:00:00Z",
@@ -90,13 +90,13 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-24T16:04:33Z"
+    "checkedAt": "2026-11-25T16:04:09Z"
    },
-   "heartbeat": "2026-11-24T04:08:34Z",
+   "heartbeat": "2026-11-25T04:08:22Z",
    "heartbeatAgeDays": 0.5,
    "fresh": true,
-   "manifestStamp": "2026-11-24T04:08:34.438Z",
-   "nextFireUtc": "2026-11-25T04:00:00Z",
+   "manifestStamp": "2026-11-25T04:08:22.245Z",
+   "nextFireUtc": "2026-11-26T04:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -110,10 +110,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-24T16:04:33Z"
+    "checkedAt": "2026-11-25T16:04:09Z"
    },
    "heartbeat": "2026-11-23T01:05:00Z",
-   "heartbeatAgeDays": 1.6,
+   "heartbeatAgeDays": 2.6,
    "fresh": true,
    "manifestStamp": "2026-09-20T00:00:00Z",
    "nextFireUtc": "2026-11-30T01:00:00Z",
@@ -130,10 +130,10 @@
    "preview": {
     "state": "behind",
     "note": "artifact 2026-11-17T04:00:00Z, repo 2026-11-15T06:10:06Z - artifact ahead of repo",
-    "checkedAt": "2026-11-24T16:04:33Z"
+    "checkedAt": "2026-11-25T16:04:09Z"
    },
    "heartbeat": "2026-11-15T06:10:06Z",
-   "heartbeatAgeDays": 9.4,
+   "heartbeatAgeDays": 10.4,
    "fresh": true,
    "manifestStamp": "2026-11-15T06:10:06Z",
    "nextFireUtc": "2026-12-01T06:00:00Z",
@@ -150,10 +150,10 @@
    "preview": {
     "state": "in-sync",
     "note": "",
-    "checkedAt": "2026-11-24T16:04:33Z"
+    "checkedAt": "2026-11-25T16:04:09Z"
    },
    "heartbeat": "2026-11-02T01:04:10Z",
-   "heartbeatAgeDays": 22.6,
+   "heartbeatAgeDays": 23.6,
    "fresh": true,
    "manifestStamp": "2026-11-01T04:12:00Z",
    "nextFireUtc": "2026-12-01T03:00:00Z",
@@ -170,13 +170,13 @@
    "preview": {
     "state": "in-sync",
     "note": "no manifest, existence only",
-    "checkedAt": "2026-11-24T16:04:33Z"
+    "checkedAt": "2026-11-25T16:04:09Z"
    },
-   "heartbeat": "2026-11-23T16:04:03Z",
+   "heartbeat": "2026-11-24T16:02:47Z",
    "heartbeatAgeDays": 1.0,
    "fresh": true,
    "manifestStamp": null,
-   "nextFireUtc": "2026-11-25T16:00:00Z",
+   "nextFireUtc": "2026-11-26T16:00:00Z",
    "band": "ok",
    "bandKind": "",
    "bandReason": ""
@@ -194,11 +194,11 @@
   "diagnose": [],
   "backup": "ok"
  },
- "previewsCheckedAt": "2026-11-24T16:04:33Z",
+ "previewsCheckedAt": "2026-11-25T16:04:09Z",
  "backup": {
   "name": "Trade Journal Drive backup",
   "month": "2026-11",
   "state": "ok",
-  "checkedAt": "2026-11-24T16:04:33Z"
+  "checkedAt": "2026-11-25T16:04:09Z"
  }
 }
